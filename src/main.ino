@@ -4,7 +4,8 @@
 #include <time.h>
 #include <Wire.h>
 #include <EEPROM.h>
-#include <ArduinoJson.h>		// JSON decoding library
+#include <ArduinoJson.h> // JSON decoding library
+#include <FirebaseArduino.h>
 
 #include "D:\Github_NguyenBang\smart_clock_ndb\include\LiquidCrystal_I2C-master\LiquidCrystal_I2C.cpp"
 #include "D:\Github_NguyenBang\smart_clock_ndb\include\Character_lcd\Character_LCD.h"
@@ -365,6 +366,8 @@ void setup()
 	da luu o eeprom
 	*/
 	thoitiet_online();
+	Firebase.begin("publicdata-cryptocurrency.firebaseio.com");
+	Firebase.stream("/bitcoin/last");
 }
 
 void loop()
@@ -373,6 +376,42 @@ void loop()
 	printLocalTime();
 	call_thoitiet();
 	yield(); // disble Soft WDT reset - NodeMCU
+}
+
+/* Func get message on Firebase */
+void firebase_mess()
+{
+	unsigned long dem_10s_stop = millis();
+	while (((unsigned long)(millis() - dem_10s_stop) < 10000) && (stt_mode == 0))
+	{
+		if (Firebase.failed())
+		{
+			Serial.println("streaming error");
+			Serial.println(Firebase.error());
+		}
+		if (Firebase.available())
+		{
+			FirebaseObject event = Firebase.readEvent();
+			String eventType = event.getString("type");
+			eventType.toLowerCase();
+
+			Serial.print("event: ");
+			Serial.println(eventType);
+			if (eventType == "put")
+			{
+				Serial.print("data: ");
+				Serial.println(event.getString("data"));
+				String path = event.getString("path");
+				String data = event.getString("data");
+
+				Serial.println(path.c_str() + 1);
+				Serial.println(data);
+			}
+		}
+		yield(); // disble Soft WDT reset - NodeMCU
+	}
+	/* set lai gia tri cho su dung lan sau */
+	stt_mode = 0;
 }
 
 void kiem_tra_nut_nhan()
@@ -465,6 +504,8 @@ void kiem_tra_nut_nhan()
 				delay(100);
 				customE(0 + 4 + 4 + 4 + 2, 2);
 				delay(1000);
+				/* Hien thi message tu Firebase */
+				firebase_mess();
 				lcd.clear();
 			}
 			/* vao mode setup wifi */
