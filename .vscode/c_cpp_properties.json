@@ -6,7 +6,7 @@
                 "D:\\Git_NDB\\smart_clock_ndb\\include\\THUVIEN_LCD.H",
                 "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\tools\\**",
                 "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.3\\**",
-                "C:\\Users\bang.nguyen-duy\\Documents\\Arduino\\libraries\\Arduino-LiquidCrystal-I2C-library-master"
+                "C:\\Users\bang.nguyen-duy\\Documents\\Arduino\\libraries\\LiquidCrystal_I2C-master"
             ],
             "forcedInclude": [],
             "intelliSenseMode": "msvc-x64",

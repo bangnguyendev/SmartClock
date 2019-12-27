@@ -1,5 +1,5 @@
-#include "LiquidCrystal_I2C.h"
-#include "D:\Git_NDB\smart_clock_ndb\include\THUVIEN_LCD.H"
+#include "D:\Git_NDB\smart_clock_ndb\include\LiquidCrystal_I2C.cpp"
+#include "D:\Git_NDB\smart_clock_ndb\include\Character_LCD.H"
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h> // http web access library
 #include "time.h"
