@@ -1,4 +1,5 @@
 #include <ESP8266WiFi.h>
+/* Get data Weather - http */
 #include <ESP8266HTTPClient.h> // http web access library
 #include <time.h>
 #include <Wire.h>
@@ -21,6 +22,7 @@ LiquidCrystal_I2C lcd(0x3F, 20, 4); // set the LCD address to 0x27 for a 16 char
 #define ESP_NB_ONE 1
 #define ESP_NB_ON 0
 #define ESP_NB_OFF 1
+
 /*index 0 to 31 */
 #define index_eeprom_SSID 32
 /*index 32 to 95 */
