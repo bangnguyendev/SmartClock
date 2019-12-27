@@ -6,8 +6,8 @@
 #include <EEPROM.h>
 #include <ArduinoJson.h>		// JSON decoding library
 
-#include "D:\Git_NDB\smart_clock_ndb\include\LiquidCrystal_I2C-master\LiquidCrystal_I2C.cpp"
-#include "D:\Git_NDB\smart_clock_ndb\include\Character_lcd\Character_LCD.H"
+#include "D:\Github_NguyenBang\smart_clock_ndb\include\LiquidCrystal_I2C-master\LiquidCrystal_I2C.cpp"
+#include "D:\Github_NguyenBang\smart_clock_ndb\include\Character_lcd\Character_LCD.h"
 LiquidCrystal_I2C lcd(0x3F, 20, 4); // set the LCD address to 0x27 for a 16 chars and 2 line display
 
 #define CHUONG_BT 16

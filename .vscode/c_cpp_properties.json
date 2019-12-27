@@ -3,10 +3,10 @@
         {
             "name": "Win32",
             "includePath": [
-                "D:\\Git_NDB\\smart_clock_ndb\\include\\THUVIEN_LCD.H",
                 "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\tools\\**",
                 "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.3\\**",
-                "D:\\Git_NDB\\smart_clock_ndb\\include\\LiquidCrystal_I2C-master"
+                "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.5.0-beta2\\**",
+                "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\tools\\**",
             ],
             "forcedInclude": [],
             "intelliSenseMode": "msvc-x64",
