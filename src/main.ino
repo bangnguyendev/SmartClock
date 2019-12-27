@@ -11,10 +11,10 @@ LiquidCrystal_I2C lcd(0x3F, 20, 4); // set the LCD address to 0x27 for a 16 char
 #define CHUONG_BT 16
 #define LED_TT 100
 #define Button_Mode 14
-/* Ngay sinh nhat Tram */
-#define DAY_TramNguyen 4
-/* Thang sinh nhat Tram */
-#define MON_TramNguyen 4
+/* Ngay sinh nhat DUNG */
+#define DAY_DungNguyen 4
+/* Thang sinh nhat DUNG */
+#define MON_DungNguyen 4
 
 #define ESP_NB_ZERO 0
 #define ESP_NB_ONE 1
@@ -314,7 +314,7 @@ void setup()
 		lcd.write(1); //chay ki tu trai tim
 		delay(200);
 	}
-	/* xoa nhung cho viet ten TRAM CUTE*/
+	/* xoa nhung cho viet ten DUNG CUTE*/
 	for (int i = 0; i < 16; i++)
 	{
 		lcd.setCursor(i, 0);
@@ -322,7 +322,7 @@ void setup()
 		lcd.setCursor(i, 1);
 		lcd.print(" ");
 	}
-	/* xoa nhung cho viet ten TRAM CUTE*/
+	/* xoa nhung cho viet ten DUNG CUTE*/
 	for (int i = 5; i < 20; i++)
 	{
 		lcd.setCursor(i, 2);
@@ -330,37 +330,20 @@ void setup()
 		lcd.setCursor(i, 3);
 		lcd.print(" ");
 	}
-	/* viet ten TRAM CUTE*/
+	/* viet ten DUNG CUTE*/
 	{
 		/* xoa trai tim dua ve binh thuong */
 		lcd.createChar(1, UB);
 		/* =============================== */
 
-		// customD(0, 0);
-		// delay(200);
-		// customU(4, 0);
-		// delay(200);
-		// customN(4 + 4, 0);
-		// delay(200);
-		// customG(4 + 4 + 5, 0);
-		// delay(200);
-		customL(0, 0);
+		customD(0, 0);
 		delay(200);
-		customI(4, 0);
+		customU(4, 0);
 		delay(200);
-		customE(4 + 4, 0);
+		customN(4 + 4, 0);
 		delay(200);
-		customU(4 + 4 + 4, 0);
+		customG(4 + 4 + 5, 0);
 		delay(200);
-
-		// customT(0, 0);
-		// delay(200);
-		// customR(4, 0);
-		// delay(200);
-		// customA(4 + 4, 0);
-		// delay(200);
-		// customM(4 + 4 + 4, 0);
-		// delay(200);
 
 		customC(5, 2);
 		delay(200);
@@ -832,17 +815,17 @@ void printLocalTime()
 		if (giay / 1 % 10 < 5)
 		/* moi che do hien thi 5 giay */
 		{
-			if ((ngay == DAY_TramNguyen) && (thang == MON_TramNguyen))
+			if ((ngay == DAY_DungNguyen) && (thang == MON_DungNguyen))
 			{
 				lcd.setCursor(0, 0);
-				lcd.print("Tram Cute!");
+				lcd.print("DUNG Cute!");
 
 				lcd.print("HPBD!");
-				static int tuoi_Tram_cute;
-				tuoi_Tram_cute = nam - 1997;
+				static int tuoi_DUNG_cute;
+				tuoi_DUNG_cute = nam - 1994;
 				lcd.setCursor(0, 1);
-				lcd.print("Tram tron ");
-				lcd.print(tuoi_Tram_cute);
+				lcd.print("DUNG tron ");
+				lcd.print(tuoi_DUNG_cute);
 				lcd.print(" tuoi.");
 				Serial.println("Sanh thần Trâm ngáo :3");
 			}
@@ -1021,7 +1004,7 @@ void printLocalTime()
 		{
 			digitalWrite(CHUONG_BT, 1);
 		}
-		else if ((ngay == DAY_TramNguyen) && (thang == MON_TramNguyen))
+		else if ((ngay == DAY_DungNguyen) && (thang == MON_DungNguyen))
 		{
 			/*
 				xử lý ngắt trong ngày
