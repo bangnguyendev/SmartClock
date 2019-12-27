@@ -1,19 +1,21 @@
-#include "D:\Git_NDB\smart_clock_ndb\include\LiquidCrystal_I2C.cpp"
-#include "D:\Git_NDB\smart_clock_ndb\include\Character_LCD.H"
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h> // http web access library
-#include "time.h"
+#include <time.h>
 #include <Wire.h>
 #include <EEPROM.h>
+#include <ArduinoJson.h>		// JSON decoding library
+
+#include "D:\Git_NDB\smart_clock_ndb\include\LiquidCrystal_I2C-master\LiquidCrystal_I2C.cpp"
+#include "D:\Git_NDB\smart_clock_ndb\include\Character_lcd\Character_LCD.H"
 LiquidCrystal_I2C lcd(0x3F, 20, 4); // set the LCD address to 0x27 for a 16 chars and 2 line display
-#include <ArduinoJson.h>			// JSON decoding library
+
 #define CHUONG_BT 16
 #define LED_TT 100
 #define Button_Mode 14
 /* Ngay sinh nhat DUNG */
-#define DAY_DungNguyen 4
+#define DAY_DungNguyen 14
 /* Thang sinh nhat DUNG */
-#define MON_DungNguyen 4
+#define MON_DungNguyen 7
 
 #define ESP_NB_ZERO 0
 #define ESP_NB_ONE 1
