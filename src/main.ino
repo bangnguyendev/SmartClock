@@ -1,15 +1,22 @@
 #include <ESP8266WiFi.h>
 /* Get data Weather - http */
-#include <ESP8266HTTPClient.h> // http web access library
+#include <ESP8266HTTPClient.h>
 #include <time.h>
 #include <Wire.h>
 #include <EEPROM.h>
-#include <ArduinoJson.h> // JSON decoding library
-#include <FirebaseArduino.h>
-
+#include <ArduinoJson.h>
+/* LCD  */
 #include "D:\Github_NguyenBang\smart_clock_ndb\include\LiquidCrystal_I2C-master\LiquidCrystal_I2C.cpp"
 #include "D:\Github_NguyenBang\smart_clock_ndb\include\Character_lcd\Character_LCD.h"
 LiquidCrystal_I2C lcd(0x3F, 20, 4); // set the LCD address to 0x27 for a 16 chars and 2 line display
+/* ThingSpeak  */
+#include "D:\Github_NguyenBang\smart_clock_ndb\include\ThingSpeak\ThingSpeak.cpp"
+WiFiClient client;
+
+#define ChannelNumber 947371
+#define FieldNumber 1
+const char *WriteAPIKey = "9DU3YS7U45KE50OA";
+const char *ReadAPIKey = "HZ6V9BBQBVUR8PXI";
 
 #define CHUONG_BT 16
 #define LED_TT 100
@@ -21,8 +28,8 @@ LiquidCrystal_I2C lcd(0x3F, 20, 4); // set the LCD address to 0x27 for a 16 char
 
 #define ESP_NB_ZERO 0
 #define ESP_NB_ONE 1
-#define ESP_NB_ON 0
-#define ESP_NB_OFF 1
+#define ESP_NB_ON 1
+#define ESP_NB_OFF 0
 
 /*index 0 to 31 */
 #define index_eeprom_SSID 32
@@ -366,8 +373,7 @@ void setup()
 	da luu o eeprom
 	*/
 	thoitiet_online();
-	Firebase.begin("publicdata-cryptocurrency.firebaseio.com");
-	Firebase.stream("/bitcoin/last");
+	ThingSpeak.begin(client);
 }
 
 void loop()
@@ -381,33 +387,61 @@ void loop()
 /* Func get message on Firebase */
 void firebase_mess()
 {
+	int statusCode_Thingspeak = 0;
 	unsigned long dem_10s_stop = millis();
 	while (((unsigned long)(millis() - dem_10s_stop) < 10000) && (stt_mode == 0))
 	{
-		if (Firebase.failed())
+#if ESP_NB_OFF
+		statusCode_Thingspeak = ThingSpeak.writeField(ChannelNumber, 1, " meo meo con meo con cho con bo", WriteAPIKey);
+		// Check the return code
+		if (statusCode_Thingspeak == 200)
 		{
-			Serial.println("streaming error");
-			Serial.println(Firebase.error());
+			Serial.println("Channel update successful.");
 		}
-		if (Firebase.available())
+		else
 		{
-			FirebaseObject event = Firebase.readEvent();
-			String eventType = event.getString("type");
-			eventType.toLowerCase();
-
-			Serial.print("event: ");
-			Serial.println(eventType);
-			if (eventType == "put")
+			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak));
+		}
+#else
+		String message_sent_Dung = ThingSpeak.readStringField(ChannelNumber, FieldNumber, ReadAPIKey);
+		// Check the status of the read operation to see if it was successful
+		statusCode_Thingspeak = ThingSpeak.getLastReadStatus();
+		if (statusCode_Thingspeak == 200)
+		{
+			Serial.println("doc ok");
+			Serial.println(message_sent_Dung);
+		}
+		else
+		{
+			Serial.println("khong ok chut nao");
+		}
+		Serial.println(message_sent_Dung);
+		int sum_char = message_sent_Dung.length();
+		lcd.setCursor(0, 0);
+		for (int i = 0; i < sum_char; i++)
+		{
+			if (i > 59)
 			{
-				Serial.print("data: ");
-				Serial.println(event.getString("data"));
-				String path = event.getString("path");
-				String data = event.getString("data");
-
-				Serial.println(path.c_str() + 1);
-				Serial.println(data);
+				lcd.setCursor(i - 60, 3);
 			}
+			else if (i > 39)
+			{
+				lcd.setCursor(i - 40, 2);
+			}
+			else if (i > 19)
+			{
+				lcd.setCursor(i - 20, 1);
+			}
+			/*
+			"Xin Chao Dung xinh  "
+			"dep! Minh den tu    "
+			"dong ho thong minh  "
+			"nhat vu tru!        "
+			*/
+			lcd.print(message_sent_Dung[i]);
+			delay(100);
 		}
+#endif
 		yield(); // disble Soft WDT reset - NodeMCU
 	}
 	/* set lai gia tri cho su dung lan sau */
@@ -442,7 +476,7 @@ void kiem_tra_nut_nhan()
 				else if (couter_mode >= 7)
 				{
 					lcd.setCursor(0, 1);
-					lcd.print("Mode: >> Out Mode   ");
+					lcd.print("Mode: >> Message    ");
 					lcd.setCursor(0, 2);
 					lcd.print("                    ");
 					lcd.setCursor(0, 3);
@@ -454,7 +488,7 @@ void kiem_tra_nut_nhan()
 					lcd.setCursor(0, 1);
 					lcd.print("Mode: >> Wifi Change");
 					lcd.setCursor(0, 2);
-					lcd.print("         Out Mode   ");
+					lcd.print("         Message    ");
 					lcd.setCursor(0, 3);
 					lcd.print("                    ");
 				}
@@ -466,7 +500,7 @@ void kiem_tra_nut_nhan()
 					lcd.setCursor(0, 2);
 					lcd.print("         Wifi Change");
 					lcd.setCursor(0, 3);
-					lcd.print("         Out Mode   ");
+					lcd.print("         Message    ");
 				}
 				/* vao mode setup bao thuc */
 				else if (couter_mode >= 1)
@@ -484,27 +518,28 @@ void kiem_tra_nut_nhan()
 			long duration = millis() - startTime;
 			Serial.printf("couter_mode: ");
 			Serial.println(couter_mode);
-			/* thoat khoi mode*/
+			/* Message mode*/
 			if (couter_mode >= 7)
 			{
-				/* out khoi mode*/
+				/* Message mode*/
 				lcd.clear();
 				delay(100);
-				custom0(0 + 4, 0);
+				customM(0 + 1, 0);
 				delay(100);
-				customU(0 + 4 + 4, 0);
+				customE(0 + 1 + 5, 0);
 				delay(100);
-				customT(0 + 4 + 4 + 4, 0);
+				customS(0 + 1 + 5 + 4, 0);
+				delay(100);
+				customS(0 + 1 + 5 + 4 + 4, 0);
 
-				customM(0 + 2, 2);
+				customA(7 + 2, 2);
 				delay(100);
-				custom0(0 + 4 + 2, 2);
+				customG(7 + 4 + 2, 2);
 				delay(100);
-				customD(0 + 4 + 4 + 2, 2);
-				delay(100);
-				customE(0 + 4 + 4 + 4 + 2, 2);
+				customE(7 + 4 + 4 + 2, 2);
 				delay(1000);
 				/* Hien thi message tu Firebase */
+				lcd.clear();
 				firebase_mess();
 				lcd.clear();
 			}
@@ -993,7 +1028,7 @@ void printLocalTime()
 				lcd.write(3);
 				if (bien_location_eeprom == 0)
 				{
-					lcd.print("TpHCM"); /* chuyen thanh location */
+					lcd.print("TpHcm"); /* chuyen thanh location */
 				}
 				else if (bien_location_eeprom == 1)
 				{
