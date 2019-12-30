@@ -130,7 +130,7 @@ void setup()
 	lcd.setCursor(0, 0);
 	lcd.print("Found saved wifi!");
 	Serial.println("Startup");
-	// read eeprom for ssid and pass
+	/* read eeprom for ssid and pass */
 	Serial.println("Reading EEPROM ssid");
 	String esid = "";
 	for (int i = 0; i < index_eeprom_SSID; ++i)
