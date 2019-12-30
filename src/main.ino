@@ -384,7 +384,7 @@ void setup()
 	/* truy cap den thoi tiet dia phuong
 	da luu o eeprom
 	*/
-	thoitiet_online();
+	Weather_Online_sever();
 	ThingSpeak.begin(client);
 }
 
@@ -392,11 +392,11 @@ void loop()
 {
 	kiem_tra_nut_nhan();
 	printLocalTime();
-	call_thoitiet();
+	Call_Weather_Every_10Min();
 	yield(); // disble Soft WDT reset - NodeMCU
 }
 
-/* Func get message on Firebase */
+/* Func get message on Thingspeak sever */
 void Thingspeak_Message()
 {
 	int statusCode_Thingspeak = 0;
@@ -430,10 +430,26 @@ void Thingspeak_Message()
 #endif
 		Serial.println(message_sent_Dung);
 		int sum_char = message_sent_Dung.length();
-		lcd.setCursor(0, 0);
+
 		for (int i = 0; i < sum_char; i++)
 		{
-			if (i > 59)
+			if (i > 139)
+			{
+				lcd.setCursor(i - 140, 3);
+			}
+			else if (i > 119)
+			{
+				lcd.setCursor(i - 120, 2);
+			}
+			else if (i > 99)
+			{
+				lcd.setCursor(i - 100, 1);
+			}
+			else if (i > 79)
+			{
+				lcd.setCursor(i - 80, 0);
+			}
+			else if (i > 59)
 			{
 				lcd.setCursor(i - 60, 3);
 			}
@@ -445,6 +461,10 @@ void Thingspeak_Message()
 			{
 				lcd.setCursor(i - 20, 1);
 			}
+			else
+			{
+				lcd.setCursor(i - 00, 0);
+			}
 			/*
 			"Xin Chao Dung xinh  "
 			"dep! Minh den tu    "
@@ -452,7 +472,16 @@ void Thingspeak_Message()
 			"nhat vu tru!        "
 			*/
 			lcd.print(message_sent_Dung[i]);
-			delay(100);
+			if (i == 79)
+			{
+				delay(1000);
+				/* Xoa man hinh 1 de chuan bi chuyen sang man hinh 2 */
+				lcd.clear();
+			}
+			else
+			{
+				delay(200);
+			}
 		}
 		yield(); // disble Soft WDT reset - NodeMCU
 	}
@@ -544,13 +573,13 @@ void kiem_tra_nut_nhan()
 				delay(100);
 				customS(0 + 1 + 5 + 4 + 4, 0);
 
-				customA(7 + 2, 2);
+				customA(6 + 2, 2);
 				delay(100);
-				customG(7 + 4 + 2, 2);
+				customG(6 + 4 + 2, 2);
 				delay(100);
-				customE(7 + 4 + 4 + 2, 2);
+				customE(6 + 4 + 4 + 2, 2);
 				delay(1000);
-				/* Hien thi message tu Firebase */
+				/* Hien thi message tu Thingspeak_Message */
 				lcd.clear();
 				Thingspeak_Message();
 				lcd.clear();
@@ -600,8 +629,10 @@ void kiem_tra_nut_nhan()
 
 				delay(1000);
 				lcd.clear();
-				chon_location();
-				thoitiet_online();
+				/* Chon vi tri doc gia tri thoi tiet */
+				Choose_location();
+				/* Lay gia tri thoi tiet tai vi tri da chon */
+				Weather_Online_sever();
 				lcd.clear();
 			}
 			/* vao mode setup bao thuc */
@@ -632,7 +663,7 @@ void kiem_tra_nut_nhan()
 	}
 }
 
-void chon_location()
+void Choose_location()
 {
 	lcd.clear();
 	lcd.setCursor(0, 0);
@@ -1117,20 +1148,21 @@ void printLocalTime()
 	}
 }
 
-void call_thoitiet()
+void Call_Weather_Every_10Min()
 {
 	if ((unsigned long)(millis() - time_dem_thoitiet) > 60 * 10 * 1000) //10 phut/ lan
 	{
 		time_dem_thoitiet = millis();
 		// Serial.printf("Trang thai WiFi.status(): %d\r\n", WiFi.status());
-		thoitiet_online();
+		Weather_Online_sever();
 		// Serial.println("===========================");
 	}
 	// unsigned long demmm = millis() - time_dem_thoitiet;
 	// Serial.printf("Demmm = % d\r\n", demmm);
 }
 
-void thoitiet_online()
+/* Lay gia tri thoi tiet tai vi tri da chon */
+void Weather_Online_sever()
 {
 	if (bien_location_eeprom == 0)
 	{
