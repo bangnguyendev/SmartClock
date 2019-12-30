@@ -1,3 +1,8 @@
+#define ESP_NB_ZERO 0
+#define ESP_NB_ONE 1
+#define ESP_NB_OFF 0
+#define ESP_NB_ON 1
+
 #include <ESP8266WiFi.h>
 /* Get data Weather - http */
 #include <ESP8266HTTPClient.h>
@@ -5,6 +10,7 @@
 #include <Wire.h>
 #include <EEPROM.h>
 #include <ArduinoJson.h>
+#if ESP_NB_OFF /* my laptop */
 /* LCD  */
 #include "D:\Github_NguyenBang\smart_clock_ndb\include\LiquidCrystal_I2C-master\LiquidCrystal_I2C.cpp"
 #include "D:\Github_NguyenBang\smart_clock_ndb\include\Character_lcd\Character_LCD.h"
@@ -12,11 +18,22 @@ LiquidCrystal_I2C lcd(0x3F, 20, 4); // set the LCD address to 0x27 for a 16 char
 /* ThingSpeak  */
 #include "D:\Github_NguyenBang\smart_clock_ndb\include\ThingSpeak\ThingSpeak.cpp"
 WiFiClient client;
+#else /* company */
+/* LCD  */
+#include "D:\Git_NDB\smart_clock_ndb\include\LiquidCrystal_I2C-master\LiquidCrystal_I2C.cpp"
+#include "D:\Git_NDB\smart_clock_ndb\include\Character_lcd\Character_LCD.H"
+LiquidCrystal_I2C lcd(0x3F, 20, 4); // set the LCD address to 0x27 for a 16 chars and 2 line display
+/* ThingSpeak  */
+#include "D:\Git_NDB\smart_clock_ndb\include\ThingSpeak\ThingSpeak.cpp"
+WiFiClient client;
+#endif
 
+/* ThingSpeak  */
 #define ChannelNumber 947371
 #define FieldNumber 1
 const char *WriteAPIKey = "9DU3YS7U45KE50OA";
 const char *ReadAPIKey = "HZ6V9BBQBVUR8PXI";
+/* End data ThingSpeak  */
 
 #define CHUONG_BT 16
 #define LED_TT 100
@@ -25,11 +42,6 @@ const char *ReadAPIKey = "HZ6V9BBQBVUR8PXI";
 #define DAY_DungNguyen 14
 /* Thang sinh nhat DUNG */
 #define MON_DungNguyen 7
-
-#define ESP_NB_ZERO 0
-#define ESP_NB_ONE 1
-#define ESP_NB_ON 1
-#define ESP_NB_OFF 0
 
 /*index 0 to 31 */
 #define index_eeprom_SSID 32
@@ -385,7 +397,7 @@ void loop()
 }
 
 /* Func get message on Firebase */
-void firebase_mess()
+void Thingspeak_Message()
 {
 	int statusCode_Thingspeak = 0;
 	unsigned long dem_10s_stop = millis();
@@ -408,13 +420,14 @@ void firebase_mess()
 		statusCode_Thingspeak = ThingSpeak.getLastReadStatus();
 		if (statusCode_Thingspeak == 200)
 		{
-			Serial.println("doc ok");
+			Serial.println("Đọc dữ liệu ThingSpeak tốt.");
 			Serial.println(message_sent_Dung);
 		}
 		else
 		{
-			Serial.println("khong ok chut nao");
+			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak));
 		}
+#endif
 		Serial.println(message_sent_Dung);
 		int sum_char = message_sent_Dung.length();
 		lcd.setCursor(0, 0);
@@ -441,7 +454,6 @@ void firebase_mess()
 			lcd.print(message_sent_Dung[i]);
 			delay(100);
 		}
-#endif
 		yield(); // disble Soft WDT reset - NodeMCU
 	}
 	/* set lai gia tri cho su dung lan sau */
@@ -540,7 +552,7 @@ void kiem_tra_nut_nhan()
 				delay(1000);
 				/* Hien thi message tu Firebase */
 				lcd.clear();
-				firebase_mess();
+				Thingspeak_Message();
 				lcd.clear();
 			}
 			/* vao mode setup wifi */
