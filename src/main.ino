@@ -10,7 +10,7 @@
 #include <Wire.h>
 #include <EEPROM.h>
 #include <ArduinoJson.h>
-#if ESP_NB_OFF /* my laptop */
+#if ESP_NB_ON /* my laptop */
 /* LCD  */
 #include "D:\Github_NguyenBang\smart_clock_ndb\include\LiquidCrystal_I2C-master\LiquidCrystal_I2C.cpp"
 #include "D:\Github_NguyenBang\smart_clock_ndb\include\Character_lcd\Character_LCD.h"
