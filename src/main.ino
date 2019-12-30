@@ -377,8 +377,12 @@ void Thingspeak_Message()
 	unsigned long dem_10s_stop = millis();
 	while (((unsigned long)(millis() - dem_10s_stop) < 10000) && (stt_mode == 0))
 	{
+		/* test nạp data vao Thingspeak */
 #if ESP_NB_OFF
-		statusCode_Thingspeak = ThingSpeak.writeField(ChannelNumber, 1, " meo meo con meo con cho con bo", WriteAPIKey);
+		statusCode_Thingspeak =
+			ThingSpeak.writeField(ChannelNumber, 1,
+								  "Hi Nguyen Dung! Have a nice day! Smart Clock 2020. - by Nguyen Bang ",
+								  WriteAPIKey);
 		// Check the return code
 		if (statusCode_Thingspeak == 200)
 		{
@@ -389,6 +393,7 @@ void Thingspeak_Message()
 			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak));
 		}
 #else
+		/* hiển thị data vao Thingspeak */
 		String message_sent_Dung = ThingSpeak.readStringField(ChannelNumber, FieldNumber, ReadAPIKey);
 		// Check the status of the read operation to see if it was successful
 		statusCode_Thingspeak = ThingSpeak.getLastReadStatus();
@@ -401,7 +406,7 @@ void Thingspeak_Message()
 		{
 			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak));
 		}
-#endif
+
 		Serial.println(message_sent_Dung);
 		int sum_char = message_sent_Dung.length();
 
@@ -457,6 +462,7 @@ void Thingspeak_Message()
 				delay(200);
 			}
 		}
+#endif
 		yield(); // disble Soft WDT reset - NodeMCU
 	}
 	/* set lai gia tri cho su dung lan sau */
