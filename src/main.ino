@@ -1124,6 +1124,7 @@ void printLocalTime()
 	}
 }
 
+/* Hàm gọi thời tiết mỗi 10 phút một lần */
 void Call_Weather_Every_10Min()
 {
 	if ((unsigned long)(millis() - time_dem_thoitiet) > 60 * 10 * 1000) //10 phut/ lan

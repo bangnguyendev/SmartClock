@@ -26,7 +26,7 @@ SmartConfig ESP
 https://arduino.esp8266.vn/wifi/smartconfig.html
 
 
-Thư viện time:
+Thư viện time :
 
   %a Abbreviated weekday name 
 
