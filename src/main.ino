@@ -462,7 +462,7 @@ void Thingspeak_Message()
 			}
 			else
 			{
-				delay(200);
+				delay(150);
 			}
 		}
 #endif
