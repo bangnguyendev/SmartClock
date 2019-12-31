@@ -378,10 +378,10 @@ void Thingspeak_Message()
 	while (((unsigned long)(millis() - dem_10s_stop) < 10000) && (stt_mode == 0))
 	{
 		/* test nạp data vao Thingspeak */
-#if ESP_NB_OFF
+#if ESP_NB_ON
 		statusCode_Thingspeak =
 			ThingSpeak.writeField(ChannelNumber, 1,
-								  "Hi Nguyen Dung! Have a nice day! Smart Clock 2020. - by Nguyen Bang ",
+								  "Hi Nguyen Dung!     Have a nice day!    Smart Clock 2020.       - by Nguyen Bang",
 								  WriteAPIKey);
 		// Check the return code
 		if (statusCode_Thingspeak == 200)
