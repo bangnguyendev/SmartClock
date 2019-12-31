@@ -379,10 +379,13 @@ void Thingspeak_Message()
 	{
 		/* test nạp data vao Thingspeak */
 #if ESP_NB_ON
+		String message_sent_Dung = "";
+		message_sent_Dung += "Hi Nguyen Dung!     ";
+		message_sent_Dung += "Have a nice day!    ";
+		message_sent_Dung += "Smart Clock 2020.   ";
+		message_sent_Dung += "    - by Nguyen Bang";
 		statusCode_Thingspeak =
-			ThingSpeak.writeField(ChannelNumber, 1,
-								  "Hi Nguyen Dung!     Have a nice day!    Smart Clock 2020.       - by Nguyen Bang",
-								  WriteAPIKey);
+			ThingSpeak.writeField(ChannelNumber, 1, message_sent_Dung, WriteAPIKey);
 		// Check the return code
 		if (statusCode_Thingspeak == 200)
 		{
