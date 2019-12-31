@@ -10,7 +10,7 @@
 #include <Wire.h>
 #include <EEPROM.h>
 #include <ArduinoJson.h>
-#if ESP_NB_ON /* my laptop */
+#if ESP_NB_OFF /* my laptop */
 /* LCD  */
 #include "D:\Github_NguyenBang\smart_clock_ndb\include\LiquidCrystal_I2C-master\LiquidCrystal_I2C.cpp"
 #include "D:\Github_NguyenBang\smart_clock_ndb\include\Character_lcd\Character_LCD.h"
@@ -931,7 +931,7 @@ void printLocalTime()
 				lcd.print("DUNG tron ");
 				lcd.print(tuoi_DUNG_cute);
 				lcd.print(" tuoi.");
-				Serial.println("Sanh thần Trâm ngáo :3");
+				Serial.println("Sanh thần Dung ngáo :3");
 			}
 			else
 			{
@@ -1113,7 +1113,7 @@ void printLocalTime()
 			/*
 				xử lý ngắt trong ngày
 			*/
-			Serial.println("Sanh thần Trâm ngáo :3");
+			Serial.println("Sanh thần Dung ngáo :3");
 		}
 		else if ((hen_gio == gio) && (hen_phut == phut) &&
 				 (giay < 2) && (stt_mode_baothuc == 0))
