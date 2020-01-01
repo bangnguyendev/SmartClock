@@ -931,7 +931,7 @@ void printLocalTime()
 				static int tuoi_DUNG_cute;
 				tuoi_DUNG_cute = nam - 1994;
 				lcd.setCursor(0, 1);
-				lcd.print("DUNG tron ");
+				lcd.print("Dung tron ");
 				lcd.print(tuoi_DUNG_cute);
 				lcd.print(" tuoi.");
 				Serial.println("Sanh thần Dung ngáo :3");
