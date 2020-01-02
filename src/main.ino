@@ -10,7 +10,7 @@
 #include <Wire.h>
 #include <EEPROM.h>
 #include <ArduinoJson.h>
-#if ESP_NB_OFF /* my laptop */
+#if ESP_NB_ON /* my laptop */
 /* LCD  */
 #include "D:\Github_NguyenBang\smart_clock_ndb\include\LiquidCrystal_I2C-master\LiquidCrystal_I2C.cpp"
 #include "D:\Github_NguyenBang\smart_clock_ndb\include\Character_lcd\Character_LCD.h"
@@ -83,7 +83,6 @@ int status_Mode = 0;
 int status_Mode_Alarm = 0;
 int value_Location_EEPROM = 0;
 unsigned long time_dem_thoitiet;
-
 
 /* bien nhiet do */
 float temp;
@@ -792,6 +791,8 @@ void Thingspeak_Message()
 		if ((statusCode_Thingspeak_0 == 200) && (statusCode_Thingspeak_1 == 200))
 		{
 			Serial.println("Channel update successful.");
+			/* out khỏi chế độ */
+			status_Mode = 1;
 		}
 		else
 		{
@@ -1195,6 +1196,7 @@ void smartConfig_ndb()
 		//Kiểm tra kết nối thành công in thông báo
 		if (WiFi.smartConfigDone())
 		{
+			lcd.clear();
 			Serial.println("SmartConfig Success");
 			String qsid = WiFi.SSID();
 			String qpass = WiFi.psk();
