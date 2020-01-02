@@ -149,8 +149,16 @@ void setup()
 	lcd.print("ID Wifi:");
 	for (int b = 0; b < 9; b++)
 	{
-		lcd.print(esid[b]);
-		delay(100);
+		/* Check khi nao toi ki tu trang thi ngat khoi viec in */
+		if (esid[b] != esid[index_eeprom_SSID - 1])
+		{
+			lcd.print(esid[b]);
+			delay(100);
+		}
+		else
+		{
+			break;
+		}
 	}
 	lcd.print("...");
 	/* pass se k in ra man hinh lcd */
@@ -241,7 +249,7 @@ void setup()
 		lcd.write(1); //chay ki tu trai tim
 		lcd.setCursor(20 - i, 3);
 		lcd.write(1); //chay ki tu trai tim
-		delay(200);
+		delay(100);
 	}
 	/* xoa nhung cho viet ten DUNG CUTE*/
 	for (int i = 0; i < 16; i++)
@@ -1200,13 +1208,17 @@ void smartConfig_ndb()
 			Serial.println("SmartConfig Success");
 			String qsid = WiFi.SSID();
 			String qpass = WiFi.psk();
+			lcd.setCursor(0, 0);
+			lcd.print("Begin SmartConfig!!!");
 			lcd.setCursor(0, 1);
 			lcd.print("SmartConfig Success");
 			lcd.setCursor(0, 2);
 			lcd.print(qsid);
 			lcd.setCursor(0, 3);
 			lcd.print(qpass);
-			delay(2000);
+			/* Chuông báo két nối ok */
+			digitalWrite(signal_Bell, 1);
+			delay(5000);
 			if (qsid.length() > 0 && qpass.length() > 0)
 			{
 				Serial.println("clearing eeprom");
@@ -1234,6 +1246,8 @@ void smartConfig_ndb()
 					Serial.println(qpass[i]);
 				}
 				EEPROM.commit();
+				/* Ngắt chuông báo két nối ok */
+				digitalWrite(signal_Bell, 0);
 				lcd.clear();
 				lcd.setCursor(0, 0);
 				lcd.print("Saved ID & Pass Wifi");
