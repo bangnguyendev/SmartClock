@@ -78,11 +78,12 @@ int nam, thang, ngay, thu;
 int hen_gio, hen_phut;
 int gio, phut, giay;
 
-int couter_mode = 0;
-int stt_mode = 0, stt_mode_baothuc = 0;
-int xoa_1_lan = 0;
+int couter_Mode = 0;
+int status_Mode = 0;
+int status_Mode_Alarm = 0;
+int value_Location_EEPROM = 0;
 unsigned long time_dem_thoitiet;
-int bien_location_eeprom = 0;
+
 
 /* bien nhiet do */
 float temp;
@@ -127,8 +128,8 @@ void setup()
 	hen_phut = EEPROM.read(index_eeprom_henphut);
 	Serial.print("hen_phut: ");
 	Serial.println(EEPROM.read(index_eeprom_henphut));
-	bien_location_eeprom = EEPROM.read(index_eeprom_location_eeprom);
-	Serial.print("bien_location_eeprom: ");
+	value_Location_EEPROM = EEPROM.read(index_eeprom_location_eeprom);
+	Serial.print("value_Location_EEPROM: ");
 	Serial.println(EEPROM.read(index_eeprom_location_eeprom));
 
 	Serial.println("=========ĐỌC SSID PASS TỪ EEROM ĐÃ LƯU!!!====");
@@ -316,19 +317,19 @@ void CheckButton_ndb()
 			while (digitalRead(Button_Mode) == HIGH) // đợi cho nút bấm được giữ
 			{
 				Serial.println(millis() - startTime);
-				couter_mode = (millis() - startTime) / 1000;
-				couter_mode = couter_mode / 1 % 10;
+				couter_Mode = (millis() - startTime) / 1000;
+				couter_Mode = couter_Mode / 1 % 10;
 				lcd.setCursor(0, 0);
 				lcd.print("Couter: ");
-				lcd.print(couter_mode);
+				lcd.print(couter_Mode);
 				lcd.print(" seconds  ");
-				if (couter_mode < 1)
+				if (couter_Mode < 1)
 				{
 					lcd.setCursor(0, 1);
 					lcd.print("Mode Selection      ");
 				}
 				/* vao mode Message */
-				else if (couter_mode >= 7)
+				else if (couter_Mode >= 7)
 				{
 					lcd.setCursor(0, 1);
 					lcd.print("Mode: >> Message    ");
@@ -338,7 +339,7 @@ void CheckButton_ndb()
 					lcd.print("                    ");
 				}
 				/* vao mode setup wifi */
-				else if (couter_mode >= 5)
+				else if (couter_Mode >= 5)
 				{
 					lcd.setCursor(0, 1);
 					lcd.print("Mode: >> Wifi Change");
@@ -348,7 +349,7 @@ void CheckButton_ndb()
 					lcd.print("                    ");
 				}
 				/* vao mode setup vi tri thoi tiet */
-				else if (couter_mode >= 3)
+				else if (couter_Mode >= 3)
 				{
 					lcd.setCursor(0, 1);
 					lcd.print("Mode: >> Location   ");
@@ -358,7 +359,7 @@ void CheckButton_ndb()
 					lcd.print("         Message    ");
 				}
 				/* vao mode setup bao thuc */
-				else if (couter_mode >= 1)
+				else if (couter_Mode >= 1)
 				{
 					lcd.setCursor(0, 1);
 					lcd.print("Mode: >> Alarm      ");
@@ -371,10 +372,10 @@ void CheckButton_ndb()
 			};
 			/* thời gian bằng giá trị hiện tại trừ giá trị ban đầu */
 			long duration = millis() - startTime;
-			Serial.printf("couter_mode: ");
-			Serial.println(couter_mode);
+			Serial.printf("couter_Mode: ");
+			Serial.println(couter_Mode);
 			/* Message mode*/
-			if (couter_mode >= 7)
+			if (couter_Mode >= 7)
 			{
 				/* Message mode*/
 				lcd.clear();
@@ -399,7 +400,7 @@ void CheckButton_ndb()
 				lcd.clear();
 			}
 			/* vao mode setup wifi */
-			else if (couter_mode >= 5)
+			else if (couter_Mode >= 5)
 			{
 				/* vao mode setup wifi */
 				lcd.clear();
@@ -422,7 +423,7 @@ void CheckButton_ndb()
 				lcd.clear();
 			}
 			/* vao mode setup vi tri thoi tiet */
-			else if (couter_mode >= 3)
+			else if (couter_Mode >= 3)
 			{
 				lcd.clear();
 				customL(0, 0);
@@ -450,7 +451,7 @@ void CheckButton_ndb()
 				lcd.clear();
 			}
 			/* vao mode setup bao thuc */
-			else if (couter_mode >= 1)
+			else if (couter_Mode >= 1)
 			{
 				lcd.clear();
 				customS(4, 0);
@@ -540,19 +541,20 @@ void printLocalTime()
 	}
 	else /* lam viec binh thuong */
 	{
-		if ((giay % 5 == 0) && (xoa_1_lan == 0))
+		static int only_Delete_Once = 0;
+		if ((giay % 5 == 0) && (only_Delete_Once == 0))
 		/* cu moi 5 giay xoa 2 line tren 1 lan */
 		{
 			lcd.setCursor(0, 0);
 			lcd.print("                    ");
 			lcd.setCursor(0, 1);
 			lcd.print("                    ");
-			xoa_1_lan++;
+			only_Delete_Once++;
 		}
 		else if (giay % 5 != 0)
 		{
 			/* code */
-			xoa_1_lan = 0;
+			only_Delete_Once = 0;
 		}
 
 		if (giay / 1 % 10 < 5)
@@ -561,14 +563,13 @@ void printLocalTime()
 			if ((ngay == DAY_DungNguyen) && (thang == MON_DungNguyen))
 			{
 				lcd.setCursor(0, 0);
-				lcd.print("DUNG Cute!");
-
+				lcd.print("Dung Cute!");
 				lcd.print("HPBD!");
-				static int tuoi_DUNG_cute;
-				tuoi_DUNG_cute = nam - 1994;
+				static int age_of_MsDung;
+				age_of_MsDung = nam - 1994;
 				lcd.setCursor(0, 1);
 				lcd.print("Dung tron ");
-				lcd.print(tuoi_DUNG_cute);
+				lcd.print(age_of_MsDung);
 				lcd.print(" tuoi.");
 				Serial.println("Sanh thần Dung ngáo :3");
 			}
@@ -690,19 +691,19 @@ void printLocalTime()
 
 				lcd.setCursor(0, 1);
 				lcd.write(3);
-				if (bien_location_eeprom == 0)
+				if (value_Location_EEPROM == 0)
 				{
 					lcd.print("TpHcm"); /* chuyen thanh location */
 				}
-				else if (bien_location_eeprom == 1)
+				else if (value_Location_EEPROM == 1)
 				{
 					lcd.print("VgTau"); /* chuyen thanh location */
 				}
-				else if (bien_location_eeprom == 2)
+				else if (value_Location_EEPROM == 2)
 				{
 					lcd.print("DaLat"); /* chuyen thanh location */
 				}
-				else if (bien_location_eeprom == 3)
+				else if (value_Location_EEPROM == 3)
 				{
 					lcd.print("TpHue"); /* chuyen thanh location */
 				}
@@ -755,16 +756,16 @@ void printLocalTime()
 			Serial.println("Sanh thần Dung ngáo :3");
 		}
 		else if ((hen_gio == gio) && (hen_phut == phut) &&
-				 (giay < 2) && (stt_mode_baothuc == 0))
+				 (giay < 2) && (status_Mode_Alarm == 0))
 		{
 			active_bao_thuc();
-			stt_mode_baothuc = 1;
+			status_Mode_Alarm = 1;
 		}
 		else
 		{
 			digitalWrite(signal_Bell, 0);
 			/* khoa trang thai cua active_bao_thuc */
-			stt_mode_baothuc = 0;
+			status_Mode_Alarm = 0;
 		}
 	}
 }
@@ -775,7 +776,7 @@ void Thingspeak_Message()
 	int statusCode_Thingspeak_0 = 0;
 	int statusCode_Thingspeak_1 = 0;
 	unsigned long dem_10s_stop = millis();
-	while (((unsigned long)(millis() - dem_10s_stop) < 10000) && (stt_mode == 0))
+	while (((unsigned long)(millis() - dem_10s_stop) < 10000) && (status_Mode == 0))
 	{
 		/* test nạp data vao Thingspeak */
 #if ESP_NB_OFF
@@ -887,7 +888,7 @@ void Thingspeak_Message()
 		yield(); // disble Soft WDT reset - NodeMCU
 	}
 	/* set lai gia tri cho su dung lan sau */
-	stt_mode = 0;
+	status_Mode = 0;
 }
 
 /* Chon vi tri doc gia tri thoi tiet */
@@ -904,7 +905,7 @@ void Choose_location()
 	lcd.print("DaLat> TpHue> TpHCM>");
 	unsigned long dem_10s_stop = millis();
 	int dem_location = 0;
-	while (((unsigned long)(millis() - dem_10s_stop) < 10000) && (stt_mode == 0))
+	while (((unsigned long)(millis() - dem_10s_stop) < 10000) && (status_Mode == 0))
 	{
 		if (digitalRead(Button_Mode) == HIGH) // nếu nút bấm ở mức thấp
 		{
@@ -918,16 +919,16 @@ void Choose_location()
 					dem_10s_stop = millis();
 					/* check hanh vi nut nhan */
 					Serial.println(millis() - startTime);
-					couter_mode = (millis() - startTime) / 1000;
-					couter_mode = couter_mode / 1 % 10;
+					couter_Mode = (millis() - startTime) / 1000;
+					couter_Mode = couter_Mode / 1 % 10;
 					lcd.setCursor(0, 0);
 					lcd.print("Couter: ");
-					lcd.print(couter_mode);
+					lcd.print(couter_Mode);
 					lcd.print(" seconds  ");
-					if (couter_mode < 1)
+					if (couter_Mode < 1)
 					{
 					}
-					else if (couter_mode >= 9)
+					else if (couter_Mode >= 9)
 					{
 						/* mode xoay vong nen dem 1 den 9 thi reset */
 						startTime = millis();
@@ -938,9 +939,9 @@ void Choose_location()
 						lcd.setCursor(0, 3);
 						lcd.print("         VungTau    ");
 					}
-					else if (couter_mode >= 7)
+					else if (couter_Mode >= 7)
 					{
-						bien_location_eeprom = 3;
+						value_Location_EEPROM = 3;
 						lcd.setCursor(0, 1);
 						lcd.print("Loca: >> Hue        ");
 						lcd.setCursor(0, 2);
@@ -948,9 +949,9 @@ void Choose_location()
 						lcd.setCursor(0, 3);
 						lcd.print("         VungTau    ");
 					}
-					else if (couter_mode >= 5)
+					else if (couter_Mode >= 5)
 					{
-						bien_location_eeprom = 2;
+						value_Location_EEPROM = 2;
 						lcd.setCursor(0, 1);
 						lcd.print("Loca: >> DaLat      ");
 						lcd.setCursor(0, 2);
@@ -958,9 +959,9 @@ void Choose_location()
 						lcd.setCursor(0, 3);
 						lcd.print("         HCMC       ");
 					}
-					else if (couter_mode >= 3)
+					else if (couter_Mode >= 3)
 					{
-						bien_location_eeprom = 1;
+						value_Location_EEPROM = 1;
 						lcd.setCursor(0, 1);
 						lcd.print("Loca: >> VungTau    ");
 						lcd.setCursor(0, 2);
@@ -968,9 +969,9 @@ void Choose_location()
 						lcd.setCursor(0, 3);
 						lcd.print("         Hue        ");
 					}
-					else if (couter_mode >= 1)
+					else if (couter_Mode >= 1)
 					{
-						bien_location_eeprom = 0;
+						value_Location_EEPROM = 0;
 						lcd.setCursor(0, 1);
 						lcd.print("Loca: >> HCMC       ");
 						lcd.setCursor(0, 2);
@@ -980,14 +981,14 @@ void Choose_location()
 					}
 					yield(); // disble Soft WDT reset - NodeMCU
 				};
-				Serial.printf("couter_mode: ");
-				Serial.println(couter_mode);
-				if (couter_mode < 1)
+				Serial.printf("couter_Mode: ");
+				Serial.println(couter_Mode);
+				if (couter_Mode < 1)
 				{
 				}
-				else if (couter_mode >= 7)
+				else if (couter_Mode >= 7)
 				{
-					bien_location_eeprom = 3;
+					value_Location_EEPROM = 3;
 					lcd.setCursor(0, 0);
 					lcd.print("Location Selection: ");
 					lcd.setCursor(0, 1);
@@ -1007,9 +1008,9 @@ void Choose_location()
 					customE(0 + 4 + 4 + 4 + 4, 2);
 					delay(800);
 				}
-				else if (couter_mode >= 5)
+				else if (couter_Mode >= 5)
 				{
-					bien_location_eeprom = 2;
+					value_Location_EEPROM = 2;
 					lcd.setCursor(0, 0);
 					lcd.print("Location Selection: ");
 					lcd.setCursor(0, 1);
@@ -1029,9 +1030,9 @@ void Choose_location()
 					customT(0 + 4 + 4 + 4 + 4, 2);
 					delay(800);
 				}
-				else if (couter_mode >= 3)
+				else if (couter_Mode >= 3)
 				{
-					bien_location_eeprom = 1;
+					value_Location_EEPROM = 1;
 					lcd.setCursor(0, 0);
 					lcd.print("Location Selection: ");
 					lcd.setCursor(0, 1);
@@ -1051,9 +1052,9 @@ void Choose_location()
 					customU(0 + 4 + 4 + 4 + 4, 2);
 					delay(800);
 				}
-				else if (couter_mode >= 1)
+				else if (couter_Mode >= 1)
 				{
-					bien_location_eeprom = 0;
+					value_Location_EEPROM = 0;
 					lcd.setCursor(0, 0);
 					lcd.print("Location Selection: ");
 					lcd.setCursor(0, 1);
@@ -1078,11 +1079,11 @@ void Choose_location()
 		yield(); // disble Soft WDT reset - NodeMCU
 	}
 	/* set lai gia tri cho su dung lan sau */
-	stt_mode = 0;
+	status_Mode = 0;
 	/* luu gia tri vao eeprom */
-	EEPROM.write(index_eeprom_location_eeprom, bien_location_eeprom);
+	EEPROM.write(index_eeprom_location_eeprom, value_Location_EEPROM);
 	EEPROM.commit();
-	Serial.print("bien_location_eeprom duoc set eeprom: ");
+	Serial.print("value_Location_EEPROM duoc set eeprom: ");
 	Serial.println(EEPROM.read(index_eeprom_location_eeprom));
 }
 
@@ -1103,19 +1104,19 @@ void Call_Weather_Every_10Min()
 /* Lay gia tri thoi tiet tai vi tri da chon */
 void Weather_Online_sever()
 {
-	if (bien_location_eeprom == 0)
+	if (value_Location_EEPROM == 0)
 	{
 		Location = "1566083";
 	}
-	else if (bien_location_eeprom == 1)
+	else if (value_Location_EEPROM == 1)
 	{
 		Location = "1562414";
 	}
-	else if (bien_location_eeprom == 2)
+	else if (value_Location_EEPROM == 2)
 	{
 		Location = "1584071";
 	}
-	else if (bien_location_eeprom == 3)
+	else if (value_Location_EEPROM == 3)
 	{
 		Location = "1565033";
 	}
@@ -1244,7 +1245,7 @@ void smartConfig_ndb()
 void Setup_AlarmClock()
 {
 	unsigned long dem_10s_stop = millis();
-	while (((unsigned long)(millis() - dem_10s_stop) < 10000) && (stt_mode == 0))
+	while (((unsigned long)(millis() - dem_10s_stop) < 10000) && (status_Mode == 0))
 	{
 		lcd.setCursor(0, 0);
 		lcd.print("Mode >= 1s SetHours ");
@@ -1276,60 +1277,59 @@ void Setup_AlarmClock()
 					dem_10s_stop = millis();
 					/* check hanh vi nut nhan */
 					Serial.println(millis() - startTime);
-					couter_mode = (millis() - startTime) / 1000;
-					couter_mode = couter_mode / 1 % 10;
+					couter_Mode = (millis() - startTime) / 1000;
+					couter_Mode = couter_Mode / 1 % 10;
 					lcd.setCursor(0, 0);
 					lcd.print("Couter: ");
-					lcd.print(couter_mode);
+					lcd.print(couter_Mode);
 					lcd.print(" seconds  ");
-					if (couter_mode < 1)
+					if (couter_Mode < 1)
 					{
 						lcd.setCursor(0, 1);
 						lcd.print("Mode Selection      ");
 					}
-					else if (couter_mode >= 5)
+					else if (couter_Mode >= 5)
 					{
 						lcd.setCursor(0, 1);
 						lcd.print("Out Mode            ");
-						delay(2000);
 					}
-					else if (couter_mode >= 3)
+					else if (couter_Mode >= 3)
 					{
 						lcd.setCursor(0, 1);
 						lcd.print("===>>>> Set Minute  ");
 					}
-					else if (couter_mode >= 1)
+					else if (couter_Mode >= 1)
 					{
 						lcd.setCursor(0, 1);
 						lcd.print(" Set Hours <<<<<<===");
 					}
 					yield(); // disble Soft WDT reset - NodeMCU
 				};
-				Serial.printf("couter_mode: ");
-				Serial.println(couter_mode);
-				if (couter_mode < 1)
+				Serial.printf("couter_Mode: ");
+				Serial.println(couter_Mode);
+				if (couter_Mode < 1)
 				{
 					lcd.setCursor(0, 1);
 					lcd.print("Mode Selection");
 				}
-				else if (couter_mode >= 5)
+				else if (couter_Mode >= 5)
 				{
-					/* set = 1 de vao while */
-					stt_mode = 1;
+					/* Out mode */
+					delay(1500);
 				}
-				else if (couter_mode >= 3)
+				else if (couter_Mode >= 3)
 				{
 					/* set = 1 de vao while */
-					stt_mode = 1;
+					status_Mode = 1;
 					chinh_phut_hen_gio();
 					/* khi nhan nut thi set lai time out mode */
 					dem_10s_stop = millis();
 					/* check hanh vi nut nhan */
 				}
-				else if (couter_mode >= 1)
+				else if (couter_Mode >= 1)
 				{
 					/* set = 1 de vao while */
-					stt_mode = 1;
+					status_Mode = 1;
 					chinh_gio_hen_gio();
 					/* khi nhan nut thi set lai time out mode */
 					dem_10s_stop = millis();
@@ -1340,7 +1340,7 @@ void Setup_AlarmClock()
 		yield(); // disble Soft WDT reset - NodeMCU
 	}
 	/* set lai gia tri cho su dung lan sau */
-	stt_mode = 0;
+	status_Mode = 0;
 }
 
 void chinh_gio_hen_gio()
@@ -1348,7 +1348,7 @@ void chinh_gio_hen_gio()
 	unsigned long dem_nhay = 0;
 	unsigned long time_dem_baothuc = millis();
 	unsigned long dem_10s_stop_g = millis();
-	while (((unsigned long)(millis() - dem_10s_stop_g) < 10000) && (stt_mode == 1))
+	while (((unsigned long)(millis() - dem_10s_stop_g) < 10000) && (status_Mode == 1))
 	{
 		/* tao hieu ung nhay nhay so */
 		dem_nhay = (unsigned long)(millis() - time_dem_baothuc);
@@ -1369,7 +1369,7 @@ void chinh_gio_hen_gio()
 		{
 			time_dem_baothuc = millis();
 		}
-		Serial.printf("couter_mode: ");
+		Serial.printf("couter_Mode: ");
 		Serial.println(dem_nhay);
 
 		lcd.setCursor(9, 2);
@@ -1398,15 +1398,15 @@ void chinh_gio_hen_gio()
 					dem_10s_stop_g = millis();
 					/* check hanh vi nut nhan */
 					Serial.println(millis() - startTime);
-					couter_mode = (millis() - startTime) / 1000;
+					couter_Mode = (millis() - startTime) / 1000;
 					/* hien thi gio font so lon */
 					printDigits(hen_gio / 10 % 10, 1, 2);
 					printDigits(hen_gio / 1 % 10, 5, 2);
-					if (couter_mode >= 2)
+					if (couter_Mode >= 2)
 					{
 						lcd.setCursor(19, 0);
 						lcd.write(7);
-						stt_mode = 0;
+						status_Mode = 0;
 					}
 					yield(); // disble Soft WDT reset - NodeMCU
 				};
@@ -1415,7 +1415,7 @@ void chinh_gio_hen_gio()
 		yield(); // disble Soft WDT reset - NodeMCU
 	}
 	/* set lai gia tri cho su dung lan sau */
-	stt_mode = 0;
+	status_Mode = 0;
 	/* luu gia tri vao eeprom */
 	EEPROM.write(index_eeprom_hengio, hen_gio);
 	EEPROM.commit();
@@ -1428,7 +1428,7 @@ void chinh_phut_hen_gio()
 	unsigned long time_dem_baothuc = millis();
 	unsigned long dem_nhay = 0;
 	unsigned long dem_10s_stop_P = millis();
-	while (((unsigned long)(millis() - dem_10s_stop_P) < 10000) && (stt_mode == 1))
+	while (((unsigned long)(millis() - dem_10s_stop_P) < 10000) && (status_Mode == 1))
 	{
 		/* hien thi gio font so lon */
 		printDigits(hen_gio / 10 % 10, 1, 2);
@@ -1476,15 +1476,15 @@ void chinh_phut_hen_gio()
 					dem_10s_stop_P = millis();
 					/* check hanh vi nut nhan */
 					Serial.println(millis() - startTime);
-					couter_mode = (millis() - startTime) / 1000;
+					couter_Mode = (millis() - startTime) / 1000;
 					/* hien thi phut font so lon */
 					printDigits(hen_phut / 10 % 10, 11, 2);
 					printDigits(hen_phut / 1 % 10, 15, 2);
-					if (couter_mode >= 2)
+					if (couter_Mode >= 2)
 					{
 						lcd.setCursor(19, 0);
 						lcd.write(7);
-						stt_mode = 0;
+						status_Mode = 0;
 					}
 					yield(); // disble Soft WDT reset - NodeMCU
 				};
@@ -1493,7 +1493,7 @@ void chinh_phut_hen_gio()
 		yield(); // disble Soft WDT reset - NodeMCU
 	}
 	/* set lai gia tri cho su dung lan sau */
-	stt_mode = 0;
+	status_Mode = 0;
 	/* luu gia tri vao eeprom */
 	EEPROM.write(index_eeprom_henphut, hen_phut);
 	EEPROM.commit();
@@ -1509,7 +1509,7 @@ void active_bao_thuc()
 	unsigned long time_dem_baothuc = millis();
 
 	while (((unsigned long)(millis() - dem_30s_stop) < 30000) &&
-		   (stt_mode_baothuc == 0))
+		   (status_Mode_Alarm == 0))
 	{
 		dem_nhay = (unsigned long)(millis() - time_dem_baothuc);
 		if (dem_nhay < 300)
@@ -1576,20 +1576,20 @@ void active_bao_thuc()
 					printDigits(hen_phut / 1 % 10, 15, 2);
 					/*==============================*/
 					Serial.println(millis() - startTime);
-					couter_mode = (millis() - startTime) / 1000;
-					couter_mode = couter_mode / 1 % 10;
+					couter_Mode = (millis() - startTime) / 1000;
+					couter_Mode = couter_Mode / 1 % 10;
 
-					if (couter_mode >= 2)
+					if (couter_Mode >= 2)
 					{
-						stt_mode_baothuc = 1;
+						status_Mode_Alarm = 1;
 						lcd.setCursor(19, 3);
 						lcd.write(4);
 						digitalWrite(signal_Bell, 0);
 					}
-					else if (couter_mode < 2)
+					else if (couter_Mode < 2)
 					{
 						lcd.setCursor(19, 3);
-						lcd.print(couter_mode);
+						lcd.print(couter_Mode);
 					}
 					yield(); // disble Soft WDT reset - NodeMCU
 				};
