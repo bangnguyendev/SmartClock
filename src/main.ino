@@ -822,9 +822,9 @@ void Thingspeak_Message()
 		// String message_sent_Dung = "";
 		String message_sent_Dung = ThingSpeak.readStatus(ChannelNumber_Smartclock, ReadAPIKey_Smartclock);
 		statusCode_Thingspeak_0 = ThingSpeak.getLastReadStatus();
-		hen_gio = ThingSpeak.readIntField(ChannelNumber_Smartclock, Fiels_Smartclock_Gio, ReadAPIKey_Smartclock);
+		int tam_hen_gio = ThingSpeak.readIntField(ChannelNumber_Smartclock, Fiels_Smartclock_Gio, ReadAPIKey_Smartclock);
 		statusCode_Thingspeak_1 = ThingSpeak.getLastReadStatus();
-		hen_phut = ThingSpeak.readIntField(ChannelNumber_Smartclock, Fiels_Smartclock_Phut, ReadAPIKey_Smartclock);
+		int tam_hen_phut = ThingSpeak.readIntField(ChannelNumber_Smartclock, Fiels_Smartclock_Phut, ReadAPIKey_Smartclock);
 		statusCode_Thingspeak_2 = ThingSpeak.getLastReadStatus();
 		/* Check the status of the read operation to see if it was successful */
 		if ((statusCode_Thingspeak_0 == 200) &&
@@ -883,6 +883,9 @@ void Thingspeak_Message()
 					delay(150);
 				}
 			}
+			/* nếu đọc ok thì chính thức lấy biến tạm gấn vào */
+			hen_gio = tam_hen_gio;
+			hen_phut = tam_hen_phut;
 			/* luu gia tri báo thưc vao eeprom */
 			EEPROM.write(index_eeprom_hengio, hen_gio);
 			Serial.print("hen_gio duoc set eeprom: ");
