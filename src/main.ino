@@ -31,6 +31,8 @@ WiFiClient client;
 /* ThingSpeak  */
 /* Channel Smart Clock */
 #define ChannelNumber_Smartclock 947371
+#define Fiels_Smartclock_Gio 1
+#define Fiels_Smartclock_Phut 2
 const char *WriteAPIKey_Smartclock = "9DU3YS7U45KE50OA";
 const char *ReadAPIKey_Smartclock = "HZ6V9BBQBVUR8PXI";
 /* Channel View */
@@ -200,6 +202,7 @@ void setup()
 			lcd.setCursor(0, 3);
 			lcd.print("--------oOOo--------");
 			delay(1000);
+			/* vào tìm kết nối wifi*/
 			smartConfig_ndb();
 		}
 	}
@@ -241,32 +244,28 @@ void setup()
 		lcd.write(1); //chay ki tu trai tim
 		lcd.setCursor(i, 3);
 		lcd.write(1); //chay ki tu trai tim
-		lcd.setCursor(20 - i, 0);
+		lcd.setCursor(19 - i, 0);
 		lcd.write(1); //chay ki tu trai tim
-		lcd.setCursor(20 - i, 1);
+		lcd.setCursor(19 - i, 1);
 		lcd.write(1); //chay ki tu trai tim
-		lcd.setCursor(20 - i, 2);
+		lcd.setCursor(19 - i, 2);
 		lcd.write(1); //chay ki tu trai tim
-		lcd.setCursor(20 - i, 3);
+		lcd.setCursor(19 - i, 3);
 		lcd.write(1); //chay ki tu trai tim
 		delay(100);
 	}
 	/* xoa nhung cho viet ten DUNG CUTE*/
-	for (int i = 0; i < 16; i++)
-	{
-		lcd.setCursor(i, 0);
-		lcd.print(" ");
-		lcd.setCursor(i, 1);
-		lcd.print(" ");
-	}
-	/* xoa nhung cho viet ten DUNG CUTE*/
-	for (int i = 5; i < 20; i++)
-	{
-		lcd.setCursor(i, 2);
-		lcd.print(" ");
-		lcd.setCursor(i, 3);
-		lcd.print(" ");
-	}
+
+	lcd.setCursor(0, 0);
+	lcd.print("                    ");
+	lcd.setCursor(0, 1);
+	lcd.print("                ");
+
+	lcd.setCursor(0, 2);
+	lcd.print("                    ");
+	lcd.setCursor(5, 3);
+	lcd.print("               ");
+
 	/* viet ten DUNG CUTE*/
 	{
 		/* xoa trai tim dua ve binh thuong */
@@ -274,22 +273,22 @@ void setup()
 		/* =============================== */
 
 		customD(0, 0);
-		delay(200);
+		delay(100);
 		customU(4, 0);
-		delay(200);
+		delay(100);
 		customN(4 + 4, 0);
-		delay(200);
+		delay(100);
 		customG(4 + 4 + 5, 0);
-		delay(200);
+		delay(100);
 
 		customC(5, 2);
-		delay(200);
+		delay(100);
 		customU(5 + 4, 2);
-		delay(200);
+		delay(100);
 		customT(5 + 4 + 4, 2);
-		delay(200);
+		delay(100);
 		customE(5 + 4 + 4 + 4, 2);
-		delay(200);
+		delay(100);
 
 		delay(1500);
 		lcd.clear();
@@ -387,19 +386,26 @@ void CheckButton_ndb()
 				/* Message mode*/
 				lcd.clear();
 				delay(100);
-				customM(0 + 1, 0);
+				customT(0, 0);
 				delay(100);
-				customE(0 + 1 + 5, 0);
+				customH(0 + 3, 0);
 				delay(100);
-				customS(0 + 1 + 5 + 4, 0);
+				customI(0 + 3 + 3, 0);
 				delay(100);
-				customS(0 + 1 + 5 + 4 + 4, 0);
+				customN(0 + 3 + 3 + 3, 0);
+				delay(100);
+				customG(0 + 3 + 3 + 3 + 4, 0);
 
-				customA(6 + 2, 2);
 				delay(100);
-				customG(6 + 4 + 2, 2);
+				customS(5, 2);
 				delay(100);
-				customE(6 + 4 + 4 + 2, 2);
+				customP(5 + 3, 2);
+				delay(100);
+				customE(5 + 3 + 3, 2);
+				delay(100);
+				customA(5 + 3 + 3 + 3, 2);
+				delay(100);
+				customK(5 + 3 + 3 + 3 + 3, 2);
 				delay(1000);
 				/* Hien thi message tu Thingspeak_Message */
 				lcd.clear();
@@ -753,7 +759,7 @@ void printLocalTime()
 		/* qua gio moi la keu  */
 		if ((phut == 0) && (giay < 2))
 		{
-			digitalWrite(signal_Bell, 1);
+			digitalWrite(signal_Bell, ESP_NB_ON);
 		}
 		else if ((ngay == DAY_DungNguyen) && (thang == MON_DungNguyen))
 		{
@@ -770,7 +776,7 @@ void printLocalTime()
 		}
 		else
 		{
-			digitalWrite(signal_Bell, 0);
+			digitalWrite(signal_Bell, ESP_NB_OFF);
 			/* khoa trang thai cua active_bao_thuc */
 			status_Mode_Alarm = 0;
 		}
@@ -780,8 +786,9 @@ void printLocalTime()
 /* Func get message on Thingspeak sever */
 void Thingspeak_Message()
 {
-	int statusCode_Thingspeak_0 = 0;
-	int statusCode_Thingspeak_1 = 0;
+	int statusCode_Thingspeak_0 = 200;
+	int statusCode_Thingspeak_1 = 200;
+	int statusCode_Thingspeak_2 = 200;
 	unsigned long dem_10s_stop = millis();
 	while (((unsigned long)(millis() - dem_10s_stop) < 10000) && (status_Mode == 0))
 	{
@@ -809,72 +816,92 @@ void Thingspeak_Message()
 		}
 #else
 		/* hiển thị data vao Thingspeak */
+		lcd.setCursor(0, 0);
+		lcd.print("Loading...");
+		/* Đọc giá trị Thingspeak về & check đường truyền */
+		// String message_sent_Dung = "";
 		String message_sent_Dung = ThingSpeak.readStatus(ChannelNumber_Smartclock, ReadAPIKey_Smartclock);
-		// Check the status of the read operation to see if it was successful
 		statusCode_Thingspeak_0 = ThingSpeak.getLastReadStatus();
-		if (statusCode_Thingspeak_0 == 200)
+		hen_gio = ThingSpeak.readIntField(ChannelNumber_Smartclock, Fiels_Smartclock_Gio, ReadAPIKey_Smartclock);
+		statusCode_Thingspeak_1 = ThingSpeak.getLastReadStatus();
+		hen_phut = ThingSpeak.readIntField(ChannelNumber_Smartclock, Fiels_Smartclock_Phut, ReadAPIKey_Smartclock);
+		statusCode_Thingspeak_2 = ThingSpeak.getLastReadStatus();
+		/* Check the status of the read operation to see if it was successful */
+		if ((statusCode_Thingspeak_0 == 200) &&
+			(statusCode_Thingspeak_1 == 200) &&
+			(statusCode_Thingspeak_2 == 200))
 		{
-			Serial.println("Đọc dữ liệu ThingSpeak tốt.");
+			Serial.println("Channel update status successful.");
+			Serial.println(message_sent_Dung);
+			int sum_char = message_sent_Dung.length();
+			/* Show nội dụng message lên LCD 2004 */
+			lcd.clear();
+			for (int i = 0; i < sum_char; i++)
+			{
+				if (i > 139)
+				{
+					lcd.setCursor(i - 140, 3);
+				}
+				else if (i > 119)
+				{
+					lcd.setCursor(i - 120, 2);
+				}
+				else if (i > 99)
+				{
+					lcd.setCursor(i - 100, 1);
+				}
+				else if (i > 79)
+				{
+					lcd.setCursor(i - 80, 0);
+				}
+				else if (i > 59)
+				{
+					lcd.setCursor(i - 60, 3);
+				}
+				else if (i > 39)
+				{
+					lcd.setCursor(i - 40, 2);
+				}
+				else if (i > 19)
+				{
+					lcd.setCursor(i - 20, 1);
+				}
+				else
+				{
+					lcd.setCursor(i - 00, 0);
+				}
+
+				lcd.print(message_sent_Dung[i]);
+				if (i == 79)
+				{
+					delay(1000);
+					/* Xoa man hinh 1 de chuan bi chuyen sang man hinh 2 */
+					lcd.clear();
+				}
+				else
+				{
+					delay(150);
+				}
+			}
+			/* luu gia tri báo thưc vao eeprom */
+			EEPROM.write(index_eeprom_hengio, hen_gio);
+			Serial.print("hen_gio duoc set eeprom: ");
+			Serial.println(EEPROM.read(index_eeprom_hengio));
+			/* luu gia tri báo thưc vao eeprom */
+			EEPROM.write(index_eeprom_henphut, hen_phut);
+			Serial.print("hen_phut duoc set eeprom: ");
+			Serial.println(EEPROM.read(index_eeprom_henphut));
+			EEPROM.commit();
+			status_Mode = 1;
 		}
 		else
 		{
 			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak_0));
-		}
-
-		Serial.println(message_sent_Dung);
-		int sum_char = message_sent_Dung.length();
-
-		for (int i = 0; i < sum_char; i++)
-		{
-			if (i > 139)
-			{
-				lcd.setCursor(i - 140, 3);
-			}
-			else if (i > 119)
-			{
-				lcd.setCursor(i - 120, 2);
-			}
-			else if (i > 99)
-			{
-				lcd.setCursor(i - 100, 1);
-			}
-			else if (i > 79)
-			{
-				lcd.setCursor(i - 80, 0);
-			}
-			else if (i > 59)
-			{
-				lcd.setCursor(i - 60, 3);
-			}
-			else if (i > 39)
-			{
-				lcd.setCursor(i - 40, 2);
-			}
-			else if (i > 19)
-			{
-				lcd.setCursor(i - 20, 1);
-			}
-			else
-			{
-				lcd.setCursor(i - 00, 0);
-			}
-			/*
-			"Xin Chao Dung xinh  "
-			"dep! Minh den tu    "
-			"dong ho thong minh  "
-			"nhat vu tru!        "
-			*/
-			lcd.print(message_sent_Dung[i]);
-			if (i == 79)
-			{
-				delay(1000);
-				/* Xoa man hinh 1 de chuan bi chuyen sang man hinh 2 */
-				lcd.clear();
-			}
-			else
-			{
-				delay(150);
-			}
+			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak_1));
+			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak_2));
+			lcd.setCursor(0, 1);
+			lcd.print("Error Status!!!");
+			status_Mode = 0;
 		}
 
 		/* Bao gio dong ho vao xem status */
@@ -883,14 +910,21 @@ void Thingspeak_Message()
 		statusCode_Thingspeak_0 = ThingSpeak.setStatus(tam_buffer_sent_thingspeak);
 		statusCode_Thingspeak_1 = ThingSpeak.writeFields(ChannelNumber_View, WriteAPIKey_View);
 		// Check the return code
-		if ((statusCode_Thingspeak_0 == 200) && (statusCode_Thingspeak_1 == 200))
+		if ((statusCode_Thingspeak_0 == 200) &&
+			(statusCode_Thingspeak_1 == 200) &&
+			(statusCode_Thingspeak_2 == 200))
 		{
-			Serial.println("Channel update successful.");
+			Serial.println("Channel update alarm successful.");
+			status_Mode = 1;
 		}
 		else
 		{
 			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak_0));
 			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak_1));
+			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak_2));
+			lcd.setCursor(0, 2);
+			lcd.print("Error Alarm!!!");
+			status_Mode = 0;
 		}
 #endif
 		/* END #if ESP_NB_OFF */
@@ -898,6 +932,10 @@ void Thingspeak_Message()
 	}
 	/* set lai gia tri cho su dung lan sau */
 	status_Mode = 0;
+	/* Chuông báo ok */
+	digitalWrite(signal_Bell, ESP_NB_ON);
+	delay(300);
+	digitalWrite(signal_Bell, ESP_NB_OFF);
 }
 
 /* Chon vi tri doc gia tri thoi tiet */
@@ -1094,6 +1132,10 @@ void Choose_location()
 	EEPROM.commit();
 	Serial.print("value_Location_EEPROM duoc set eeprom: ");
 	Serial.println(EEPROM.read(index_eeprom_location_eeprom));
+	/* Chuông báo ok */
+	digitalWrite(signal_Bell, ESP_NB_ON);
+	delay(300);
+	digitalWrite(signal_Bell, ESP_NB_OFF);
 }
 
 /* Hàm gọi thời tiết mỗi 10 phút một lần */
@@ -1102,12 +1144,8 @@ void Call_Weather_Every_10Min()
 	if ((unsigned long)(millis() - time_dem_thoitiet) > 60 * 10 * 1000) //10 phut/ lan
 	{
 		time_dem_thoitiet = millis();
-		// Serial.printf("Trang thai WiFi.status(): %d\r\n", WiFi.status());
 		Weather_Online_sever();
-		// Serial.println("===========================");
 	}
-	// unsigned long demmm = millis() - time_dem_thoitiet;
-	// Serial.printf("Demmm = % d\r\n", demmm);
 }
 
 /* Lay gia tri thoi tiet tai vi tri da chon */
@@ -1217,7 +1255,7 @@ void smartConfig_ndb()
 			lcd.setCursor(0, 3);
 			lcd.print(qpass);
 			/* Chuông báo két nối ok */
-			digitalWrite(signal_Bell, 1);
+			digitalWrite(signal_Bell, ESP_NB_ON);
 			delay(5000);
 			if (qsid.length() > 0 && qpass.length() > 0)
 			{
@@ -1247,7 +1285,7 @@ void smartConfig_ndb()
 				}
 				EEPROM.commit();
 				/* Ngắt chuông báo két nối ok */
-				digitalWrite(signal_Bell, 0);
+				digitalWrite(signal_Bell, ESP_NB_OFF);
 				lcd.clear();
 				lcd.setCursor(0, 0);
 				lcd.print("Saved ID & Pass Wifi");
@@ -1332,6 +1370,8 @@ void Setup_AlarmClock()
 				{
 					/* Out mode */
 					delay(1500);
+					/* set = 1 de out Mode */
+					status_Mode = 1;
 				}
 				else if (couter_Mode >= 3)
 				{
@@ -1357,6 +1397,10 @@ void Setup_AlarmClock()
 	}
 	/* set lai gia tri cho su dung lan sau */
 	status_Mode = 0;
+	/* Chuông báo ok */
+	digitalWrite(signal_Bell, ESP_NB_ON);
+	delay(300);
+	digitalWrite(signal_Bell, ESP_NB_OFF);
 }
 
 void chinh_gio_hen_gio()
@@ -1562,7 +1606,7 @@ void active_bao_thuc()
 			time_dem_baothuc = millis();
 		}
 
-		digitalWrite(signal_Bell, 1);
+		digitalWrite(signal_Bell, ESP_NB_ON);
 		if (digitalRead(Button_Mode) == HIGH) // nếu nút bấm ở mức thấp
 		{
 			delay(500); //check chac chan la do ng nhan nut
@@ -1600,7 +1644,7 @@ void active_bao_thuc()
 						status_Mode_Alarm = 1;
 						lcd.setCursor(19, 3);
 						lcd.write(4);
-						digitalWrite(signal_Bell, 0);
+						digitalWrite(signal_Bell, ESP_NB_OFF);
 					}
 					else if (couter_Mode < 2)
 					{
@@ -1625,6 +1669,10 @@ bool testWifi(void)
 	{
 		if (WiFi.status() == WL_CONNECTED)
 		{
+			/* Chuông báo ok */
+			digitalWrite(signal_Bell, ESP_NB_ON);
+			delay(300);
+			digitalWrite(signal_Bell, ESP_NB_OFF);
 			return true;
 		}
 		delay(300);
