@@ -35,6 +35,10 @@ WiFiClient client;
 #define Fiels_Smartclock_Phut 2
 const char *WriteAPIKey_Smartclock = "9DU3YS7U45KE50OA";
 const char *ReadAPIKey_Smartclock = "HZ6V9BBQBVUR8PXI";
+/* Channel Status Thingspeak */
+#define ChannelNumber_Status 951877
+const char *WriteAPIKey_Status = "CKFBC2539BDNOTRB";
+const char *ReadAPIKey_Status = "JAXYJ6LRKFRA6XTO";
 /* Channel View */
 #define ChannelNumber_View 947394
 const char *WriteAPIKey_View = "0WLGTHFLKRW0GZDJ";
@@ -789,6 +793,8 @@ void Thingspeak_Message()
 	int statusCode_Thingspeak_0 = 200;
 	int statusCode_Thingspeak_1 = 200;
 	int statusCode_Thingspeak_2 = 200;
+	int statusCode_Thingspeak_3 = 200;
+	int statusCode_Thingspeak_4 = 200;
 	unsigned long dem_10s_stop = millis();
 	while (((unsigned long)(millis() - dem_10s_stop) < 10000) && (status_Mode == 0))
 	{
@@ -819,17 +825,28 @@ void Thingspeak_Message()
 		lcd.setCursor(0, 0);
 		lcd.print("Loading...");
 		/* Đọc giá trị Thingspeak về & check đường truyền */
-		// String message_sent_Dung = "";
-		String message_sent_Dung = ThingSpeak.readStatus(ChannelNumber_Smartclock, ReadAPIKey_Smartclock);
+		/* ChannelNumber_Status */
+		String message_sent_Dung = ThingSpeak.readStatus(ChannelNumber_Status, ReadAPIKey_Status);
 		statusCode_Thingspeak_0 = ThingSpeak.getLastReadStatus();
+		/* ChannelNumber_Smartclock */
 		int tam_hen_gio = ThingSpeak.readIntField(ChannelNumber_Smartclock, Fiels_Smartclock_Gio, ReadAPIKey_Smartclock);
 		statusCode_Thingspeak_1 = ThingSpeak.getLastReadStatus();
 		int tam_hen_phut = ThingSpeak.readIntField(ChannelNumber_Smartclock, Fiels_Smartclock_Phut, ReadAPIKey_Smartclock);
 		statusCode_Thingspeak_2 = ThingSpeak.getLastReadStatus();
+
+		/* Bao gio dong ho vao xem status */
+		/* ChannelNumber_View */
+		String tam_buffer_sent_thingspeak = buffer_sent_thingspeak;
+		tam_buffer_sent_thingspeak += message_sent_Dung;
+		statusCode_Thingspeak_3 = ThingSpeak.setStatus(tam_buffer_sent_thingspeak);
+		statusCode_Thingspeak_4 = ThingSpeak.writeFields(ChannelNumber_View, WriteAPIKey_View);
+
 		/* Check the status of the read operation to see if it was successful */
 		if ((statusCode_Thingspeak_0 == 200) &&
 			(statusCode_Thingspeak_1 == 200) &&
-			(statusCode_Thingspeak_2 == 200))
+			(statusCode_Thingspeak_2 == 200) &&
+			(statusCode_Thingspeak_3 == 200) &&
+			(statusCode_Thingspeak_4 == 200))
 		{
 			Serial.println("Channel update status successful.");
 			Serial.println(message_sent_Dung);
@@ -902,29 +919,10 @@ void Thingspeak_Message()
 			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak_0));
 			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak_1));
 			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak_2));
+			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak_3));
+			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak_4));
 			lcd.setCursor(0, 1);
 			lcd.print("Error Status!!!");
-			status_Mode = 0;
-		}
-
-		/* Bao gio dong ho vao xem status */
-		String tam_buffer_sent_thingspeak = buffer_sent_thingspeak;
-		tam_buffer_sent_thingspeak += message_sent_Dung;
-		statusCode_Thingspeak_0 = ThingSpeak.setStatus(tam_buffer_sent_thingspeak);
-		statusCode_Thingspeak_1 = ThingSpeak.writeFields(ChannelNumber_View, WriteAPIKey_View);
-		// Check the return code
-		if ((statusCode_Thingspeak_0 == 200) &&
-			(statusCode_Thingspeak_1 == 200) &&
-			(statusCode_Thingspeak_2 == 200))
-		{
-			Serial.println("Channel update alarm successful.");
-			status_Mode = 1;
-		}
-		else
-		{
-			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak_0));
-			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak_1));
-			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak_2));
 			lcd.setCursor(0, 2);
 			lcd.print("Error Alarm!!!");
 			status_Mode = 0;
