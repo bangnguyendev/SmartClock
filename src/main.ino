@@ -10,21 +10,21 @@
 #include <Wire.h>
 #include <EEPROM.h>
 #include <ArduinoJson.h>
-#if ESP_NB_ON /* my laptop */
+#if ESP_NB_OFF /* my laptop */
 /* LCD  */
-#include "D:\Github_NguyenBang\smart_clock_ndb\include\LiquidCrystal_I2C-master\LiquidCrystal_I2C.cpp"
-#include "D:\Github_NguyenBang\smart_clock_ndb\include\Character_lcd\Character_LCD.h"
+#include "D:\Github_NguyenBang\SmartClock\include\LiquidCrystal_I2C-master\LiquidCrystal_I2C.cpp"
+#include "D:\Github_NguyenBang\SmartClock\include\Character_lcd\Character_LCD.h"
 LiquidCrystal_I2C lcd(0x3F, 20, 4); // set the LCD address to 0x27 for a 16 chars and 2 line display
 /* ThingSpeak  */
-#include "D:\Github_NguyenBang\smart_clock_ndb\include\ThingSpeak\ThingSpeak.cpp"
+#include "D:\Github_NguyenBang\SmartClock\include\ThingSpeak\ThingSpeak.cpp"
 WiFiClient client;
 #else /* company */
 /* LCD  */
-#include "D:\Git_NDB\smart_clock_ndb\include\LiquidCrystal_I2C-master\LiquidCrystal_I2C.cpp"
-#include "D:\Git_NDB\smart_clock_ndb\include\Character_lcd\Character_LCD.H"
+#include "D:\Git_NDB\SmartClock\include\LiquidCrystal_I2C-master\LiquidCrystal_I2C.cpp"
+#include "D:\Git_NDB\SmartClock\include\Character_lcd\Character_LCD.h"
 LiquidCrystal_I2C lcd(0x3F, 20, 4); // set the LCD address to 0x27 for a 16 chars and 2 line display
 /* ThingSpeak  */
-#include "D:\Git_NDB\smart_clock_ndb\include\ThingSpeak\ThingSpeak.cpp"
+#include "D:\Git_NDB\SmartClock\include\ThingSpeak\ThingSpeak.cpp"
 WiFiClient client;
 #endif
 
