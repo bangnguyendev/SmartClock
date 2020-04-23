@@ -21,7 +21,6 @@ do
 	echo "===========> $Str_Replace" >> log_change.txt
 	echo Line $i: $Str_Pattern 
 	echo "===========> $Str_Replace"
-	echo thay tai dong $i
 	sed -i "$i s/$Str_Pattern/$Str_Replace/" $name_file.c
 	((temp_count++))
 	
