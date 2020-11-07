@@ -47,10 +47,10 @@ const char *ReadAPIKey_View = "RLQ8HD91AE19S4U3";
 
 #define signal_Bell 16
 #define Button_Mode 14
-/* Ngay sinh nhat DUNG */
-#define DAY_DungNguyen 14
-/* Thang sinh nhat DUNG */
-#define MON_DungNguyen 7
+/* Ngay sinh nhat Bang */
+#define DAY_BangNguyen 14
+/* Thang sinh nhat Bang */
+#define MON_BangNguyen 4
 
 /*index 0 to 31 */
 #define index_eeprom_SSID 32
@@ -258,7 +258,7 @@ void setup()
 		lcd.write(1); //chay ki tu trai tim
 		delay(100);
 	}
-	/* xoa nhung cho viet ten DUNG CUTE*/
+	/* xoa nhung cho viet ten Bang CUTE*/
 
 	lcd.setCursor(0, 0);
 	lcd.print("                    ");
@@ -270,15 +270,15 @@ void setup()
 	lcd.setCursor(5, 3);
 	lcd.print("               ");
 
-	/* viet ten DUNG CUTE*/
+	/* viet ten Bang CUTE*/
 	{
 		/* xoa trai tim dua ve binh thuong */
 		lcd.createChar(1, UB);
 		/* =============================== */
 
-		customD(0, 0);
+		customB(0, 0);
 		delay(100);
-		customU(4, 0);
+		customA(4, 0);
 		delay(100);
 		customN(4 + 4, 0);
 		delay(100);
@@ -577,18 +577,18 @@ void printLocalTime()
 		if (giay / 1 % 10 < 5)
 		/* moi che do hien thi 5 giay */
 		{
-			if ((ngay == DAY_DungNguyen) && (thang == MON_DungNguyen))
+			if ((ngay == DAY_BangNguyen) && (thang == MON_BangNguyen))
 			{
 				lcd.setCursor(0, 0);
-				lcd.print("Dung Cute!");
+				lcd.print("Bang Cute!");
 				lcd.print("HPBD!");
-				static int age_of_MsDung;
-				age_of_MsDung = nam - 1994;
+				static int age_of_mrbang;
+				age_of_mrbang = nam - 1994;
 				lcd.setCursor(0, 1);
-				lcd.print("Dung tron ");
-				lcd.print(age_of_MsDung);
+				lcd.print("Bang tron ");
+				lcd.print(age_of_mrbang);
 				lcd.print(" tuoi.");
-				Serial.println("Sanh thần Dung ngáo :3");
+				Serial.println("Sanh thần Bằng :3");
 			}
 			else
 			{
@@ -765,12 +765,12 @@ void printLocalTime()
 		{
 			digitalWrite(signal_Bell, ESP_NB_ON);
 		}
-		else if ((ngay == DAY_DungNguyen) && (thang == MON_DungNguyen))
+		else if ((ngay == DAY_BangNguyen) && (thang == MON_BangNguyen))
 		{
 			/*
 				xử lý ngắt trong ngày
 			*/
-			Serial.println("Sanh thần Dung ngáo :3");
+			Serial.println("Sanh thần Bang ngáo :3");
 		}
 		else if ((hen_gio == gio) && (hen_phut == phut) &&
 				 (giay < 2) && (status_Mode_Alarm == 0))
@@ -800,13 +800,13 @@ void Thingspeak_Message()
 	{
 		/* test nạp data vao Thingspeak */
 #if ESP_NB_OFF
-		String message_sent_Dung = "";
-		message_sent_Dung += "Hi Nguyen Dung!     ";
-		message_sent_Dung += "Have a nice day!    ";
-		message_sent_Dung += "Smart Clock 2020.   ";
-		message_sent_Dung += "    - by Nguyen Bang";
+		String message_sent_Bang = "";
+		message_sent_Bang += "Hi Nguyen Bang!     ";
+		message_sent_Bang += "Have a nice day!    ";
+		message_sent_Bang += "Smart Clock 2020.   ";
+		message_sent_Bang += "    - by Nguyen Bang";
 
-		statusCode_Thingspeak_0 = ThingSpeak.setStatus(message_sent_Dung);
+		statusCode_Thingspeak_0 = ThingSpeak.setStatus(message_sent_Bang);
 		statusCode_Thingspeak_1 = ThingSpeak.writeFields(ChannelNumber_Smartclock, WriteAPIKey_Smartclock);
 		// Check the return code
 		if ((statusCode_Thingspeak_0 == 200) && (statusCode_Thingspeak_1 == 200))
@@ -826,7 +826,7 @@ void Thingspeak_Message()
 		lcd.print("Loading...");
 		/* Đọc giá trị Thingspeak về & check đường truyền */
 		/* ChannelNumber_Status */
-		String message_sent_Dung = ThingSpeak.readStatus(ChannelNumber_Status, ReadAPIKey_Status);
+		String message_sent_Bang = ThingSpeak.readStatus(ChannelNumber_Status, ReadAPIKey_Status);
 		statusCode_Thingspeak_0 = ThingSpeak.getLastReadStatus();
 		/* ChannelNumber_Smartclock */
 		int tam_hen_gio = ThingSpeak.readIntField(ChannelNumber_Smartclock, Fiels_Smartclock_Gio, ReadAPIKey_Smartclock);
@@ -837,7 +837,7 @@ void Thingspeak_Message()
 		/* Bao gio dong ho vao xem status */
 		/* ChannelNumber_View */
 		String tam_buffer_sent_thingspeak = buffer_sent_thingspeak;
-		tam_buffer_sent_thingspeak += message_sent_Dung;
+		tam_buffer_sent_thingspeak += message_sent_Bang;
 		statusCode_Thingspeak_3 = ThingSpeak.setStatus(tam_buffer_sent_thingspeak);
 		statusCode_Thingspeak_4 = ThingSpeak.writeFields(ChannelNumber_View, WriteAPIKey_View);
 
@@ -849,8 +849,8 @@ void Thingspeak_Message()
 			(statusCode_Thingspeak_4 == 200))
 		{
 			Serial.println("Channel update status successful.");
-			Serial.println(message_sent_Dung);
-			int sum_char = message_sent_Dung.length();
+			Serial.println(message_sent_Bang);
+			int sum_char = message_sent_Bang.length();
 			/* Show nội dụng message lên LCD 2004 */
 			lcd.clear();
 			for (int i = 0; i < sum_char; i++)
@@ -888,7 +888,7 @@ void Thingspeak_Message()
 					lcd.setCursor(i - 00, 0);
 				}
 
-				lcd.print(message_sent_Dung[i]);
+				lcd.print(message_sent_Bang[i]);
 				if (i == 79)
 				{
 					delay(1000);
