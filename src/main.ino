@@ -315,7 +315,7 @@ void loop()
 
 void CheckButton_ndb()
 {
-	if (digitalRead(Button_Mode) == HIGH) // nếu nút bấm ở mức thấp
+	if (digitalRead(Button_Mode) == HIGH) // nếu nút bấm ở mức cao
 	{
 		delay(500); //check chac chan la do ng nhan nut
 		if (digitalRead(Button_Mode) == HIGH)
