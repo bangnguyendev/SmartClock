@@ -17,6 +17,8 @@
 LiquidCrystal_I2C lcd(0x3F, 20, 4); // set the LCD address to 0x27 for a 16 chars and 2 line display
 /* ThingSpeak  */
 #include "D:\Github_NguyenBang\SmartClock\include\ThingSpeak\ThingSpeak.cpp"
+#include <WiFiClient.h>
+
 WiFiClient client;
 #else /* company */
 /* LCD  */
@@ -285,13 +287,13 @@ void setup()
 		customG(4 + 4 + 5, 0);
 		delay(100);
 
-		customC(5, 2);
+		customH(4, 2);
 		delay(100);
-		customU(5 + 4, 2);
+		customI(4 + 4, 2);
 		delay(100);
-		customT(5 + 4 + 4, 2);
+		customE(4 + 4 + 4, 2);
 		delay(100);
-		customE(5 + 4 + 4 + 4, 2);
+		customN(4 + 4 + 4 + 4, 2);
 		delay(100);
 
 		delay(1500);
@@ -580,7 +582,7 @@ void printLocalTime()
 			if ((ngay == DAY_BangNguyen) && (thang == MON_BangNguyen))
 			{
 				lcd.setCursor(0, 0);
-				lcd.print("Bang Cute!");
+				lcd.print("Bang Nguyen! ");
 				lcd.print("HPBD!");
 				static int age_of_mrbang;
 				age_of_mrbang = nam - 1994;
@@ -760,20 +762,18 @@ void printLocalTime()
 		lcd.print(":");
 		lcd.print(buffer_GIAY);
 
-		/* qua gio moi la keu  */
-		if ((phut == 0) && (giay < 2))
+		/* Qua khung giờ mới là tingting  */
+		if ((phut == 0) && (giay < 3))
 		{
 			digitalWrite(signal_Bell, ESP_NB_ON);
 		}
-		else if ((ngay == DAY_BangNguyen) && (thang == MON_BangNguyen))
+		else 
 		{
-			/*
-				xử lý ngắt trong ngày
-			*/
-			Serial.println("Sanh thần Bang ngáo :3");
+			digitalWrite(signal_Bell, ESP_NB_OFF);
 		}
-		else if ((hen_gio == gio) && (hen_phut == phut) &&
-				 (giay < 2) && (status_Mode_Alarm == 0))
+		/* Báo thức */
+		if ((hen_gio == gio) && (hen_phut == phut) &&
+				 (giay < 3) && (status_Mode_Alarm == 0))
 		{
 			active_bao_thuc();
 			status_Mode_Alarm = 1;
@@ -1174,7 +1174,7 @@ void Weather_Online_sever()
 		HTTPClient http; //Declare an object of class HTTPClient
 
 		// specify request destination
-		http.begin("http://api.openweathermap.org/data/2.5/weather?id=" + Location + "&APPID=" + APIKey_openweather);
+		http.begin(client,"http://api.openweathermap.org/data/2.5/weather?id=" + Location + "&APPID=" + APIKey_openweather);
 
 		int httpCode = http.GET(); // send the request
 
@@ -1608,7 +1608,7 @@ void active_bao_thuc()
 		}
 
 		digitalWrite(signal_Bell, ESP_NB_ON);
-		if (digitalRead(Button_Mode) == HIGH) // nếu nút bấm ở mức thấp
+		if (digitalRead(Button_Mode) == HIGH) // nếu nút bấm ở mức cao
 		{
 			delay(500); //check chac chan la do ng nhan nut
 			if (digitalRead(Button_Mode) == HIGH)
