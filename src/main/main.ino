@@ -10,17 +10,7 @@
 #include <Wire.h>
 #include <EEPROM.h>
 #include <ArduinoJson.h>
-#if ESP_NB_OFF /* my laptop */
-/* LCD  */
-#include "D:\Github_NguyenBang\SmartClock\include\LiquidCrystal_I2C-master\LiquidCrystal_I2C.cpp"
-#include "D:\Github_NguyenBang\SmartClock\include\Character_lcd\Character_LCD.h"
-LiquidCrystal_I2C lcd(0x3F, 20, 4); // set the LCD address to 0x27 for a 16 chars and 2 line display
-/* ThingSpeak  */
-#include "D:\Github_NguyenBang\SmartClock\include\ThingSpeak\ThingSpeak.cpp"
-#include <WiFiClient.h>
 
-WiFiClient client;
-#else /* company */
 /* LCD  */
 #include "D:\Git_NDB\SmartClock\include\LiquidCrystal_I2C-master\LiquidCrystal_I2C.cpp"
 #include "D:\Git_NDB\SmartClock\include\Character_lcd\Character_LCD.h"
@@ -28,7 +18,10 @@ LiquidCrystal_I2C lcd(0x3F, 20, 4); // set the LCD address to 0x27 for a 16 char
 /* ThingSpeak  */
 #include "D:\Git_NDB\SmartClock\include\ThingSpeak\ThingSpeak.cpp"
 WiFiClient client;
-#endif
+
+/* Cập nhật OTA */
+String version = "1.0";
+String key = "ee01b3e6-5101-4b37-8e0e-f53353bf12df";
 
 /* ThingSpeak  */
 /* Channel Smart Clock */
@@ -66,7 +59,7 @@ const char *ReadAPIKey_View = "RLQ8HD91AE19S4U3";
 /*
 1584071 DAT LAT
 1566083 TP HCM
-1565033 TP HUE 
+1565033 TP HUE
 1562414 VUNG TAU
 */
 String Location = "1566083";
@@ -192,7 +185,7 @@ void setup()
 			for (int i = 0; i < 20; i++)
 			{
 				lcd.setCursor(i, 1);
-				lcd.write(1); //chay ki tu trai tim
+				lcd.write(1); // chay ki tu trai tim
 				delay(140);
 			}
 			lcd.setCursor(0, 2);
@@ -226,6 +219,9 @@ void setup()
 	Serial.println("IP address: ");
 	Serial.println(WiFi.localIP());
 
+	/* Cập nhật OTA*/
+	update_FOTA();
+
 	configTime(7 * 3600, 0, "vn.pool.ntp.org", "time.nist.gov");
 	Serial.println("Time >>> vn.pool.ntp.org");
 	while (!time(nullptr))
@@ -243,21 +239,21 @@ void setup()
 	for (int i = 0; i < 11; i++)
 	{
 		lcd.setCursor(i, 0);
-		lcd.write(1); //chay ki tu trai tim
+		lcd.write(1); // chay ki tu trai tim
 		lcd.setCursor(i, 1);
-		lcd.write(1); //chay ki tu trai tim
+		lcd.write(1); // chay ki tu trai tim
 		lcd.setCursor(i, 2);
-		lcd.write(1); //chay ki tu trai tim
+		lcd.write(1); // chay ki tu trai tim
 		lcd.setCursor(i, 3);
-		lcd.write(1); //chay ki tu trai tim
+		lcd.write(1); // chay ki tu trai tim
 		lcd.setCursor(19 - i, 0);
-		lcd.write(1); //chay ki tu trai tim
+		lcd.write(1); // chay ki tu trai tim
 		lcd.setCursor(19 - i, 1);
-		lcd.write(1); //chay ki tu trai tim
+		lcd.write(1); // chay ki tu trai tim
 		lcd.setCursor(19 - i, 2);
-		lcd.write(1); //chay ki tu trai tim
+		lcd.write(1); // chay ki tu trai tim
 		lcd.setCursor(19 - i, 3);
-		lcd.write(1); //chay ki tu trai tim
+		lcd.write(1); // chay ki tu trai tim
 		delay(100);
 	}
 	/* xoa nhung cho viet ten Bang CUTE*/
@@ -319,7 +315,7 @@ void CheckButton_ndb()
 {
 	if (digitalRead(Button_Mode) == HIGH) // nếu nút bấm ở mức cao
 	{
-		delay(500); //check chac chan la do ng nhan nut
+		delay(500); // check chac chan la do ng nhan nut
 		if (digitalRead(Button_Mode) == HIGH)
 		{
 			lcd.clear();
@@ -767,13 +763,13 @@ void printLocalTime()
 		{
 			digitalWrite(signal_Bell, ESP_NB_ON);
 		}
-		else 
+		else
 		{
 			digitalWrite(signal_Bell, ESP_NB_OFF);
 		}
 		/* Báo thức */
 		if ((hen_gio == gio) && (hen_phut == phut) &&
-				 (giay < 3) && (status_Mode_Alarm == 0))
+			(giay < 3) && (status_Mode_Alarm == 0))
 		{
 			active_bao_thuc();
 			status_Mode_Alarm = 1;
@@ -957,7 +953,7 @@ void Choose_location()
 	{
 		if (digitalRead(Button_Mode) == HIGH) // nếu nút bấm ở mức thấp
 		{
-			delay(500); //check chac chan la do ng nhan nut
+			delay(500); // check chac chan la do ng nhan nut
 			if (digitalRead(Button_Mode) == HIGH)
 			{
 				long startTime = millis();				 // giá trị ban đầu được gán bằng giá trị hiện tại của millis
@@ -1142,7 +1138,7 @@ void Choose_location()
 /* Hàm gọi thời tiết mỗi 10 phút một lần */
 void Call_Weather_Every_10Min()
 {
-	if ((unsigned long)(millis() - time_dem_thoitiet) > 60 * 10 * 1000) //10 phut/ lan
+	if ((unsigned long)(millis() - time_dem_thoitiet) > 60 * 10 * 1000) // 10 phut/ lan
 	{
 		time_dem_thoitiet = millis();
 		Weather_Online_sever();
@@ -1169,18 +1165,18 @@ void Weather_Online_sever()
 		Location = "1565033";
 	}
 
-	if (WiFi.status() == WL_CONNECTED) //Check WiFi connection status
+	if (WiFi.status() == WL_CONNECTED) // Check WiFi connection status
 	{
-		HTTPClient http; //Declare an object of class HTTPClient
+		HTTPClient http; // Declare an object of class HTTPClient
 
 		// specify request destination
-		http.begin(client,"http://api.openweathermap.org/data/2.5/weather?id=" + Location + "&APPID=" + APIKey_openweather);
+		http.begin(client, "http://api.openweathermap.org/data/2.5/weather?id=" + Location + "&APPID=" + APIKey_openweather);
 
 		int httpCode = http.GET(); // send the request
 
 		if (httpCode > 0) // check the returning code
 		{
-			String payload = http.getString(); //Get the request response payload
+			String payload = http.getString(); // Get the request response payload
 
 			DynamicJsonBuffer jsonBuffer(512);
 
@@ -1204,7 +1200,7 @@ void Weather_Online_sever()
 			// Serial.printf("Wind speed = % .1f m / s\r\n", wind_speed);
 			// Serial.printf("Wind degree = % d°\r\n\r\n", wind_degree);
 		}
-		http.end(); //Close connection
+		http.end(); // Close connection
 		yield();	// disble Soft WDT reset - NodeMCU
 	}
 }
@@ -1212,7 +1208,7 @@ void Weather_Online_sever()
 void smartConfig_ndb()
 {
 	lcd.createChar(1, UB);
-	//Mode wifi là station
+	// Mode wifi là station
 	WiFi.mode(WIFI_STA);
 	WiFi.beginSmartConfig();
 	lcd.clear();
@@ -1240,7 +1236,7 @@ void smartConfig_ndb()
 			delay(2000);
 			ESP.restart();
 		}
-		//Kiểm tra kết nối thành công in thông báo
+		// Kiểm tra kết nối thành công in thông báo
 		if (WiFi.smartConfigDone())
 		{
 			lcd.clear();
@@ -1322,7 +1318,7 @@ void Setup_AlarmClock()
 
 		if (digitalRead(Button_Mode) == HIGH) // nếu nút bấm ở mức thấp
 		{
-			delay(500); //check chac chan la do ng nhan nut
+			delay(500); // check chac chan la do ng nhan nut
 			if (digitalRead(Button_Mode) == HIGH)
 			{
 				long startTime = millis();				 // giá trị ban đầu được gán bằng giá trị hiện tại của millis
@@ -1444,7 +1440,7 @@ void chinh_gio_hen_gio()
 
 		if (digitalRead(Button_Mode) == HIGH) // nếu nút bấm ở mức thấp
 		{
-			delay(50); //check chac chan la do ng nhan nut
+			delay(50); // check chac chan la do ng nhan nut
 			if (digitalRead(Button_Mode) == HIGH)
 			{
 				hen_gio++;
@@ -1522,7 +1518,7 @@ void chinh_phut_hen_gio()
 
 		if (digitalRead(Button_Mode) == HIGH) // nếu nút bấm ở mức thấp
 		{
-			delay(50); //check chac chan la do ng nhan nut
+			delay(50); // check chac chan la do ng nhan nut
 			if (digitalRead(Button_Mode) == HIGH)
 			{
 				hen_phut++;
@@ -1575,7 +1571,7 @@ void active_bao_thuc()
 		dem_nhay = (unsigned long)(millis() - time_dem_baothuc);
 		if (dem_nhay < 300)
 		{
-			lcd.clear(); //day thoi
+			lcd.clear(); // day thoi
 		}
 		else if (dem_nhay <= 800)
 		{
@@ -1610,7 +1606,7 @@ void active_bao_thuc()
 		digitalWrite(signal_Bell, ESP_NB_ON);
 		if (digitalRead(Button_Mode) == HIGH) // nếu nút bấm ở mức cao
 		{
-			delay(500); //check chac chan la do ng nhan nut
+			delay(500); // check chac chan la do ng nhan nut
 			if (digitalRead(Button_Mode) == HIGH)
 			{
 				long startTime = millis();				 // giá trị ban đầu được gán bằng giá trị hiện tại của millis
@@ -1695,6 +1691,19 @@ bool testWifi(void)
 	Serial.println("");
 	Serial.println("Connect timed out, opening AP");
 	return false;
+}
+
+/* Cập nhật OTA */
+void update_FOTA()
+{
+	String url = "http://otadrive.com/deviceapi/update?";
+	url += "k=" + key;
+	url += "&v=" + version;
+	url += "&s=" + ESP.getChipId(); // định danh thiết bị trên Cloud
+
+	// WiFiClient client;
+	HTTPClient httpUpdate; // Declare an object of class HTTPClient
+	httpUpdate.begin(client, url);
 }
 
 void custom0(int x, int y)
