@@ -6,6 +6,7 @@
 #include <ESP8266WiFi.h>
 /* Get data Weather - http */
 #include <ESP8266HTTPClient.h>
+#include <ESP8266httpUpdate.h>
 #include <time.h>
 #include <Wire.h>
 #include <EEPROM.h>
@@ -20,8 +21,10 @@ LiquidCrystal_I2C lcd(0x3F, 20, 4); // set the LCD address to 0x27 for a 16 char
 WiFiClient client;
 
 /* Cập nhật OTA */
-String version = "1.0";
-String key = "ee01b3e6-5101-4b37-8e0e-f53353bf12df";
+
+#define ProductKey "ee01b3e6-5101-4b37-8e0e-f53353bf12df"
+#define Version "1.0.5"
+#define MakeFirmwareInfo(k, v) "&_FirmwareInfo&k=" k "&v=" v "&FirmwareInfo_&"
 
 /* ThingSpeak  */
 /* Channel Smart Clock */
@@ -180,6 +183,7 @@ void setup()
 		if (testWifi())
 		{
 			lcd.createChar(1, traitim);
+			Serial.println("");
 			Serial.println("Vao test wifi ok!");
 
 			for (int i = 0; i < 20; i++)
@@ -218,9 +222,6 @@ void setup()
 	Serial.println("WiFi connected");
 	Serial.println("IP address: ");
 	Serial.println(WiFi.localIP());
-
-	/* Cập nhật OTA*/
-	update_FOTA();
 
 	configTime(7 * 3600, 0, "vn.pool.ntp.org", "time.nist.gov");
 	Serial.println("Time >>> vn.pool.ntp.org");
@@ -300,7 +301,11 @@ void setup()
 	da luu o eeprom
 	*/
 	Weather_Online_sever();
-	ThingSpeak.begin(client);
+	// ThingSpeak.begin(client);
+	/* Check firmware coi có cập nhật không?  */
+	lcd.clear();
+	update_FOTA();
+	lcd.clear();
 }
 
 void loop()
@@ -336,11 +341,11 @@ void CheckButton_ndb()
 					lcd.setCursor(0, 1);
 					lcd.print("Mode Selection      ");
 				}
-				/* vao mode Message */
+				/* vao mode OTA */
 				else if (couter_Mode >= 7)
 				{
 					lcd.setCursor(0, 1);
-					lcd.print("Mode: >> Message    ");
+					lcd.print("Mode: >> Update OTA ");
 					lcd.setCursor(0, 2);
 					lcd.print("                    ");
 					lcd.setCursor(0, 3);
@@ -382,36 +387,35 @@ void CheckButton_ndb()
 			long duration = millis() - startTime;
 			Serial.printf("couter_Mode: ");
 			Serial.println(couter_Mode);
-			/* Message mode*/
+			/* Update FOTA mode*/
 			if (couter_Mode >= 7)
 			{
-				/* Message mode*/
+				/* Update FOTA mode*/
 				lcd.clear();
-				delay(100);
-				customT(0, 0);
-				delay(100);
-				customH(0 + 3, 0);
-				delay(100);
-				customI(0 + 3 + 3, 0);
-				delay(100);
-				customN(0 + 3 + 3 + 3, 0);
-				delay(100);
-				customG(0 + 3 + 3 + 3 + 4, 0);
+				customU(0, 0);
+				delay(200);
+				customP(3, 0);
+				delay(200);
+				customD(3 + 3, 0);
+				delay(200);
+				customA(3 + 3 + 3, 0);
+				delay(200);
+				customT(3 + 3 + 3 + 3, 0);
+				delay(200);
+				customE(3 + 3 + 3 + 3 + 3, 0);
+				delay(200);
 
-				delay(100);
-				customS(5, 2);
-				delay(100);
-				customP(5 + 3, 2);
-				delay(100);
-				customE(5 + 3 + 3, 2);
-				delay(100);
-				customA(5 + 3 + 3 + 3, 2);
-				delay(100);
-				customK(5 + 3 + 3 + 3 + 3, 2);
+				customF(4, 2);
+				delay(200);
+				custom0(4 + 4, 2);
+				delay(200);
+				customT(4 + 4 + 4, 2);
+				delay(200);
+				customA(4 + 4 + 4 + 5, 2);
 				delay(1000);
-				/* Hien thi message tu Thingspeak_Message */
+				/* Hien thi message tu Update OTA */
 				lcd.clear();
-				Thingspeak_Message();
+				update_FOTA();
 				lcd.clear();
 			}
 			/* vao mode setup wifi */
@@ -556,6 +560,11 @@ void printLocalTime()
 	}
 	else /* lam viec binh thuong */
 	{
+		Serial.print(gio);
+		Serial.print(":");
+		Serial.print(phut);
+		Serial.print(":");
+		Serial.println(giay);
 		static int only_Delete_Once = 0;
 		if ((giay % 5 == 0) && (only_Delete_Once == 0))
 		/* cu moi 5 giay xoa 2 line tren 1 lan */
@@ -1662,6 +1671,17 @@ bool testWifi(void)
 	int c = 0;
 	Serial.println("");
 	Serial.println("Waiting for Wifi to connect");
+	Serial.println("=========  Note =========");
+	Serial.println("WL_NO_SHIELD        = 255");
+	Serial.println("WL_IDLE_STATUS      = 0");
+	Serial.println("WL_NO_SSID_AVAIL    = 1");
+	Serial.println("WL_SCAN_COMPLETED   = 2");
+	Serial.println("WL_CONNECTED        = 3");
+	Serial.println("WL_CONNECT_FAILED   = 4");
+	Serial.println("WL_CONNECTION_LOST  = 5");
+	Serial.println("WL_WRONG_PASSWORD   = 6");
+	Serial.println("WL_DISCONNECTED     = 7");
+	Serial.println("========================");
 	while (c < 40)
 	{
 		if (WiFi.status() == WL_CONNECTED)
@@ -1674,18 +1694,7 @@ bool testWifi(void)
 		}
 		delay(300);
 		Serial.print(WiFi.status());
-		/**
-			typedef enum {
-				WL_NO_SHIELD        = 255,   // for compatibility with WiFi Shield library
-				WL_IDLE_STATUS      = 0,
-				WL_NO_SSID_AVAIL    = 1,
-				WL_SCAN_COMPLETED   = 2,
-				WL_CONNECTED        = 3,
-				WL_CONNECT_FAILED   = 4,
-				WL_CONNECTION_LOST  = 5,
-				WL_DISCONNECTED     = 6
-			} wl_status_t;
-		**/
+		Serial.print(" - ");
 		c++;
 	}
 	Serial.println("");
@@ -1696,14 +1705,58 @@ bool testWifi(void)
 /* Cập nhật OTA */
 void update_FOTA()
 {
-	String url = "http://otadrive.com/deviceapi/update?";
-	url += "k=" + key;
-	url += "&v=" + version;
-	url += "&s=" + ESP.getChipId(); // định danh thiết bị trên Cloud
+	/* màn hình hiển thị trên LCD 2004 */
+	lcd.setCursor(0, 0);
+	lcd.print("Version Firmware:   ");
 
-	// WiFiClient client;
-	HTTPClient httpUpdate; // Declare an object of class HTTPClient
-	httpUpdate.begin(client, url);
+	lcd.setCursor(0, 1);
+	lcd.print(Version);
+	lcd.print(" - ");
+	lcd.print(CHIPID);
+
+	lcd.setCursor(0, 2);
+	lcd.print("Checking for updates");
+
+	lcd.setCursor(0, 3);
+
+	Serial.println("Test");
+	Serial.print("Version Firmware: ");
+	Serial.println(Version);
+	Serial.print("ID ESP: ");
+	Serial.println(CHIPID);
+	/* biến Check_OTA kiểm tra có coi bản cập nhật OTA nào hay không? */
+	bool Check_OTA = true;
+	while (Check_OTA)
+	{
+		/* hiển thị loading . . . */
+		lcd.print("...");
+		/* sever chưa tệp BIN */
+		String url = "http://otadrive.com/DeviceApi/update?";
+		WiFiClient client;
+		url += "&s=" + String(CHIPID);
+		url += MakeFirmwareInfo(ProductKey, Version);
+
+		t_httpUpdate_return ret = ESPhttpUpdate.update(client, url, Version);
+
+		switch (ret)
+		{
+		// case HTTP_UPDATE_FAILED:
+		// 	Serial.printf("HTTP_UPDATE_FAILED Error (%d): %s\n", ESPhttpUpdate.getLastError(), ESPhttpUpdate.getLastErrorString().c_str());
+		// 	Serial.println(url);
+		// 	Check_OTA = true;
+		// 	break;
+
+		case HTTP_UPDATE_NO_UPDATES:
+			Serial.println("HTTP_UPDATE_NO_UPDATES");
+			Check_OTA = false;
+			break;
+
+		case HTTP_UPDATE_OK:
+			Serial.println("HTTP_UPDATE_OK");
+			Check_OTA = false;
+			break;
+		}
+	}
 }
 
 void custom0(int x, int y)
