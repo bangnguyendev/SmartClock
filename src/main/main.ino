@@ -7,6 +7,7 @@
 /* Get data Weather - http */
 #include <ESP8266HTTPClient.h>
 #include <ESP8266httpUpdate.h>
+#include <BlynkSimpleEsp8266.h>
 #include <time.h>
 #include <Wire.h>
 #include <EEPROM.h>
@@ -23,8 +24,13 @@ WiFiClient client;
 /* Cập nhật OTA */
 
 #define ProductKey "ee01b3e6-5101-4b37-8e0e-f53353bf12df"
-#define Version "1.0.5"
+#define Version "1.0.6"
 #define MakeFirmwareInfo(k, v) "&_FirmwareInfo&k=" k "&v=" v "&FirmwareInfo_&"
+
+//#define BLYNK_TEMPLATE_ID   "YourTemplateID"
+#define BLYNK_TEMPLATE_ID "TMPL85uHU5ks"
+#define BLYNK_DEVICE_NAME "Template NDB"
+#define BLYNK_AUTH_TOKEN "dHTAaLwA5F-ZdeGAcmXP3ZE54k20Joby"
 
 /* ThingSpeak  */
 /* Channel Smart Clock */
@@ -97,6 +103,10 @@ int wind_degree;
 
 const char *ssid = "nguyenduybang";
 const char *passphrase = "nguyenduybang";
+char auth[] = "dHTAaLwA5F-ZdeGAcmXP3ZE54k20Joby";
+
+// Your WiFi credentials.
+// Set password to "" for open networks.
 
 void setup()
 {
@@ -180,7 +190,8 @@ void setup()
 	{
 		WiFi.mode(WIFI_STA);
 		WiFi.begin(esid.c_str(), epass.c_str());
-		if (testWifi())
+
+		if (bool_Test_Wifi())
 		{
 			lcd.createChar(1, traitim);
 			Serial.println("");
@@ -223,6 +234,13 @@ void setup()
 	Serial.println("IP address: ");
 	Serial.println(WiFi.localIP());
 
+	/* Check firmware coi có cập nhật không?  */
+	Serial.println("Check firmware coi có cập nhật không? ");
+	lcd.clear();
+	update_FOTA();
+	lcd.clear();
+
+	/* Cập nhật thời gian từ sever vn.pool.ntp.org */
 	configTime(7 * 3600, 0, "vn.pool.ntp.org", "time.nist.gov");
 	Serial.println("Time >>> vn.pool.ntp.org");
 	while (!time(nullptr))
@@ -233,83 +251,22 @@ void setup()
 		yield(); // disble Soft WDT reset - NodeMCU
 	}
 
-	lcd.clear();
-	delay(100);
-	/* chay full trai tim */
-	lcd.createChar(1, traitim);
-	for (int i = 0; i < 11; i++)
-	{
-		lcd.setCursor(i, 0);
-		lcd.write(1); // chay ki tu trai tim
-		lcd.setCursor(i, 1);
-		lcd.write(1); // chay ki tu trai tim
-		lcd.setCursor(i, 2);
-		lcd.write(1); // chay ki tu trai tim
-		lcd.setCursor(i, 3);
-		lcd.write(1); // chay ki tu trai tim
-		lcd.setCursor(19 - i, 0);
-		lcd.write(1); // chay ki tu trai tim
-		lcd.setCursor(19 - i, 1);
-		lcd.write(1); // chay ki tu trai tim
-		lcd.setCursor(19 - i, 2);
-		lcd.write(1); // chay ki tu trai tim
-		lcd.setCursor(19 - i, 3);
-		lcd.write(1); // chay ki tu trai tim
-		delay(100);
-	}
-	/* xoa nhung cho viet ten Bang CUTE*/
-
-	lcd.setCursor(0, 0);
-	lcd.print("                    ");
-	lcd.setCursor(0, 1);
-	lcd.print("                ");
-
-	lcd.setCursor(0, 2);
-	lcd.print("                    ");
-	lcd.setCursor(5, 3);
-	lcd.print("               ");
-
-	/* viet ten Bang CUTE*/
-	{
-		/* xoa trai tim dua ve binh thuong */
-		lcd.createChar(1, UB);
-		/* =============================== */
-
-		customB(0, 0);
-		delay(100);
-		customA(4, 0);
-		delay(100);
-		customN(4 + 4, 0);
-		delay(100);
-		customG(4 + 4 + 5, 0);
-		delay(100);
-
-		customH(4, 2);
-		delay(100);
-		customI(4 + 4, 2);
-		delay(100);
-		customE(4 + 4 + 4, 2);
-		delay(100);
-		customN(4 + 4 + 4 + 4, 2);
-		delay(100);
-
-		delay(1500);
-		lcd.clear();
-		delay(100);
-	}
+	Welcome_Smartclock();
 	/* truy cap den thoi tiet dia phuong
 	da luu o eeprom
 	*/
+	Serial.println("\nTruy cap den thoi tiet dia phuong");
 	Weather_Online_sever();
 	// ThingSpeak.begin(client);
-	/* Check firmware coi có cập nhật không?  */
-	lcd.clear();
-	update_FOTA();
-	lcd.clear();
+	// Serial.println("\nKết nối Blynk");
+	// /* Kết nối Blynk */
+	// Blynk.begin(auth, ssida, passa);
+	// Serial.println("\nKết nối Blynk");
 }
 
 void loop()
 {
+	// Blynk.run();
 	CheckButton_ndb();
 	printLocalTime();
 	Call_Weather_Every_10Min();
@@ -1563,8 +1520,7 @@ void chinh_phut_hen_gio()
 	/* luu gia tri vao eeprom */
 	EEPROM.write(index_eeprom_henphut, hen_phut);
 	EEPROM.commit();
-	Serial.print("hen_phut duoc set eeprom: ");
-	Serial.println(EEPROM.read(index_eeprom_henphut));
+	Serial.printf("hen_phut duoc set eeprom: %d \n", EEPROM.read(index_eeprom_henphut));
 }
 
 void active_bao_thuc()
@@ -1666,7 +1622,7 @@ void active_bao_thuc()
 	lcd.clear();
 }
 
-bool testWifi(void)
+bool bool_Test_Wifi(void)
 {
 	int c = 0;
 	Serial.println("");
@@ -1717,19 +1673,19 @@ void update_FOTA()
 	lcd.setCursor(0, 2);
 	lcd.print("Checking for updates");
 
+	/* hiển thị loading . . . */
 	lcd.setCursor(0, 3);
-
-	Serial.println("Test");
-	Serial.print("Version Firmware: ");
-	Serial.println(Version);
-	Serial.print("ID ESP: ");
-	Serial.println(CHIPID);
+	lcd.print("...");
+	Serial.printf("Device:   %d MHz \n", ESP.getCpuFreqMHz());
+	Serial.printf("Version Firmware: %d \n", Version);
+	Serial.printf("ID ESP: "); Serial.print(CHIPID);
+	Serial.printf("Boot Mode: %d \n", ESP.getBootMode());
+	Serial.printf("Free mem: %d \n", ESP.getFreeHeap());
 	/* biến Check_OTA kiểm tra có coi bản cập nhật OTA nào hay không? */
 	bool Check_OTA = true;
 	while (Check_OTA)
 	{
-		/* hiển thị loading . . . */
-		lcd.print("...");
+
 		/* sever chưa tệp BIN */
 		String url = "http://otadrive.com/DeviceApi/update?";
 		WiFiClient client;
@@ -1740,15 +1696,20 @@ void update_FOTA()
 
 		switch (ret)
 		{
-		// case HTTP_UPDATE_FAILED:
-		// 	Serial.printf("HTTP_UPDATE_FAILED Error (%d): %s\n", ESPhttpUpdate.getLastError(), ESPhttpUpdate.getLastErrorString().c_str());
-		// 	Serial.println(url);
-		// 	Check_OTA = true;
-		// 	break;
+		case HTTP_UPDATE_FAILED:
+			Serial.println("Please waiting ...");
+			Check_OTA = true;
+			break;
 
 		case HTTP_UPDATE_NO_UPDATES:
 			Serial.println("HTTP_UPDATE_NO_UPDATES");
+			Serial.println("The current version is the latest.");
 			Check_OTA = false;
+			lcd.setCursor(0, 2);
+			lcd.print("The current version ");
+			lcd.setCursor(0, 2);
+			lcd.print("      is the latest.");
+			delay(1500);
 			break;
 
 		case HTTP_UPDATE_OK:
@@ -2222,5 +2183,73 @@ void printDigits(int digits, int x, int y)
 	case 9:
 		custom9(x, y);
 		break;
+	}
+}
+
+void Welcome_Smartclock()
+{
+	lcd.clear();
+	delay(100);
+	/* chay full trai tim */
+	lcd.createChar(1, traitim);
+	for (int i = 0; i < 11; i++)
+	{
+		lcd.setCursor(i, 0);
+		lcd.write(1); // chay ki tu trai tim
+		lcd.setCursor(i, 1);
+		lcd.write(1); // chay ki tu trai tim
+		lcd.setCursor(i, 2);
+		lcd.write(1); // chay ki tu trai tim
+		lcd.setCursor(i, 3);
+		lcd.write(1); // chay ki tu trai tim
+		lcd.setCursor(19 - i, 0);
+		lcd.write(1); // chay ki tu trai tim
+		lcd.setCursor(19 - i, 1);
+		lcd.write(1); // chay ki tu trai tim
+		lcd.setCursor(19 - i, 2);
+		lcd.write(1); // chay ki tu trai tim
+		lcd.setCursor(19 - i, 3);
+		lcd.write(1); // chay ki tu trai tim
+		delay(100);
+	}
+	/* xoa nhung cho viet ten Bang CUTE*/
+
+	lcd.setCursor(0, 0);
+	lcd.print("                    ");
+	lcd.setCursor(0, 1);
+	lcd.print("                ");
+
+	lcd.setCursor(0, 2);
+	lcd.print("                    ");
+	lcd.setCursor(5, 3);
+	lcd.print("               ");
+
+	/* viet ten Bang CUTE*/
+	{
+		/* xoa trai tim dua ve binh thuong */
+		lcd.createChar(1, UB);
+		/* =============================== */
+
+		customB(0, 0);
+		delay(100);
+		customA(4, 0);
+		delay(100);
+		customN(4 + 4, 0);
+		delay(100);
+		customG(4 + 4 + 5, 0);
+		delay(100);
+
+		customH(4, 2);
+		delay(100);
+		customI(4 + 4, 2);
+		delay(100);
+		customE(4 + 4 + 4, 2);
+		delay(100);
+		customN(4 + 4 + 4 + 4, 2);
+		delay(100);
+
+		delay(1500);
+		lcd.clear();
+		delay(100);
 	}
 }

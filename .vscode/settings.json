@@ -4,7 +4,14 @@
         "*.tcc": "cpp",
         "iostream": "cpp",
         "array": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp",
+        "ranges": "cpp"
     },
-    "C_Cpp.errorSquiggles": "Disabled"
+    "C_Cpp.errorSquiggles": "Disabled",
 }
