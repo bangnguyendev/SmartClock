@@ -1677,8 +1677,8 @@ void update_FOTA()
 	lcd.setCursor(0, 3);
 	lcd.print("...");
 	Serial.printf("Device:   %d MHz \n", ESP.getCpuFreqMHz());
-	Serial.printf("Version Firmware: %d \n", Version);
-	Serial.printf("ID ESP: "); Serial.print(CHIPID);
+	Serial.printf("Version Firmware: %s \n", Version);
+	Serial.printf("ID ESP: "); Serial.println(CHIPID);
 	Serial.printf("Boot Mode: %d \n", ESP.getBootMode());
 	Serial.printf("Free mem: %d \n", ESP.getFreeHeap());
 	/* biến Check_OTA kiểm tra có coi bản cập nhật OTA nào hay không? */
