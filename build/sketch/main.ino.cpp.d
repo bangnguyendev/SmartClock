@@ -157,6 +157,7 @@ d:\Git_NDB\SmartClock\build\sketch\main.ino.cpp.o: \
  D:\OneDrive_bang.nguyen-duy\OneDrive\ -\ Ban\ Vien\ Co.,\ ltd\Documents\Arduino\libraries\Blynk\src/WidgetGPS.h \
  D:\OneDrive_bang.nguyen-duy\OneDrive\ -\ Ban\ Vien\ Co.,\ ltd\Documents\Arduino\libraries\Blynk\src/WidgetMap.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2\libraries\Wire/Wire.h \
+ D:\OneDrive_bang.nguyen-duy\OneDrive\ -\ Ban\ Vien\ Co.,\ ltd\Documents\Arduino\libraries\LiquidCrystal_I2C/LiquidCrystal_I2C.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2\libraries\EEPROM/EEPROM.h \
  D:\OneDrive_bang.nguyen-duy\OneDrive\ -\ Ban\ Vien\ Co.,\ ltd\Documents\Arduino\libraries\ArduinoJson\src/ArduinoJson.h \
  D:\OneDrive_bang.nguyen-duy\OneDrive\ -\ Ban\ Vien\ Co.,\ ltd\Documents\Arduino\libraries\ArduinoJson\src/ArduinoJson.hpp \
@@ -240,8 +241,5 @@ d:\Git_NDB\SmartClock\build\sketch\main.ino.cpp.o: \
  D:\OneDrive_bang.nguyen-duy\OneDrive\ -\ Ban\ Vien\ Co.,\ ltd\Documents\Arduino\libraries\ArduinoJson\src/ArduinoJson/Polyfills/parseInteger.hpp \
  D:\OneDrive_bang.nguyen-duy\OneDrive\ -\ Ban\ Vien\ Co.,\ ltd\Documents\Arduino\libraries\ArduinoJson\src/ArduinoJson/Serialization/JsonSerializerImpl.hpp \
  D:\OneDrive_bang.nguyen-duy\OneDrive\ -\ Ban\ Vien\ Co.,\ ltd\Documents\Arduino\libraries\ArduinoJson\src/ArduinoJson/compatibility.hpp \
- D:\Git_NDB\SmartClock\include\LiquidCrystal_I2C-master\LiquidCrystal_I2C.cpp \
- D:\Git_NDB\SmartClock\include\LiquidCrystal_I2C-master\LiquidCrystal_I2C.h \
- D:\Git_NDB\SmartClock\include\Character_lcd\Character_LCD.h \
- D:\Git_NDB\SmartClock\include\ThingSpeak\ThingSpeak.cpp \
- D:\Git_NDB\SmartClock\include\ThingSpeak\ThingSpeak.h
+ d:\git_ndb\smartclock\include\lcd_2004_define.h \
+ d:\git_ndb\smartclock\include\macro_define.h

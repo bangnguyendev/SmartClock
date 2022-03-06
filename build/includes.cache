@@ -36,6 +36,11 @@
   },
   {
     "Sourcefile": "d:\\Git_NDB\\SmartClock\\build\\sketch\\main.ino.cpp",
+    "Include": "LiquidCrystal_I2C.h",
+    "Includepath": "D:\\OneDrive_bang.nguyen-duy\\OneDrive - Ban Vien Co., ltd\\Documents\\Arduino\\libraries\\LiquidCrystal_I2C"
+  },
+  {
+    "Sourcefile": "d:\\Git_NDB\\SmartClock\\build\\sketch\\main.ino.cpp",
     "Include": "EEPROM.h",
     "Includepath": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\EEPROM"
   },
@@ -161,6 +166,11 @@
   },
   {
     "Sourcefile": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\Wire\\Wire.cpp",
+    "Include": "",
+    "Includepath": null
+  },
+  {
+    "Sourcefile": "D:\\OneDrive_bang.nguyen-duy\\OneDrive - Ban Vien Co., ltd\\Documents\\Arduino\\libraries\\LiquidCrystal_I2C\\LiquidCrystal_I2C.cpp",
     "Include": "",
     "Includepath": null
   },
