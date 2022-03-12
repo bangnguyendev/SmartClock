@@ -1,5 +1,7 @@
 # Smart Clock
-
+| Release | Release date |
+| :----:  | :----:       |
+| <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/bangnguyendev/SmartClock"> | <img alt="GitHub Release Date" src="https://img.shields.io/github/release-date/bangnguyendev/SmartClock"> |
 ## TẢI ARDUINO VỀ, MỞ ỨNG DỤNG -> FILE -> PREFERENCES -> ADD 2 LINK PHÍA DƯỚI VÀO BOARDS MANAGER URLS. 
 ### LIBRARY board ESP8266, ESP32
 
