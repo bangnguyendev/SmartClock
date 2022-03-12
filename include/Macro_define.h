@@ -1,3 +1,18 @@
+/*                                                                                                                                                               
+      _____          ____  _____   ______         _____           _____   ______         _____     ____   ____  _____      _____      ______  _____   ______   
+ ___|\     \    ____|\   \|\    \ |\     \    ___|\    \         |\    \ |\     \    ___|\    \   |    | |    ||\    \    /    /| ___|\     \|\    \ |\     \  
+|    |\     \  /    /\    \\\    \| \     \  /    /\    \         \\    \| \     \  /    /\    \  |    | |    || \    \  /    / ||     \     \\\    \| \     \ 
+|    | |     ||    |  |    |\|    \  \     ||    |  |____|         \|    \  \     ||    |  |____| |    | |    ||  \____\/    /  /|     ,_____/|\|    \  \     |
+|    | /_ _ / |    |__|    | |     \  |    ||    |    ____          |     \  |    ||    |    ____ |    | |    | \ |    /    /  / |     \--'\_|/ |     \  |    |
+|    |\    \  |    .--.    | |      \ |    ||    |   |    |         |      \ |    ||    |   |    ||    | |    |  \|___/    /  /  |     /___/|   |      \ |    |
+|    | |    | |    |  |    | |    |\ \|    ||    |   |_,  |         |    |\ \|    ||    |   |_,  ||    | |    |      /    /  /   |     \____|\  |    |\ \|    |
+|____|/____/| |____|  |____| |____||\_____/||\ ___\___/  /|         |____||\_____/||\ ___\___/  /||\___\_|____|     /____/  /    |____ '     /| |____||\_____/|
+|    /     || |    |  |    | |    |/ \|   ||| |   /____ / |         |    |/ \|   ||| |   /____ / || |    |    |    |`    | /     |    /_____/ | |    |/ \|   ||
+|____|_____|/ |____|  |____| |____|   |___|/ \|___|    | /          |____|   |___|/ \|___|    | /  \|____|____|    |_____|/      |____|     | / |____|   |___|/
+  \(    )/      \(      )/     \(       )/     \( |____|/             \(       )/     \( |____|/      \(   )/         )/           \( |_____|/    \(       )/  
+   '    '        '      '       '       '       '   )/                 '       '       '   )/          '   '          '             '    )/        '       '   
+                                                    '                                      '                                             '                     
+*/
 /* PIN kết nối với chuông kêu */
 #define PIN_signal_Bell 16
 /* PIN kết nối với nút nhấn MODE */
@@ -9,12 +24,12 @@
 #define ESP_NB_OFF 0
 #define ESP_NB_ON 1
 
-/* Cài đặt trạng thái nút nhấn PULL_UP OR PULL_DOWN */
+/* Cài đặt dạng kết nối nút nhấn PULL_UP OR PULL_DOWN */
 #define PULLUP_PULLDOWN 0 // PULL DOWN
 
 /* Cập nhật OTA */
 #define ProductKey "ee01b3e6-5101-4b37-8e0e-f53353bf12df"
-#define Version "1.0.7"
+#define Version "1.1.0"
 #define MakeFirmwareInfo(k, v) "&_FirmwareInfo&k=" k "&v=" v "&FirmwareInfo_&"
 
 /* MACRO BLYNK IOT */
@@ -22,7 +37,8 @@
 #define BLYNK_TEMPLATE_ID "TMPL85uHU5ks"
 #define BLYNK_DEVICE_NAME "Template NDB"
 #define BLYNK_AUTH_TOKEN "dHTAaLwA5F-ZdeGAcmXP3ZE54k20Joby"
-
+char ssida[] = "DUY BANG";
+char passa[] = "zxcvbnm@123";
 
 /*index 0 to 31 */
 #define index_eeprom_SSID 32
@@ -34,14 +50,13 @@
 #define index_eeprom_henphut 98
 #define index_eeprom_location_eeprom 99
 
-
 /* ===== Open Weather Map =====
     1584071 DAT LAT
     1566083 TP HCM
     1565033 TP HUE
     1562414 VUNG TAU
 */
-#define Location_TPHCM "1566083" 
+#define Location_TPHCM "1566083"
 #define Location_DALAT "1584071"
 #define Location_TPHUE "1565033"
 #define Location_VUTAU "1562414"
@@ -91,22 +106,19 @@ int nam, thang, ngay, thu;
 int hen_gio, hen_phut;
 int gio, phut, giay;
 
-
 /* Biến sử dụng trong báo thức */
 #define DAY_BangNguyen 14 /* Ngay sinh nhat Bang */
-#define MON_BangNguyen 4 /* Thang sinh nhat Bang */
+#define MON_BangNguyen 4  /* Thang sinh nhat Bang */
 int couter_Mode = 0;
 int status_Mode = 0;
 int status_Mode_Alarm = ESP_NB_ON;
 int value_Location_EEPROM = 0;
 unsigned long time_dem_thoitiet;
 
-
 /* Khai báo cấu hình cho wifi */
 const char *ssid = "nguyenduybang";
 const char *passphrase = "nguyenduybang";
 WiFiClient client;
-
 
 extern void setup();
 extern void loop();

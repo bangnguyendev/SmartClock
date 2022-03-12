@@ -1,24 +1,50 @@
 # 1 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+/*                                                                                                                                                               
+
+      _____          ____  _____   ______         _____           _____   ______         _____     ____   ____  _____      _____      ______  _____   ______   
+
+ ___|\     \    ____|\   \|\    \ |\     \    ___|\    \         |\    \ |\     \    ___|\    \   |    | |    ||\    \    /    /| ___|\     \|\    \ |\     |    |\     \  /    /\    \\\    \| \     \  /    /\    \         \\    \| \     \  /    /\    \  |    | |    || \    \  /    / ||     \     \\\    \| \     |    | |     ||    |  |    |\|    \  \     ||    |  |____|         \|    \  \     ||    |  |____| |    | |    ||  \____\/    /  /|     ,_____/|\|    \  \     |
+ \     |
+|    | /_ _ / |    |__|    | |     \  |    ||    |    ____          |     \  |    ||    |    ____ |    | |    | \ |    /    /  / |     \--'\_|/ |     \  |    |
+
+|    |\    \  |    .--.    | |      \ |    ||    |   |    |         |      \ |    ||    |   |    ||    | |    |  \|___/    /  /  |     /___/|   |      \ |    |
+
+|    | |    | |    |  |    | |    |\ \|    ||    |   |_,  |         |    |\ \|    ||    |   |_,  ||    | |    |      /    /  /   |     \____|\  |    |\ \|    |
+
+|____|/____/| |____|  |____| |____||\_____/||\ ___\___/  /|         |____||\_____/||\ ___\___/  /||\___\_|____|     /____/  /    |____ '     /| |____||\_____/|
+
+|    /     || |    |  |    | |    |/ \|   ||| |   /____ / |         |    |/ \|   ||| |   /____ / || |    |    |    |`    | /     |    /_____/ | |    |/ \|   ||
+
+|____|_____|/ |____|  |____| |____|   |___|/ \|___|    | /          |____|   |___|/ \|___|    | /  \|____|____|    |_____|/      |____|     | / |____|   |___|/
+
+  \(    )/      \(      )/     \(       )/     \( |____|/             \(       )/     \( |____|/      \(   )/         )/           \( |_____|/    \(       )/  
+
+   '    '        '      '       '       '       '   )/                 '       '       '   )/          '   '          '             '    )/        '       '   
+
+                                                    '                                      '                                             '                     
+
+*/
+# 16 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 /* LIBRARY ARDUINO DEFINE  */
-# 3 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 4 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 5 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 6 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 7 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 8 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 9 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 10 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 11 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 18 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 19 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 20 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 21 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 22 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 23 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 24 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 25 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 26 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
 
 /* USER DEFINE  */
-# 14 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 15 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 29 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 30 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
 
 void setup()
 {
  /* Initialize Serial. */
  Serial.begin(115200);
- time_dem_thoitiet = millis();
+
  /* Initialize BUTTON. */
  pinMode(16, 0x01);
  pinMode(14, 0x00);
@@ -40,34 +66,33 @@ void setup()
 
  /* Initialize eeprom */
  EEPROM.begin(512);
- Serial.println(" ");
- Serial.printf("Status Alarm: %d \n", status_Mode_Alarm);
+ Serial.println("\n\n>>>>>>>>>> Read EEPROM \n");
+ Serial.printf("Status Alarm: %d (1: ON - 0: OFF) \n", status_Mode_Alarm);
  /* Lấy giờ hẹn từ EEPROM */
  hen_gio = EEPROM.read(97);
- Serial.printf("hen_gio: %d \n", hen_gio);
+ Serial.printf("Var hen_gio: %d \n", hen_gio);
 
  /* Lấy phút hẹn từ EEPROM */
  hen_phut = EEPROM.read(98);
- Serial.printf("hen_phut: %d \n", hen_phut);
+ Serial.printf("Var hen_phut: %d \n", hen_phut);
 
  /* Lấy vị trí từ EEPROM */
  value_Location_EEPROM = EEPROM.read(99);
- Serial.printf("value_Location_EEPROM: %d \n", value_Location_EEPROM);
+ Serial.printf("Var value_Location_EEPROM: %d \n\n", value_Location_EEPROM);
 
- Serial.println("=========ĐỌC SSID PASS TỪ EEROM ĐÃ LƯU!!!====");
+ Serial.println(">>>>>>>>>> READ SSID PASS EEROM  \n");
  lcd.setCursor(0, 0);
  lcd.print("Found saved wifi!");
- Serial.println("Startup");
 
  /* read data Wifi from eeprom */
  /* for ssid and pass */
- Serial.println("Reading EEPROM ssid");
+ Serial.println("Reading EEPROM ssid ......");
  String esid = "";
  for (int i = 0; i < 32; ++i)
  {
   esid += char(EEPROM.read(i));
  }
- Serial.print("SSID: ");
+ Serial.print(">>>>> SSID: ");
  Serial.println(esid);
 
  lcd.setCursor(0, 1);
@@ -87,14 +112,13 @@ void setup()
  }
  lcd.print("...");
  /* pass se k in ra man hinh lcd */
- Serial.println(" ");
- Serial.println("Reading EEPROM pass");
+ Serial.println("\nReading EEPROM pass ......");
  String epass = "";
  for (int i = 32; i < 96; ++i)
  {
   epass += char(EEPROM.read(i));
  }
- Serial.print("PASS: ");
+ Serial.print(">>>>> PASS: ");
  Serial.println(epass);
  /* nho check lai dieu kien cho nay khi < 1 */
  if (esid.length() > 1)
@@ -150,14 +174,11 @@ void setup()
  Serial.println(WiFi.localIP());
 
  /* Check firmware coi có cập nhật không?  */
- Serial.println("\n>>>>>>>>>>> Update FOTA <<<<<<<<<<< ");
- Serial.println("Check firmware coi có bản cập nhật không? ");
  update_FOTA();
- Serial.println("<<<<<<<<< Done Check FOTA >>>>>>>>>\n");
 
  /* Cập nhật thời gian từ sever vn.pool.ntp.org */
  configTime(7 * 3600, 0, "vn.pool.ntp.org", "time.nist.gov");
- Serial.println("Update Time <<< - >>> vn.pool.ntp.org");
+ Serial.println("Update Time <<< - >>> vn.pool.ntp.org \n");
  while (!time(nullptr))
  {
   Serial.println("\nWaiting for time");
@@ -167,13 +188,14 @@ void setup()
  }
 
  /* Màn hình khởi tạo chào mừng */
- Serial.println("Màn hình khởi tạo chào mừng");
+ Serial.println("Chạy màn hình LCD khởi tạo chào mừng");
  Welcome_Smartclock();
 
  /* truy cap den thoi tiet dia phuong da luu o eeprom */
- Serial.println("Truy cap den thoi tiet dia phuong");
+ Serial.println("Truy cập đến thời tiết địa phương");
+ time_dem_thoitiet = millis();
  Weather_Online_sever();
-# 186 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 202 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 }
 
 void loop()
@@ -182,8 +204,9 @@ void loop()
 
 
  Check_Status_Button();
- Setup_Local_RealTime();
  Call_Weather_Every_10Min();
+ Setup_Local_RealTime();
+
  yield(); // disble Soft WDT reset - NodeMCU
 }
 
@@ -510,7 +533,7 @@ void Setup_Local_RealTime()
     /*  *___XX_June_2019___*
 
 				July  */
-# 521 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 538 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 6) || (thang == 7))
     {
      lcd.setCursor(4, 1);
@@ -519,7 +542,7 @@ void Setup_Local_RealTime()
     /*  *__XX_March_2019___*
 
 				April  */
-# 528 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 545 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 3) || (thang == 4))
     {
      lcd.setCursor(3, 1);
@@ -534,7 +557,7 @@ void Setup_Local_RealTime()
     /*  *_XX_January_2019__*
 
 				October */
-# 541 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 558 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 10) || (thang == 1))
     {
      lcd.setCursor(2, 1);
@@ -543,7 +566,7 @@ void Setup_Local_RealTime()
     /*  *_XX_February_2019_*
 
 				November December  */
-# 548 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 565 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 11) || (thang == 2) || (thang == 12))
     {
      lcd.setCursor(2, 1);
@@ -617,6 +640,52 @@ void Setup_Local_RealTime()
     lcd.write(5);
    }
   }
+  /*
+
+            HIỂN THỊ FONT SỐ LỚN                                                           
+
+                                                                                                                                                               
+
+                                                                                   
+
+          000000000          888888888               1111111    222222222222222    
+
+        00:::::::::00      88:::::::::88            1::::::1   2:::::::::::::::22  
+
+      00:::::::::::::00  88:::::::::::::88         1:::::::1   2::::::222222:::::2 
+
+     0:::::::000:::::::08::::::88888::::::8        111:::::1   2222222     2:::::2 
+
+     0::::::0   0::::::08:::::8     8:::::8           1::::1               2:::::2 
+
+     0:::::0     0:::::08:::::8     8:::::8 ::::::    1::::1               2:::::2 
+
+     0:::::0     0:::::0 8:::::88888:::::8  ::::::    1::::1            2222::::2  
+
+     0:::::0 000 0:::::0  8:::::::::::::8   ::::::    1::::l       22222::::::22   
+
+     0:::::0 000 0:::::0 8:::::88888:::::8            1::::l     22::::::::222     
+
+     0:::::0     0:::::08:::::8     8:::::8           1::::l    2:::::22222        
+
+     0:::::0     0:::::08:::::8     8:::::8           1::::l   2:::::2             
+
+     0::::::0   0::::::08:::::8     8:::::8 ::::::    1::::l   2:::::2             
+
+     0:::::::000:::::::08::::::88888::::::8 :::::: 111::::::1112:::::2       222222
+
+      00:::::::::::::00  88:::::::::::::88  :::::: 1::::::::::12::::::2222222:::::2
+
+        00:::::::::00      88:::::::::88           1::::::::::12::::::::::::::::::2
+
+          000000000          888888888             11111111111122222222222222222222
+
+                                                                                   
+
+																				
+
+		*/
+# 661 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
   /* hien thi gio font so lon */
   printDigits(gio / 10 % 10, 0, 2);
   printDigits(gio / 1 % 10, 4, 2);
@@ -668,7 +737,28 @@ void Setup_Local_RealTime()
  }
 }
 
-/* Chon vi tri doc gia tri thoi tiet */
+/* Chon vi tri doc gia tri thoi tiet 
+
+   █████████  █████                                            ████                               █████     ███                     
+
+  ███░░░░░███░░███                                            ░░███                              ░░███     ░░░                      
+
+ ███     ░░░  ░███████    ██████   ██████   █████   ██████     ░███   ██████   ██████   ██████   ███████   ████   ██████  ████████  
+
+░███          ░███░░███  ███░░███ ███░░███ ███░░   ███░░███    ░███  ███░░███ ███░░███ ░░░░░███ ░░░███░   ░░███  ███░░███░░███░░███ 
+
+░███          ░███ ░███ ░███ ░███░███ ░███░░█████ ░███████     ░███ ░███ ░███░███ ░░░   ███████   ░███     ░███ ░███ ░███ ░███ ░███ 
+
+░░███     ███ ░███ ░███ ░███ ░███░███ ░███ ░░░░███░███░░░      ░███ ░███ ░███░███  ███ ███░░███   ░███ ███ ░███ ░███ ░███ ░███ ░███ 
+
+ ░░█████████  ████ █████░░██████ ░░██████  ██████ ░░██████     █████░░██████ ░░██████ ░░████████  ░░█████  █████░░██████  ████ █████
+
+  ░░░░░░░░░  ░░░░ ░░░░░  ░░░░░░   ░░░░░░  ░░░░░░   ░░░░░░     ░░░░░  ░░░░░░   ░░░░░░   ░░░░░░░░    ░░░░░  ░░░░░  ░░░░░░  ░░░░ ░░░░░ 
+
+                                                                                                                                                                                                                                                       
+
+*/
+# 723 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Choose_location()
 {
  lcd.clear();
@@ -882,29 +972,50 @@ void Call_Weather_Every_10Min()
 
    Sử dụng hàm API riêng để dùng cho nút nhấn MODE
 
+.--.      .--.    .-''-.     ____   ,---------. .---.  .---.     .-''-.  .-------.     
+
+|  |_     |  |  .'_ _   \  .'  __ `.\          \|   |  |_ _|   .'_ _   \ |  _ _   | _( )_   |  | / ( ` )   '/   '  \  \`--.  ,---'|   |  ( ' )  / ( ` )   '| ( ' )  |    
+ |    
+|(_ o _)  |  |. (_ o _)  ||___|  /  |   |   \   |   '-(_{;}_). (_ o _)  ||(_ o _) /    
+
+| (_,_) \ |  ||  (_,_)___|   _.-`   |   :_ _:   |      (_,_) |  (_,_)___|| (_,_).' __  
+
+|  |/    \|  |'  \   .---..'   _    |   (_I_)   | _ _--.   | '  \   .---.|  |\ \  |  | 
+
+|  '  /\  `  | \  `-'    /|  _( )_  |  (_(=)_)  |( ' ) |   |  \  `-'    /|  | \ `'   / 
+
+|    /  \    |  \       / \ (_ o _) /   (_I_)   (_{;}_)|   |   \       / |  |  \    /  
+
+`---'    `---`   `'-..-'   '.(_,_).'    '---'   '(_,_) '---'    `'-..-'  ''-'   `'-'   
+
 */
-# 885 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 944 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Weather_Online_sever()
 {
  if (value_Location_EEPROM == 0)
  {
   Location = "1566083";
-  Serial.println("Địa điểm lấy data thời tiết: Location_TPHCM");
+  Serial.println("\nĐịa điểm lấy data thời tiết: Location_TPHCM\n");
  }
  else if (value_Location_EEPROM == 1)
  {
   Location = "1562414";
-  Serial.println("Địa điểm lấy data thời tiết: Location_VUTAU");
+  Serial.println("\nĐịa điểm lấy data thời tiết: Location_VUTAU\n");
  }
  else if (value_Location_EEPROM == 2)
  {
   Location = "1584071";
-  Serial.println("Địa điểm lấy data thời tiết: Location_DALAT");
+  Serial.println("\nĐịa điểm lấy data thời tiết: Location_DALAT\n");
  }
  else if (value_Location_EEPROM == 3)
  {
   Location = "1565033";
-  Serial.println("Địa điểm lấy data thời tiết: Location_TPHUE");
+  Serial.println("\nĐịa điểm lấy data thời tiết: Location_TPHUE\n");
+ }
+ else // Nếu lần đầu tiên khởi động chưa setup vị trí thì mặc định là TPHCM
+ {
+  Location = "1566083";
+  Serial.println("\nĐịa điểm lấy data thời tiết: Location_TPHCM\n");
  }
 
  if (WiFi.status() == WL_CONNECTED) // Check WiFi connection status
@@ -927,13 +1038,13 @@ void Weather_Online_sever()
    if (!root.success())
    {
     Serial.println(((reinterpret_cast<const __FlashStringHelper *>(
-# 927 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
-                  (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "927" "." "9" "\", \"aSM\", @progbits, 1 #"))) = (
-# 927 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 991 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+                  (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "991" "." "9" "\", \"aSM\", @progbits, 1 #"))) = (
+# 991 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
                   "Parsing failed !"
-# 927 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+# 991 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
                   ); &__pstr__[0];}))
-# 927 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 991 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
                   ))));
    }
 
@@ -948,13 +1059,33 @@ void Weather_Online_sever()
    Serial.printf("Humidity = % d % %\n", humidity);
    Serial.printf("Pressure = % .3f bar\n", pressure);
    Serial.printf("Wind speed = % .1f m / s\n", wind_speed);
-   Serial.printf("Wind degree = % d°\n", wind_degree);
+   Serial.printf("Wind degree = % d°\n\n", wind_degree);
   }
   http.end(); // Close connection
   yield(); // disble Soft WDT reset - NodeMCU
  }
+ else
+ {
+  Serial.println("Wifi không có Internet !\n");
+ }
 }
 
+/*                                                                                                            
+
+                              __                      _____      
+
+   _________ ___  ____ ______/ /_   _________  ____  / __(_)___ _
+
+  / ___/ __ `__ \/ __ `/ ___/ __/  / ___/ __ \/ __ \/ /_/ / __ `/
+
+ (__  ) / / / / / /_/ / /  / /_   / /__/ /_/ / / / / __/ / /_/ / 
+
+/____/_/ /_/ /_/\__,_/_/   \__/   \___/\____/_/ /_/_/ /_/\__, /  
+
+                                                        /____/                                                                                                         
+
+*/
+# 1024 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void smartConfig_ndb()
 {
  lcd.createChar(1, UB);
@@ -1307,6 +1438,28 @@ void Set_Minute_Alarm()
  Serial.printf("hen_phut duoc set eeprom: %d \n", EEPROM.read(98));
 }
 
+/*
+
+   █████████             █████     ███                                   █████████   ████                                     
+
+  ███░░░░░███           ░░███     ░░░                                   ███░░░░░███ ░░███                                     
+
+ ░███    ░███   ██████  ███████   ████  █████ █████  ██████            ░███    ░███  ░███   ██████   ████████  █████████████  
+
+ ░███████████  ███░░███░░░███░   ░░███ ░░███ ░░███  ███░░███           ░███████████  ░███  ░░░░░███ ░░███░░███░░███░░███░░███ 
+
+ ░███░░░░░███ ░███ ░░░   ░███     ░███  ░███  ░███ ░███████            ░███░░░░░███  ░███   ███████  ░███ ░░░  ░███ ░███ ░███ 
+
+ ░███    ░███ ░███  ███  ░███ ███ ░███  ░░███ ███  ░███░░░             ░███    ░███  ░███  ███░░███  ░███      ░███ ░███ ░███ 
+
+ █████   █████░░██████   ░░█████  █████  ░░█████   ░░██████  █████████ █████   █████ █████░░████████ █████     █████░███ █████
+
+░░░░░   ░░░░░  ░░░░░░     ░░░░░  ░░░░░    ░░░░░     ░░░░░░  ░░░░░░░░░ ░░░░░   ░░░░░ ░░░░░  ░░░░░░░░ ░░░░░     ░░░░░ ░░░ ░░░░░ 
+
+                                                                                                                                                                                                                                                                                                                                                                                          
+
+*/
+# 1387 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Active_Alarm()
 {
  lcd.clear();
@@ -1408,6 +1561,28 @@ void Active_Alarm()
  lcd.clear();
 }
 
+/* 
+
+ ███████████                   █████       █████   ███   █████  ███     ██████   ███ 
+
+░█░░░███░░░█                  ░░███       ░░███   ░███  ░░███  ░░░     ███░░███ ░░░  
+
+░   ░███  ░   ██████   █████  ███████      ░███   ░███   ░███  ████   ░███ ░░░  ████ 
+
+    ░███     ███░░███ ███░░  ░░░███░       ░███   ░███   ░███ ░░███  ███████   ░░███ 
+
+    ░███    ░███████ ░░█████   ░███        ░░███  █████  ███   ░███ ░░░███░     ░███ 
+
+    ░███    ░███░░░   ░░░░███  ░███ ███     ░░░█████░█████░    ░███   ░███      ░███ 
+
+    █████   ░░██████  ██████   ░░█████        ░░███ ░░███      █████  █████     █████
+
+   ░░░░░     ░░░░░░  ░░░░░░     ░░░░░          ░░░   ░░░      ░░░░░  ░░░░░     ░░░░░ 
+
+                                                                                                                                                                       
+
+*/
+# 1499 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 bool bool_Test_Wifi(void)
 {
  int c = 0;
@@ -1444,16 +1619,44 @@ bool bool_Test_Wifi(void)
  return false;
 }
 
-/* Cập nhật OTA */
+/* Cập nhật OTA 
+
+ █████  █████               █████            █████                   ███████    ███████████   █████████  
+
+░░███  ░░███               ░░███            ░░███                  ███░░░░░███ ░█░░░███░░░█  ███░░░░░███ 
+
+ ░███   ░███  ████████   ███████   ██████   ███████    ██████     ███     ░░███░   ░███  ░  ░███    ░███ 
+
+ ░███   ░███ ░░███░░███ ███░░███  ░░░░░███ ░░░███░    ███░░███   ░███      ░███    ░███     ░███████████ 
+
+ ░███   ░███  ░███ ░███░███ ░███   ███████   ░███    ░███████    ░███      ░███    ░███     ░███░░░░░███ 
+
+ ░███   ░███  ░███ ░███░███ ░███  ███░░███   ░███ ███░███░░░     ░░███     ███     ░███     ░███    ░███ 
+
+ ░░████████   ░███████ ░░████████░░████████  ░░█████ ░░██████     ░░░███████░      █████    █████   █████
+
+  ░░░░░░░░    ░███░░░   ░░░░░░░░  ░░░░░░░░    ░░░░░   ░░░░░░        ░░░░░░░       ░░░░░    ░░░░░   ░░░░░ 
+
+              ░███                                                                                       
+
+              █████                                                                                      
+
+             ░░░░░                                                                                       
+
+*/
+# 1548 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void update_FOTA()
 {
+ Serial.println("\n>>>>>>>>>>> Update FOTA \n");
+ Serial.println("Check firmware coi có bản cập nhật không? ");
+
  lcd.clear();
  /* màn hình hiển thị trên LCD 2004 */
  lcd.setCursor(0, 0);
  lcd.print("Version Firmware:   ");
 
  lcd.setCursor(0, 1);
- lcd.print("1.0.7");
+ lcd.print("1.1.0");
  lcd.print(" - ");
  lcd.print(*((volatile uint32_t *)(0x3FF00000+(0x58))));
 
@@ -1463,8 +1666,8 @@ void update_FOTA()
  /* hiển thị loading . . . */
  lcd.setCursor(0, 3);
  lcd.print("...");
- Serial.printf(">>> Device:   %d MHz \n", ESP.getCpuFreqMHz());
- Serial.printf(">>> Version Firmware: %s \n", "1.0.7");
+ Serial.printf(">>> Device: %d MHz \n", ESP.getCpuFreqMHz());
+ Serial.printf(">>> Version Firmware: v%s (OTADrive) \n", "1.1.0");
  Serial.printf(">>> ID ESP: ");
  Serial.println(*((volatile uint32_t *)(0x3FF00000+(0x58))));
  Serial.printf(">>> Boot Mode: %d \n", ESP.getBootMode());
@@ -1478,9 +1681,9 @@ void update_FOTA()
   String url = "http://otadrive.com/DeviceApi/update?";
   WiFiClient client;
   url += "&s=" + String(*((volatile uint32_t *)(0x3FF00000+(0x58))));
-  url += "&_FirmwareInfo&k=" "ee01b3e6-5101-4b37-8e0e-f53353bf12df" "&v=" "1.0.7" "&FirmwareInfo_&";
+  url += "&_FirmwareInfo&k=" "ee01b3e6-5101-4b37-8e0e-f53353bf12df" "&v=" "1.1.0" "&FirmwareInfo_&";
 
-  t_httpUpdate_return ret = ESPhttpUpdate.update(client, url, "1.0.7");
+  t_httpUpdate_return ret = ESPhttpUpdate.update(client, url, "1.1.0");
 
   switch (ret)
   {
@@ -1507,6 +1710,7 @@ void update_FOTA()
   }
  }
  lcd.clear();
+ Serial.println("\n<<<<<<<<<< Done Check FOTA \n");
 }
 
 void Welcome_Smartclock()

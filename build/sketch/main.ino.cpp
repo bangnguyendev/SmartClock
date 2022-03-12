@@ -1,5 +1,20 @@
 #include <Arduino.h>
 #line 1 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+/*                                                                                                                                                               
+      _____          ____  _____   ______         _____           _____   ______         _____     ____   ____  _____      _____      ______  _____   ______   
+ ___|\     \    ____|\   \|\    \ |\     \    ___|\    \         |\    \ |\     \    ___|\    \   |    | |    ||\    \    /    /| ___|\     \|\    \ |\     \  
+|    |\     \  /    /\    \\\    \| \     \  /    /\    \         \\    \| \     \  /    /\    \  |    | |    || \    \  /    / ||     \     \\\    \| \     \ 
+|    | |     ||    |  |    |\|    \  \     ||    |  |____|         \|    \  \     ||    |  |____| |    | |    ||  \____\/    /  /|     ,_____/|\|    \  \     |
+|    | /_ _ / |    |__|    | |     \  |    ||    |    ____          |     \  |    ||    |    ____ |    | |    | \ |    /    /  / |     \--'\_|/ |     \  |    |
+|    |\    \  |    .--.    | |      \ |    ||    |   |    |         |      \ |    ||    |   |    ||    | |    |  \|___/    /  /  |     /___/|   |      \ |    |
+|    | |    | |    |  |    | |    |\ \|    ||    |   |_,  |         |    |\ \|    ||    |   |_,  ||    | |    |      /    /  /   |     \____|\  |    |\ \|    |
+|____|/____/| |____|  |____| |____||\_____/||\ ___\___/  /|         |____||\_____/||\ ___\___/  /||\___\_|____|     /____/  /    |____ '     /| |____||\_____/|
+|    /     || |    |  |    | |    |/ \|   ||| |   /____ / |         |    |/ \|   ||| |   /____ / || |    |    |    |`    | /     |    /_____/ | |    |/ \|   ||
+|____|_____|/ |____|  |____| |____|   |___|/ \|___|    | /          |____|   |___|/ \|___|    | /  \|____|____|    |_____|/      |____|     | / |____|   |___|/
+  \(    )/      \(      )/     \(       )/     \( |____|/             \(       )/     \( |____|/      \(   )/         )/           \( |_____|/    \(       )/  
+   '    '        '      '       '       '       '   )/                 '       '       '   )/          '   '          '             '    )/        '       '   
+                                                    '                                      '                                             '                     
+*/
 /* LIBRARY ARDUINO DEFINE  */
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h> /* Get data Weather - http */
@@ -15,42 +30,42 @@
 #include "../../../SmartClock/include/LCD_2004_define.h" /* DEFINE MACRO */
 #include "../../../SmartClock/include/Macro_define.h"	 /* LCD2004 - CHARACTER LCD */
 
-#line 16 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 31 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void setup();
-#line 188 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 204 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void loop();
-#line 199 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 216 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Check_Status_Button();
-#line 378 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 395 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Setup_Local_RealTime();
-#line 673 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 723 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Choose_location();
-#line 873 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 923 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Call_Weather_Every_10Min();
-#line 885 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 944 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Weather_Online_sever();
-#line 948 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1024 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void smartConfig_ndb();
-#line 1036 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1112 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Setup_AlarmClock();
-#line 1143 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1219 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Set_Hour_Alarm();
-#line 1223 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1299 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Set_Minute_Alarm();
-#line 1300 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1387 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Active_Alarm();
-#line 1401 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1499 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 bool bool_Test_Wifi(void);
-#line 1438 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1548 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void update_FOTA();
-#line 1502 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1616 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Welcome_Smartclock();
-#line 16 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 31 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void setup()
 {
 	/* Initialize Serial. */
 	Serial.begin(115200);
-	time_dem_thoitiet = millis();
+
 	/* Initialize BUTTON. */
 	pinMode(PIN_signal_Bell, OUTPUT);
 	pinMode(Button_Mode, INPUT);
@@ -72,34 +87,33 @@ void setup()
 
 	/* Initialize eeprom */
 	EEPROM.begin(512);
-	Serial.println(" ");
-	Serial.printf("Status Alarm: %d \n", status_Mode_Alarm);
+	Serial.println("\n\n>>>>>>>>>> Read EEPROM \n");
+	Serial.printf("Status Alarm: %d (1: ON - 0: OFF) \n", status_Mode_Alarm);
 	/* Lấy giờ hẹn từ EEPROM */
 	hen_gio = EEPROM.read(index_eeprom_hengio);
-	Serial.printf("hen_gio: %d \n", hen_gio);
+	Serial.printf("Var hen_gio: %d \n", hen_gio);
 
 	/* Lấy phút hẹn từ EEPROM */
 	hen_phut = EEPROM.read(index_eeprom_henphut);
-	Serial.printf("hen_phut: %d \n", hen_phut);
+	Serial.printf("Var hen_phut: %d \n", hen_phut);
 
 	/* Lấy vị trí từ EEPROM */
 	value_Location_EEPROM = EEPROM.read(index_eeprom_location_eeprom);
-	Serial.printf("value_Location_EEPROM: %d \n", value_Location_EEPROM);
+	Serial.printf("Var value_Location_EEPROM: %d \n\n", value_Location_EEPROM);
 
-	Serial.println("=========ĐỌC SSID PASS TỪ EEROM ĐÃ LƯU!!!====");
+	Serial.println(">>>>>>>>>> READ SSID PASS EEROM  \n");
 	lcd.setCursor(0, 0);
 	lcd.print("Found saved wifi!");
-	Serial.println("Startup");
 
 	/* read data Wifi from eeprom */
 	/* for ssid and pass */
-	Serial.println("Reading EEPROM ssid");
+	Serial.println("Reading EEPROM ssid ......");
 	String esid = "";
 	for (int i = 0; i < index_eeprom_SSID; ++i)
 	{
 		esid += char(EEPROM.read(i));
 	}
-	Serial.print("SSID: ");
+	Serial.print(">>>>> SSID: ");
 	Serial.println(esid);
 
 	lcd.setCursor(0, 1);
@@ -119,14 +133,13 @@ void setup()
 	}
 	lcd.print("...");
 	/* pass se k in ra man hinh lcd */
-	Serial.println(" ");
-	Serial.println("Reading EEPROM pass");
+	Serial.println("\nReading EEPROM pass ......");
 	String epass = "";
 	for (int i = 32; i < index_eeprom_PASS; ++i)
 	{
 		epass += char(EEPROM.read(i));
 	}
-	Serial.print("PASS: ");
+	Serial.print(">>>>> PASS: ");
 	Serial.println(epass);
 	/* nho check lai dieu kien cho nay khi < 1 */
 	if (esid.length() > ESP_NB_ONE)
@@ -182,14 +195,11 @@ void setup()
 	Serial.println(WiFi.localIP());
 
 	/* Check firmware coi có cập nhật không?  */
-	Serial.println("\n>>>>>>>>>>> Update FOTA <<<<<<<<<<< ");
-	Serial.println("Check firmware coi có bản cập nhật không? ");
 	update_FOTA();
-	Serial.println("<<<<<<<<< Done Check FOTA >>>>>>>>>\n");
 
 	/* Cập nhật thời gian từ sever vn.pool.ntp.org */
 	configTime(7 * 3600, 0, "vn.pool.ntp.org", "time.nist.gov");
-	Serial.println("Update Time <<< - >>> vn.pool.ntp.org");
+	Serial.println("Update Time <<< - >>> vn.pool.ntp.org \n");
 	while (!time(nullptr))
 	{
 		Serial.println("\nWaiting for time");
@@ -199,23 +209,29 @@ void setup()
 	}
 
 	/* Màn hình khởi tạo chào mừng */
-	Serial.println("Màn hình khởi tạo chào mừng");
+	Serial.println("Chạy màn hình LCD khởi tạo chào mừng");
 	Welcome_Smartclock();
 
 	/* truy cap den thoi tiet dia phuong da luu o eeprom */
-	Serial.println("Truy cap den thoi tiet dia phuong");
+	Serial.println("Truy cập đến thời tiết địa phương");
+	time_dem_thoitiet = millis();
 	Weather_Online_sever();
 
 #if ESP_NB_THINGSPEAK
 	ThingSpeak.begin(client);
-#endif
+#endif //#if ESP_NB_THINGSPEAK
 
 #if ESP_NB_BLYNK
 	Serial.println("\nKết nối Blynk");
 	/* Kết nối Blynk */
-	Blynk.begin(auth, ssida, passa);
+	Blynk.config(BLYNK_AUTH_TOKEN, BLYNK_DEFAULT_DOMAIN, 8080);
+	while (Blynk.connect() == false)
+	{
+		Blynk.connect(1000l);
+		Serial.print(". ");
+	}
 	Serial.println("\nKết nối Blynk");
-#endif
+#endif //#if ESP_NB_BLYNK
 }
 
 void loop()
@@ -224,8 +240,9 @@ void loop()
 	Blynk.run();
 #endif
 	Check_Status_Button();
-	Setup_Local_RealTime();
 	Call_Weather_Every_10Min();
+	Setup_Local_RealTime();
+
 	yield(); // disble Soft WDT reset - NodeMCU
 }
 
@@ -651,6 +668,29 @@ void Setup_Local_RealTime()
 				lcd.write(5);
 			}
 		}
+		/*
+            HIỂN THỊ FONT SỐ LỚN                                                           
+                                                                                                                                                               
+                                                                                   
+          000000000          888888888               1111111    222222222222222    
+        00:::::::::00      88:::::::::88            1::::::1   2:::::::::::::::22  
+      00:::::::::::::00  88:::::::::::::88         1:::::::1   2::::::222222:::::2 
+     0:::::::000:::::::08::::::88888::::::8        111:::::1   2222222     2:::::2 
+     0::::::0   0::::::08:::::8     8:::::8           1::::1               2:::::2 
+     0:::::0     0:::::08:::::8     8:::::8 ::::::    1::::1               2:::::2 
+     0:::::0     0:::::0 8:::::88888:::::8  ::::::    1::::1            2222::::2  
+     0:::::0 000 0:::::0  8:::::::::::::8   ::::::    1::::l       22222::::::22   
+     0:::::0 000 0:::::0 8:::::88888:::::8            1::::l     22::::::::222     
+     0:::::0     0:::::08:::::8     8:::::8           1::::l    2:::::22222        
+     0:::::0     0:::::08:::::8     8:::::8           1::::l   2:::::2             
+     0::::::0   0::::::08:::::8     8:::::8 ::::::    1::::l   2:::::2             
+     0:::::::000:::::::08::::::88888::::::8 :::::: 111::::::1112:::::2       222222
+      00:::::::::::::00  88:::::::::::::88  :::::: 1::::::::::12::::::2222222:::::2
+        00:::::::::00      88:::::::::88           1::::::::::12::::::::::::::::::2
+          000000000          888888888             11111111111122222222222222222222
+                                                                                   
+																				
+		*/                                                  		
 		/* hien thi gio font so lon */
 		printDigits(gio / 10 % 10, 0, 2);
 		printDigits(gio / 1 % 10, 4, 2);
@@ -702,7 +742,17 @@ void Setup_Local_RealTime()
 	}
 }
 
-/* Chon vi tri doc gia tri thoi tiet */
+/* Chon vi tri doc gia tri thoi tiet 
+   █████████  █████                                            ████                               █████     ███                     
+  ███░░░░░███░░███                                            ░░███                              ░░███     ░░░                      
+ ███     ░░░  ░███████    ██████   ██████   █████   ██████     ░███   ██████   ██████   ██████   ███████   ████   ██████  ████████  
+░███          ░███░░███  ███░░███ ███░░███ ███░░   ███░░███    ░███  ███░░███ ███░░███ ░░░░░███ ░░░███░   ░░███  ███░░███░░███░░███ 
+░███          ░███ ░███ ░███ ░███░███ ░███░░█████ ░███████     ░███ ░███ ░███░███ ░░░   ███████   ░███     ░███ ░███ ░███ ░███ ░███ 
+░░███     ███ ░███ ░███ ░███ ░███░███ ░███ ░░░░███░███░░░      ░███ ░███ ░███░███  ███ ███░░███   ░███ ███ ░███ ░███ ░███ ░███ ░███ 
+ ░░█████████  ████ █████░░██████ ░░██████  ██████ ░░██████     █████░░██████ ░░██████ ░░████████  ░░█████  █████░░██████  ████ █████
+  ░░░░░░░░░  ░░░░ ░░░░░  ░░░░░░   ░░░░░░  ░░░░░░   ░░░░░░     ░░░░░  ░░░░░░   ░░░░░░   ░░░░░░░░    ░░░░░  ░░░░░  ░░░░░░  ░░░░ ░░░░░ 
+                                                                                                                                                                                                                                                       
+*/
 void Choose_location()
 {
 	lcd.clear();
@@ -914,28 +964,42 @@ void Call_Weather_Every_10Min()
 
 /* Lấy giá trị thời tiết tại vị trí đã chọn
    Sử dụng hàm API riêng để dùng cho nút nhấn MODE
-*/
+.--.      .--.    .-''-.     ____   ,---------. .---.  .---.     .-''-.  .-------.     
+|  |_     |  |  .'_ _   \  .'  __ `.\          \|   |  |_ _|   .'_ _   \ |  _ _   \    
+| _( )_   |  | / ( ` )   '/   '  \  \`--.  ,---'|   |  ( ' )  / ( ` )   '| ( ' )  |    
+|(_ o _)  |  |. (_ o _)  ||___|  /  |   |   \   |   '-(_{;}_). (_ o _)  ||(_ o _) /    
+| (_,_) \ |  ||  (_,_)___|   _.-`   |   :_ _:   |      (_,_) |  (_,_)___|| (_,_).' __  
+|  |/    \|  |'  \   .---..'   _    |   (_I_)   | _ _--.   | '  \   .---.|  |\ \  |  | 
+|  '  /\  `  | \  `-'    /|  _( )_  |  (_(=)_)  |( ' ) |   |  \  `-'    /|  | \ `'   / 
+|    /  \    |  \       / \ (_ o _) /   (_I_)   (_{;}_)|   |   \       / |  |  \    /  
+`---'    `---`   `'-..-'   '.(_,_).'    '---'   '(_,_) '---'    `'-..-'  ''-'   `'-'   
+*/                                                                                       
 void Weather_Online_sever()
 {
 	if (value_Location_EEPROM == 0)
 	{
 		Location = Location_TPHCM;
-		Serial.println("Địa điểm lấy data thời tiết: Location_TPHCM");
+		Serial.println("\nĐịa điểm lấy data thời tiết: Location_TPHCM\n");
 	}
 	else if (value_Location_EEPROM == 1)
 	{
 		Location = Location_VUTAU;
-		Serial.println("Địa điểm lấy data thời tiết: Location_VUTAU");
+		Serial.println("\nĐịa điểm lấy data thời tiết: Location_VUTAU\n");
 	}
 	else if (value_Location_EEPROM == 2)
 	{
 		Location = Location_DALAT;
-		Serial.println("Địa điểm lấy data thời tiết: Location_DALAT");
+		Serial.println("\nĐịa điểm lấy data thời tiết: Location_DALAT\n");
 	}
 	else if (value_Location_EEPROM == 3)
 	{
 		Location = Location_TPHUE;
-		Serial.println("Địa điểm lấy data thời tiết: Location_TPHUE");
+		Serial.println("\nĐịa điểm lấy data thời tiết: Location_TPHUE\n");
+	}
+	else // Nếu lần đầu tiên khởi động chưa setup vị trí thì mặc định là TPHCM
+	{
+		Location = Location_TPHCM;
+		Serial.println("\nĐịa điểm lấy data thời tiết: Location_TPHCM\n");
 	}
 
 	if (WiFi.status() == WL_CONNECTED) // Check WiFi connection status
@@ -971,13 +1035,25 @@ void Weather_Online_sever()
 			Serial.printf("Humidity = % d % %\n", humidity);
 			Serial.printf("Pressure = % .3f bar\n", pressure);
 			Serial.printf("Wind speed = % .1f m / s\n", wind_speed);
-			Serial.printf("Wind degree = % d°\n", wind_degree);
+			Serial.printf("Wind degree = % d°\n\n", wind_degree);
 		}
 		http.end(); // Close connection
 		yield();	// disble Soft WDT reset - NodeMCU
 	}
+	else
+	{
+		Serial.println("Wifi không có Internet !\n");
+	}
 }
 
+/*                                                                                                            
+                              __                      _____      
+   _________ ___  ____ ______/ /_   _________  ____  / __(_)___ _
+  / ___/ __ `__ \/ __ `/ ___/ __/  / ___/ __ \/ __ \/ /_/ / __ `/
+ (__  ) / / / / / /_/ / /  / /_   / /__/ /_/ / / / / __/ / /_/ / 
+/____/_/ /_/ /_/\__,_/_/   \__/   \___/\____/_/ /_/_/ /_/\__, /  
+                                                        /____/                                                                                                         
+*/
 void smartConfig_ndb()
 {
 	lcd.createChar(1, UB);
@@ -1330,6 +1406,17 @@ void Set_Minute_Alarm()
 	Serial.printf("hen_phut duoc set eeprom: %d \n", EEPROM.read(index_eeprom_henphut));
 }
 
+/*
+   █████████             █████     ███                                   █████████   ████                                     
+  ███░░░░░███           ░░███     ░░░                                   ███░░░░░███ ░░███                                     
+ ░███    ░███   ██████  ███████   ████  █████ █████  ██████            ░███    ░███  ░███   ██████   ████████  █████████████  
+ ░███████████  ███░░███░░░███░   ░░███ ░░███ ░░███  ███░░███           ░███████████  ░███  ░░░░░███ ░░███░░███░░███░░███░░███ 
+ ░███░░░░░███ ░███ ░░░   ░███     ░███  ░███  ░███ ░███████            ░███░░░░░███  ░███   ███████  ░███ ░░░  ░███ ░███ ░███ 
+ ░███    ░███ ░███  ███  ░███ ███ ░███  ░░███ ███  ░███░░░             ░███    ░███  ░███  ███░░███  ░███      ░███ ░███ ░███ 
+ █████   █████░░██████   ░░█████  █████  ░░█████   ░░██████  █████████ █████   █████ █████░░████████ █████     █████░███ █████
+░░░░░   ░░░░░  ░░░░░░     ░░░░░  ░░░░░    ░░░░░     ░░░░░░  ░░░░░░░░░ ░░░░░   ░░░░░ ░░░░░  ░░░░░░░░ ░░░░░     ░░░░░ ░░░ ░░░░░ 
+                                                                                                                                                                                                                                                                                                                                                                                          
+*/
 void Active_Alarm()
 {
 	lcd.clear();
@@ -1431,6 +1518,17 @@ void Active_Alarm()
 	lcd.clear();
 }
 
+/* 
+ ███████████                   █████       █████   ███   █████  ███     ██████   ███ 
+░█░░░███░░░█                  ░░███       ░░███   ░███  ░░███  ░░░     ███░░███ ░░░  
+░   ░███  ░   ██████   █████  ███████      ░███   ░███   ░███  ████   ░███ ░░░  ████ 
+    ░███     ███░░███ ███░░  ░░░███░       ░███   ░███   ░███ ░░███  ███████   ░░███ 
+    ░███    ░███████ ░░█████   ░███        ░░███  █████  ███   ░███ ░░░███░     ░███ 
+    ░███    ░███░░░   ░░░░███  ░███ ███     ░░░█████░█████░    ░███   ░███      ░███ 
+    █████   ░░██████  ██████   ░░█████        ░░███ ░░███      █████  █████     █████
+   ░░░░░     ░░░░░░  ░░░░░░     ░░░░░          ░░░   ░░░      ░░░░░  ░░░░░     ░░░░░ 
+                                                                                                                                                                       
+*/
 bool bool_Test_Wifi(void)
 {
 	int c = 0;
@@ -1467,9 +1565,24 @@ bool bool_Test_Wifi(void)
 	return false;
 }
 
-/* Cập nhật OTA */
+/* Cập nhật OTA 
+ █████  █████               █████            █████                   ███████    ███████████   █████████  
+░░███  ░░███               ░░███            ░░███                  ███░░░░░███ ░█░░░███░░░█  ███░░░░░███ 
+ ░███   ░███  ████████   ███████   ██████   ███████    ██████     ███     ░░███░   ░███  ░  ░███    ░███ 
+ ░███   ░███ ░░███░░███ ███░░███  ░░░░░███ ░░░███░    ███░░███   ░███      ░███    ░███     ░███████████ 
+ ░███   ░███  ░███ ░███░███ ░███   ███████   ░███    ░███████    ░███      ░███    ░███     ░███░░░░░███ 
+ ░███   ░███  ░███ ░███░███ ░███  ███░░███   ░███ ███░███░░░     ░░███     ███     ░███     ░███    ░███ 
+ ░░████████   ░███████ ░░████████░░████████  ░░█████ ░░██████     ░░░███████░      █████    █████   █████
+  ░░░░░░░░    ░███░░░   ░░░░░░░░  ░░░░░░░░    ░░░░░   ░░░░░░        ░░░░░░░       ░░░░░    ░░░░░   ░░░░░ 
+              ░███                                                                                       
+              █████                                                                                      
+             ░░░░░                                                                                       
+*/
 void update_FOTA()
 {
+	Serial.println("\n>>>>>>>>>>> Update FOTA \n");
+	Serial.println("Check firmware coi có bản cập nhật không? ");
+
 	lcd.clear();
 	/* màn hình hiển thị trên LCD 2004 */
 	lcd.setCursor(0, 0);
@@ -1486,8 +1599,8 @@ void update_FOTA()
 	/* hiển thị loading . . . */
 	lcd.setCursor(0, 3);
 	lcd.print("...");
-	Serial.printf(">>> Device:   %d MHz \n", ESP.getCpuFreqMHz());
-	Serial.printf(">>> Version Firmware: %s \n", Version);
+	Serial.printf(">>> Device: %d MHz \n", ESP.getCpuFreqMHz());
+	Serial.printf(">>> Version Firmware: v%s (OTADrive) \n", Version);
 	Serial.printf(">>> ID ESP: ");
 	Serial.println(CHIPID);
 	Serial.printf(">>> Boot Mode: %d \n", ESP.getBootMode());
@@ -1530,6 +1643,7 @@ void update_FOTA()
 		}
 	}
 	lcd.clear();
+	Serial.println("\n<<<<<<<<<< Done Check FOTA \n");
 }
 
 void Welcome_Smartclock()
