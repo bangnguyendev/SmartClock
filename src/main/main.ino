@@ -254,7 +254,7 @@ void Check_Status_Button()
 					lcd.setCursor(0, 1);
 					lcd.print("Mode: >> Wifi Change");
 					lcd.setCursor(0, 2);
-					lcd.print("         Message    ");
+					lcd.print("         Update OTA ");
 					lcd.setCursor(0, 3);
 					lcd.print("                    ");
 				}
@@ -266,7 +266,7 @@ void Check_Status_Button()
 					lcd.setCursor(0, 2);
 					lcd.print("         Wifi Change");
 					lcd.setCursor(0, 3);
-					lcd.print("         Message    ");
+					lcd.print("         Update OTA ");
 				}
 				/* vao mode setup bao thuc */
 				else if (couter_Mode >= 1)
@@ -657,7 +657,7 @@ void Setup_Local_RealTime()
           000000000          888888888             11111111111122222222222222222222
                                                                                    
 																				
-		*/                                                  		
+		*/
 		/* hien thi gio font so lon */
 		printDigits(gio / 10 % 10, 0, 2);
 		printDigits(gio / 1 % 10, 4, 2);
@@ -940,7 +940,7 @@ void Call_Weather_Every_10Min()
 |  '  /\  `  | \  `-'    /|  _( )_  |  (_(=)_)  |( ' ) |   |  \  `-'    /|  | \ `'   / 
 |    /  \    |  \       / \ (_ o _) /   (_I_)   (_{;}_)|   |   \       / |  |  \    /  
 `---'    `---`   `'-..-'   '.(_,_).'    '---'   '(_,_) '---'    `'-..-'  ''-'   `'-'   
-*/                                                                                       
+*/
 void Weather_Online_sever()
 {
 	if (value_Location_EEPROM == 0)
@@ -1574,6 +1574,7 @@ void update_FOTA()
 	Serial.printf(">>> Free mem: %d \n", ESP.getFreeHeap());
 	/* biến Check_OTA kiểm tra có coi bản cập nhật OTA nào hay không? */
 	bool Check_OTA = true;
+	int count_Check_OTA = 0;
 	while (Check_OTA)
 	{
 
@@ -1588,8 +1589,24 @@ void update_FOTA()
 		switch (ret)
 		{
 		case HTTP_UPDATE_FAILED:
-			Serial.println(">>> Please waiting ...");
+			count_Check_OTA++;
 			Check_OTA = true;
+			Serial.println(">>> Please waiting ...");
+			lcd.setCursor(0, 3);
+			lcd.print("> Please waiting ");
+			lcd.print((100 - count_Check_OTA) / 10 % 10);
+			lcd.print((100 - count_Check_OTA) / 1 % 10);
+			if (count_Check_OTA > 100)
+			{
+				Check_OTA = false;
+				Serial.println(">>> Sever OTADrive bị nghẻn, quá tải...");
+				Serial.println(">>> Hoặc thiết bị của bạn chưa được cho phép cập nhật trên hệ thống...");
+				Serial.println(">>> Check cập nhật ở thời điểm khác...");
+				Serial.printf(">>> Phiên bản hiện tại là v%s \n", Version);
+				lcd.setCursor(0, 3);
+				lcd.print("> Skip updated...   ");
+				delay(2000);
+			}
 			break;
 
 		case HTTP_UPDATE_NO_UPDATES:
@@ -1600,6 +1617,8 @@ void update_FOTA()
 			lcd.print("The current version ");
 			lcd.setCursor(0, 2);
 			lcd.print("      is the latest.");
+			lcd.setCursor(0, 3);
+			lcd.print("> > > > > > > > > > ");
 			delay(1500);
 			break;
 

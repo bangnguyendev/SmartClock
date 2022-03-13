@@ -25,11 +25,11 @@
 #define ESP_NB_ON 1
 
 /* Cài đặt dạng kết nối nút nhấn PULL_UP OR PULL_DOWN */
-#define PULLUP_PULLDOWN 0 // PULL DOWN
+#define PULLUP_PULLDOWN 1 // PULL DOWN
 
 /* Cập nhật OTA */
 #define ProductKey "ee01b3e6-5101-4b37-8e0e-f53353bf12df"
-#define Version "1.1.0"
+#define Version "1.1.3"
 #define MakeFirmwareInfo(k, v) "&_FirmwareInfo&k=" k "&v=" v "&FirmwareInfo_&"
 
 /* MACRO BLYNK IOT */

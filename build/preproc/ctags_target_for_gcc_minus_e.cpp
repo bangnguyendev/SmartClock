@@ -1,4 +1,4 @@
-# 1 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
 /*                                                                                                                                                               
 
       _____          ____  _____   ______         _____           _____   ______         _____     ____   ____  _____      _____      ______  _____   ______   
@@ -24,21 +24,21 @@
                                                     '                                      '                                             '                     
 
 */
-# 16 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 16 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
 /* LIBRARY ARDUINO DEFINE  */
-# 18 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 19 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 20 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 21 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 22 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 23 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 24 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 25 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 26 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 18 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino" 2
+# 19 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino" 2
+# 20 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino" 2
+# 21 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino" 2
+# 22 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino" 2
+# 23 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino" 2
+# 24 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino" 2
+# 25 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino" 2
+# 26 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino" 2
 
 /* USER DEFINE  */
-# 29 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 30 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 29 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino" 2
+# 30 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino" 2
 
 void setup()
 {
@@ -195,7 +195,7 @@ void setup()
  Serial.println("Truy cập đến thời tiết địa phương");
  time_dem_thoitiet = millis();
  Weather_Online_sever();
-# 202 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 202 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
 }
 
 void loop()
@@ -212,16 +212,16 @@ void loop()
 
 void Check_Status_Button()
 {
- if (digitalRead(14) == 0 /* PULL DOWN*/) // nếu nút bấm ở mức cao
+ if (digitalRead(14) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
  {
   delay(500); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
-  if (digitalRead(14) == 0 /* PULL DOWN*/)
+  if (digitalRead(14) == 1 /* PULL DOWN*/)
   {
    lcd.clear();
    long startTime = millis(); // giá trị ban đầu được gán bằng giá trị hiện tại của millis
    Serial.printf("digitalRead(Button_Mode): %d \n", digitalRead(14));
 
-   while (digitalRead(14) == 0 /* PULL DOWN*/) // đợi cho nút bấm được giữ
+   while (digitalRead(14) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
    {
     Serial.printf("Thời gian đè giữ nút nhấn: %d ms\n", (millis() - startTime));
     couter_Mode = (millis() - startTime) / 1000;
@@ -251,7 +251,7 @@ void Check_Status_Button()
      lcd.setCursor(0, 1);
      lcd.print("Mode: >> Wifi Change");
      lcd.setCursor(0, 2);
-     lcd.print("         Message    ");
+     lcd.print("         Update OTA ");
      lcd.setCursor(0, 3);
      lcd.print("                    ");
     }
@@ -263,7 +263,7 @@ void Check_Status_Button()
      lcd.setCursor(0, 2);
      lcd.print("         Wifi Change");
      lcd.setCursor(0, 3);
-     lcd.print("         Message    ");
+     lcd.print("         Update OTA ");
     }
     /* vao mode setup bao thuc */
     else if (couter_Mode >= 1)
@@ -533,7 +533,7 @@ void Setup_Local_RealTime()
     /*  *___XX_June_2019___*
 
 				July  */
-# 538 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 538 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 6) || (thang == 7))
     {
      lcd.setCursor(4, 1);
@@ -542,7 +542,7 @@ void Setup_Local_RealTime()
     /*  *__XX_March_2019___*
 
 				April  */
-# 545 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 545 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 3) || (thang == 4))
     {
      lcd.setCursor(3, 1);
@@ -557,7 +557,7 @@ void Setup_Local_RealTime()
     /*  *_XX_January_2019__*
 
 				October */
-# 558 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 558 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 10) || (thang == 1))
     {
      lcd.setCursor(2, 1);
@@ -566,7 +566,7 @@ void Setup_Local_RealTime()
     /*  *_XX_February_2019_*
 
 				November December  */
-# 565 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 565 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 11) || (thang == 2) || (thang == 12))
     {
      lcd.setCursor(2, 1);
@@ -685,7 +685,7 @@ void Setup_Local_RealTime()
 																				
 
 		*/
-# 661 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 661 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
   /* hien thi gio font so lon */
   printDigits(gio / 10 % 10, 0, 2);
   printDigits(gio / 1 % 10, 4, 2);
@@ -758,7 +758,7 @@ void Setup_Local_RealTime()
                                                                                                                                                                                                                                                        
 
 */
-# 723 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 723 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
 void Choose_location()
 {
  lcd.clear();
@@ -774,13 +774,13 @@ void Choose_location()
  int dem_location = 0;
  while (((unsigned long)(millis() - dem_10s_stop) < 10000) && (status_Mode == 0))
  {
-  if (digitalRead(14) == 0 /* PULL DOWN*/) // nếu nút bấm ở mức cao
+  if (digitalRead(14) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
   {
    delay(500); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
-   if (digitalRead(14) == 0 /* PULL DOWN*/)
+   if (digitalRead(14) == 1 /* PULL DOWN*/)
    {
     long startTime = millis(); // giá trị ban đầu được gán bằng giá trị hiện tại của millis
-    while (digitalRead(14) == 0 /* PULL DOWN*/) // đợi cho nút bấm được giữ
+    while (digitalRead(14) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
     {
      /* khi nhan nut thi set lai time out mode */
      dem_10s_stop = millis();
@@ -989,7 +989,7 @@ void Call_Weather_Every_10Min()
 `---'    `---`   `'-..-'   '.(_,_).'    '---'   '(_,_) '---'    `'-..-'  ''-'   `'-'   
 
 */
-# 944 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 944 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
 void Weather_Online_sever()
 {
  if (value_Location_EEPROM == 0)
@@ -1037,15 +1037,7 @@ void Weather_Online_sever()
    JsonObject &root = jsonBuffer.parseObject(payload);
    if (!root.success())
    {
-    Serial.println(((reinterpret_cast<const __FlashStringHelper *>(
-# 991 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
-                  (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "991" "." "9" "\", \"aSM\", @progbits, 1 #"))) = (
-# 991 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
-                  "Parsing failed !"
-# 991 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
-                  ); &__pstr__[0];}))
-# 991 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
-                  ))));
+    Serial.println(((reinterpret_cast<const __FlashStringHelper *>((__extension__({static const char __c[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "991" "." "0" "\", \"aSM\", @progbits, 1 #"))) = ("Parsing failed !"); &__c[0];}))))));
    }
 
    temp = (float)(root["main"]["temp"]) - 273.15; // get temperature in °C
@@ -1085,7 +1077,7 @@ void Weather_Online_sever()
                                                         /____/                                                                                                         
 
 */
-# 1024 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1024 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
 void smartConfig_ndb()
 {
  lcd.createChar(1, UB);
@@ -1197,13 +1189,13 @@ void Setup_AlarmClock()
   printDigits(hen_phut / 10 % 10, 11, 2);
   printDigits(hen_phut / 1 % 10, 15, 2);
 
-  if (digitalRead(14) == 0 /* PULL DOWN*/) // nếu nút bấm ở mức cao
+  if (digitalRead(14) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
   {
    delay(500); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
-   if (digitalRead(14) == 0 /* PULL DOWN*/)
+   if (digitalRead(14) == 1 /* PULL DOWN*/)
    {
     long startTime = millis(); // giá trị ban đầu được gán bằng giá trị hiện tại của millis
-    while (digitalRead(14) == 0 /* PULL DOWN*/) // đợi cho nút bấm được giữ
+    while (digitalRead(14) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
     {
      /* khi nhan nut thi set lai time out mode */
      dem_10s_stop = millis();
@@ -1319,10 +1311,10 @@ void Set_Hour_Alarm()
   printDigits(hen_phut / 10 % 10, 11, 2);
   printDigits(hen_phut / 1 % 10, 15, 2);
 
-  if (digitalRead(14) == 0 /* PULL DOWN*/) // nếu nút bấm ở mức cao
+  if (digitalRead(14) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
   {
    delay(50); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
-   if (digitalRead(14) == 0 /* PULL DOWN*/)
+   if (digitalRead(14) == 1 /* PULL DOWN*/)
    {
     hen_gio++;
     if (hen_gio >= 24)
@@ -1330,7 +1322,7 @@ void Set_Hour_Alarm()
      hen_gio = 0;
     }
     long startTime = millis();
-    while (digitalRead(14) == 0 /* PULL DOWN*/) // đợi cho nút bấm được giữ
+    while (digitalRead(14) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
     {
      /* khi nhan nut thi set lai time out mode */
      dem_10s_stop_g = millis();
@@ -1397,10 +1389,10 @@ void Set_Minute_Alarm()
    time_dem_baothuc = millis();
   }
 
-  if (digitalRead(14) == 0 /* PULL DOWN*/) // nếu nút bấm ở mức cao
+  if (digitalRead(14) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
   {
    delay(50); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
-   if (digitalRead(14) == 0 /* PULL DOWN*/)
+   if (digitalRead(14) == 1 /* PULL DOWN*/)
    {
     hen_phut++;
     if (hen_phut >= 60)
@@ -1408,7 +1400,7 @@ void Set_Minute_Alarm()
      hen_phut = 0;
     }
     long startTime = millis();
-    while (digitalRead(14) == 0 /* PULL DOWN*/) // đợi cho nút bấm được giữ
+    while (digitalRead(14) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
     {
      /* khi nhan nut thi set lai time out mode */
      dem_10s_stop_P = millis();
@@ -1459,7 +1451,7 @@ void Set_Minute_Alarm()
                                                                                                                                                                                                                                                                                                                                                                                           
 
 */
-# 1387 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1387 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
 void Active_Alarm()
 {
  lcd.clear();
@@ -1507,13 +1499,13 @@ void Active_Alarm()
 
   /* Check đè phím MODE hơn 2 giây thì thoát, không kêu chuông nữa */
   digitalWrite(16, 1);
-  if (digitalRead(14) == 0 /* PULL DOWN*/) // nếu nút bấm ở mức cao
+  if (digitalRead(14) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
   {
    delay(500); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
-   if (digitalRead(14) == 0 /* PULL DOWN*/)
+   if (digitalRead(14) == 1 /* PULL DOWN*/)
    {
     long startTime = millis(); // giá trị ban đầu được gán bằng giá trị hiện tại của millis
-    while (digitalRead(14) == 0 /* PULL DOWN*/) // đợi cho nút bấm được giữ
+    while (digitalRead(14) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
     {
      /* hien thi gio font so lon */
      customA(0, 0);
@@ -1582,7 +1574,7 @@ void Active_Alarm()
                                                                                                                                                                        
 
 */
-# 1499 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1499 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
 bool bool_Test_Wifi(void)
 {
  int c = 0;
@@ -1644,7 +1636,7 @@ bool bool_Test_Wifi(void)
              ░░░░░                                                                                       
 
 */
-# 1548 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1548 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
 void update_FOTA()
 {
  Serial.println("\n>>>>>>>>>>> Update FOTA \n");
@@ -1656,7 +1648,7 @@ void update_FOTA()
  lcd.print("Version Firmware:   ");
 
  lcd.setCursor(0, 1);
- lcd.print("1.1.0");
+ lcd.print("1.1.3");
  lcd.print(" - ");
  lcd.print(*((volatile uint32_t *)(0x3FF00000+(0x58))));
 
@@ -1667,13 +1659,14 @@ void update_FOTA()
  lcd.setCursor(0, 3);
  lcd.print("...");
  Serial.printf(">>> Device: %d MHz \n", ESP.getCpuFreqMHz());
- Serial.printf(">>> Version Firmware: v%s (OTADrive) \n", "1.1.0");
+ Serial.printf(">>> Version Firmware: v%s (OTADrive) \n", "1.1.3");
  Serial.printf(">>> ID ESP: ");
  Serial.println(*((volatile uint32_t *)(0x3FF00000+(0x58))));
  Serial.printf(">>> Boot Mode: %d \n", ESP.getBootMode());
  Serial.printf(">>> Free mem: %d \n", ESP.getFreeHeap());
  /* biến Check_OTA kiểm tra có coi bản cập nhật OTA nào hay không? */
  bool Check_OTA = true;
+ int count_Check_OTA = 0;
  while (Check_OTA)
  {
 
@@ -1681,15 +1674,31 @@ void update_FOTA()
   String url = "http://otadrive.com/DeviceApi/update?";
   WiFiClient client;
   url += "&s=" + String(*((volatile uint32_t *)(0x3FF00000+(0x58))));
-  url += "&_FirmwareInfo&k=" "ee01b3e6-5101-4b37-8e0e-f53353bf12df" "&v=" "1.1.0" "&FirmwareInfo_&";
+  url += "&_FirmwareInfo&k=" "ee01b3e6-5101-4b37-8e0e-f53353bf12df" "&v=" "1.1.3" "&FirmwareInfo_&";
 
-  t_httpUpdate_return ret = ESPhttpUpdate.update(client, url, "1.1.0");
+  t_httpUpdate_return ret = ESPhttpUpdate.update(client, url, "1.1.3");
 
   switch (ret)
   {
   case HTTP_UPDATE_FAILED:
-   Serial.println(">>> Please waiting ...");
+   count_Check_OTA++;
    Check_OTA = true;
+   Serial.println(">>> Please waiting ...");
+   lcd.setCursor(0, 3);
+   lcd.print("> Please waiting ");
+   lcd.print((100 - count_Check_OTA) / 10 % 10);
+   lcd.print((100 - count_Check_OTA) / 1 % 10);
+   if (count_Check_OTA > 100)
+   {
+    Check_OTA = false;
+    Serial.println(">>> Sever OTADrive bị nghẻn, quá tải...");
+    Serial.println(">>> Hoặc thiết bị của bạn chưa được cho phép cập nhật trên hệ thống...");
+    Serial.println(">>> Check cập nhật ở thời điểm khác...");
+    Serial.printf(">>> Phiên bản hiện tại là v%s \n", "1.1.3");
+    lcd.setCursor(0, 3);
+    lcd.print("> Skip updated...   ");
+    delay(2000);
+   }
    break;
 
   case HTTP_UPDATE_NO_UPDATES:
@@ -1700,6 +1709,8 @@ void update_FOTA()
    lcd.print("The current version ");
    lcd.setCursor(0, 2);
    lcd.print("      is the latest.");
+   lcd.setCursor(0, 3);
+   lcd.print("> > > > > > > > > > ");
    delay(1500);
    break;
 
