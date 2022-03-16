@@ -14,9 +14,9 @@
                                                     '                                      '                                             '                     
 */
 /* PIN kết nối với chuông kêu */
-#define PIN_signal_Bell 16
+#define PIN_signal_Bell D0
 /* PIN kết nối với nút nhấn MODE */
-#define Button_Mode 14
+#define Button_Mode D1
 
 /* Define By User NDB */
 #define ESP_NB_ZERO 0
@@ -29,7 +29,7 @@
 
 /* Cập nhật OTA */
 #define ProductKey "ee01b3e6-5101-4b37-8e0e-f53353bf12df"
-#define Version "1.1.3"
+#define Version "2.0.0"
 #define MakeFirmwareInfo(k, v) "&_FirmwareInfo&k=" k "&v=" v "&FirmwareInfo_&"
 
 /* MACRO BLYNK IOT */
@@ -70,28 +70,6 @@ float pressure;
 float wind_speed;
 int wind_degree;
 
-/* ===== ThingSpeak ===== */
-// Bắt đầu Ver 1.0.6 không sử dụng Thingspeak_Message
-#define ESP_NB_THINGSPEAK ESP_NB_OFF
-#if ESP_NB_THINGSPEAK
-#include <ThingSpeak.h>
-/* Channel Smart Clock */
-#define ChannelNumber_Smartclock 947371
-#define Fiels_Smartclock_Gio 1
-#define Fiels_Smartclock_Phut 2
-const char *WriteAPIKey_Smartclock = "9DU3YS7U45KE50OA";
-const char *ReadAPIKey_Smartclock = "HZ6V9BBQBVUR8PXI";
-/* Channel Status Thingspeak */
-#define ChannelNumber_Status 951877
-const char *WriteAPIKey_Status = "CKFBC2539BDNOTRB";
-const char *ReadAPIKey_Status = "JAXYJ6LRKFRA6XTO";
-/* Channel View */
-#define ChannelNumber_View 947394
-const char *WriteAPIKey_View = "0WLGTHFLKRW0GZDJ";
-const char *ReadAPIKey_View = "RLQ8HD91AE19S4U3";
-/* End data ThingSpeak  */
-#endif
-
 /* Cập nhật thời gian từ sever vn.pool.ntp.org */
 char buffer_NAM[80];
 char buffer_THANG[80];
@@ -101,7 +79,7 @@ char buffer_N_T_N[80];
 char buffer_GIO[80];
 char buffer_PHUT[80];
 char buffer_GIAY[80];
-char buffer_sent_thingspeak[80];
+char buffer_sent_serial[80];
 int nam, thang, ngay, thu;
 int hen_gio, hen_phut;
 int gio, phut, giay;
@@ -124,9 +102,6 @@ extern void setup();
 extern void loop();
 extern void Check_Status_Button();
 extern void Setup_Local_RealTime();
-#if ESP_NB_THINGSPEAK
-extern void Thingspeak_Message();
-#endif
 extern void Choose_location();
 extern void Call_Weather_Every_10Min();
 extern void Weather_Online_sever();

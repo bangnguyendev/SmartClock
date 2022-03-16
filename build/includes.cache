@@ -2,180 +2,180 @@
   {
     "Sourcefile": null,
     "Include": "",
-    "Includepath": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\cores\\esp8266"
+    "Includepath": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\cores\\esp8266"
   },
   {
     "Sourcefile": null,
     "Include": "",
-    "Includepath": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\variants\\d1_mini"
+    "Includepath": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\variants\\d1_mini"
   },
   {
-    "Sourcefile": "d:\\NguyenBangGitHub\\SmartClock\\build\\sketch\\main.ino.cpp",
+    "Sourcefile": "d:\\Git_NDB\\SmartClock\\build\\sketch\\main.ino.cpp",
     "Include": "ESP8266WiFi.h",
-    "Includepath": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\ESP8266WiFi\\src"
+    "Includepath": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\ESP8266WiFi\\src"
   },
   {
-    "Sourcefile": "d:\\NguyenBangGitHub\\SmartClock\\build\\sketch\\main.ino.cpp",
+    "Sourcefile": "d:\\Git_NDB\\SmartClock\\build\\sketch\\main.ino.cpp",
     "Include": "ESP8266HTTPClient.h",
-    "Includepath": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\ESP8266HTTPClient\\src"
+    "Includepath": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\ESP8266HTTPClient\\src"
   },
   {
-    "Sourcefile": "d:\\NguyenBangGitHub\\SmartClock\\build\\sketch\\main.ino.cpp",
+    "Sourcefile": "d:\\Git_NDB\\SmartClock\\build\\sketch\\main.ino.cpp",
     "Include": "ESP8266httpUpdate.h",
-    "Includepath": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\ESP8266httpUpdate\\src"
+    "Includepath": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\ESP8266httpUpdate\\src"
   },
   {
-    "Sourcefile": "d:\\NguyenBangGitHub\\SmartClock\\build\\sketch\\main.ino.cpp",
+    "Sourcefile": "d:\\Git_NDB\\SmartClock\\build\\sketch\\main.ino.cpp",
     "Include": "BlynkSimpleEsp8266.h",
-    "Includepath": "C:\\Users\\NguyenBang\\Documents\\Arduino\\libraries\\Blynk\\src"
+    "Includepath": "D:\\OneDrive_bang.nguyen-duy\\OneDrive - Ban Vien Co., ltd\\Documents\\Arduino\\libraries\\Blynk\\src"
   },
   {
-    "Sourcefile": "d:\\NguyenBangGitHub\\SmartClock\\build\\sketch\\main.ino.cpp",
+    "Sourcefile": "d:\\Git_NDB\\SmartClock\\build\\sketch\\main.ino.cpp",
     "Include": "Wire.h",
-    "Includepath": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\Wire"
+    "Includepath": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\Wire"
   },
   {
-    "Sourcefile": "d:\\NguyenBangGitHub\\SmartClock\\build\\sketch\\main.ino.cpp",
+    "Sourcefile": "d:\\Git_NDB\\SmartClock\\build\\sketch\\main.ino.cpp",
     "Include": "LiquidCrystal_I2C.h",
-    "Includepath": "C:\\Users\\NguyenBang\\Documents\\Arduino\\libraries\\LiquidCrystal_I2C-master"
+    "Includepath": "D:\\OneDrive_bang.nguyen-duy\\OneDrive - Ban Vien Co., ltd\\Documents\\Arduino\\libraries\\LiquidCrystal_I2C"
   },
   {
-    "Sourcefile": "d:\\NguyenBangGitHub\\SmartClock\\build\\sketch\\main.ino.cpp",
+    "Sourcefile": "d:\\Git_NDB\\SmartClock\\build\\sketch\\main.ino.cpp",
     "Include": "EEPROM.h",
-    "Includepath": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\EEPROM"
+    "Includepath": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\EEPROM"
   },
   {
-    "Sourcefile": "d:\\NguyenBangGitHub\\SmartClock\\build\\sketch\\main.ino.cpp",
+    "Sourcefile": "d:\\Git_NDB\\SmartClock\\build\\sketch\\main.ino.cpp",
     "Include": "ArduinoJson.h",
-    "Includepath": "C:\\Users\\NguyenBang\\Documents\\Arduino\\libraries\\ArduinoJson-master\\src"
+    "Includepath": "D:\\OneDrive_bang.nguyen-duy\\OneDrive - Ban Vien Co., ltd\\Documents\\Arduino\\libraries\\ArduinoJson\\src"
   },
   {
-    "Sourcefile": "d:\\NguyenBangGitHub\\SmartClock\\build\\sketch\\main.ino.cpp",
+    "Sourcefile": "d:\\Git_NDB\\SmartClock\\build\\sketch\\main.ino.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\ESP8266WiFi\\src\\BearSSLHelpers.cpp",
+    "Sourcefile": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\ESP8266WiFi\\src\\BearSSLHelpers.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\ESP8266WiFi\\src\\CertStoreBearSSL.cpp",
+    "Sourcefile": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\ESP8266WiFi\\src\\CertStoreBearSSL.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\ESP8266WiFi\\src\\ESP8266WiFi.cpp",
+    "Sourcefile": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\ESP8266WiFi\\src\\ESP8266WiFi.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\ESP8266WiFi\\src\\ESP8266WiFiAP.cpp",
+    "Sourcefile": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\ESP8266WiFi\\src\\ESP8266WiFiAP.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\ESP8266WiFi\\src\\ESP8266WiFiGeneric.cpp",
+    "Sourcefile": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\ESP8266WiFi\\src\\ESP8266WiFiGeneric.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\ESP8266WiFi\\src\\ESP8266WiFiMulti.cpp",
+    "Sourcefile": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\ESP8266WiFi\\src\\ESP8266WiFiGratuitous.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\ESP8266WiFi\\src\\ESP8266WiFiSTA-WPS.cpp",
+    "Sourcefile": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\ESP8266WiFi\\src\\ESP8266WiFiMulti.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\ESP8266WiFi\\src\\ESP8266WiFiSTA.cpp",
+    "Sourcefile": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\ESP8266WiFi\\src\\ESP8266WiFiSTA-WPS.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\ESP8266WiFi\\src\\ESP8266WiFiScan.cpp",
+    "Sourcefile": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\ESP8266WiFi\\src\\ESP8266WiFiSTA.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\ESP8266WiFi\\src\\WiFiClient.cpp",
+    "Sourcefile": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\ESP8266WiFi\\src\\ESP8266WiFiScan.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\ESP8266WiFi\\src\\WiFiClientSecureAxTLS.cpp",
+    "Sourcefile": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\ESP8266WiFi\\src\\WiFiClient.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\ESP8266WiFi\\src\\WiFiClientSecureBearSSL.cpp",
+    "Sourcefile": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\ESP8266WiFi\\src\\WiFiClientSecureBearSSL.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\ESP8266WiFi\\src\\WiFiServer.cpp",
+    "Sourcefile": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\ESP8266WiFi\\src\\WiFiServer.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\ESP8266WiFi\\src\\WiFiServerSecureAxTLS.cpp",
+    "Sourcefile": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\ESP8266WiFi\\src\\WiFiServerSecureBearSSL.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\ESP8266WiFi\\src\\WiFiServerSecureBearSSL.cpp",
+    "Sourcefile": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\ESP8266WiFi\\src\\WiFiUdp.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\ESP8266WiFi\\src\\WiFiUdp.cpp",
+    "Sourcefile": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\ESP8266WiFi\\src\\enable_wifi_at_boot_time.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\ESP8266HTTPClient\\src\\ESP8266HTTPClient.cpp",
+    "Sourcefile": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\ESP8266HTTPClient\\src\\ESP8266HTTPClient.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\ESP8266httpUpdate\\src\\ESP8266httpUpdate.cpp",
+    "Sourcefile": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\ESP8266httpUpdate\\src\\ESP8266httpUpdate.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\Documents\\Arduino\\libraries\\Blynk\\src\\utility\\BlynkDebug.cpp",
+    "Sourcefile": "D:\\OneDrive_bang.nguyen-duy\\OneDrive - Ban Vien Co., ltd\\Documents\\Arduino\\libraries\\Blynk\\src\\utility\\BlynkDebug.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\Documents\\Arduino\\libraries\\Blynk\\src\\utility\\BlynkHandlers.cpp",
+    "Sourcefile": "D:\\OneDrive_bang.nguyen-duy\\OneDrive - Ban Vien Co., ltd\\Documents\\Arduino\\libraries\\Blynk\\src\\utility\\BlynkHandlers.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\Documents\\Arduino\\libraries\\Blynk\\src\\utility\\BlynkTimer.cpp",
+    "Sourcefile": "D:\\OneDrive_bang.nguyen-duy\\OneDrive - Ban Vien Co., ltd\\Documents\\Arduino\\libraries\\Blynk\\src\\utility\\BlynkTimer.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\Documents\\Arduino\\libraries\\Blynk\\src\\utility\\utility.cpp",
+    "Sourcefile": "D:\\OneDrive_bang.nguyen-duy\\OneDrive - Ban Vien Co., ltd\\Documents\\Arduino\\libraries\\Blynk\\src\\utility\\utility.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\Wire\\Wire.cpp",
+    "Sourcefile": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\Wire\\Wire.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\Documents\\Arduino\\libraries\\LiquidCrystal_I2C-master\\LiquidCrystal_I2C.cpp",
+    "Sourcefile": "D:\\OneDrive_bang.nguyen-duy\\OneDrive - Ban Vien Co., ltd\\Documents\\Arduino\\libraries\\LiquidCrystal_I2C\\LiquidCrystal_I2C.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "C:\\Users\\NguyenBang\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\2.6.2\\libraries\\EEPROM\\EEPROM.cpp",
+    "Sourcefile": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\EEPROM\\EEPROM.cpp",
     "Include": "",
     "Includepath": null
   }

@@ -1,9 +1,9 @@
 #include <Arduino.h>
-#line 1 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
-/*                                                                                                                                                               
-      _____          ____  _____   ______         _____           _____   ______         _____     ____   ____  _____      _____      ______  _____   ______   
- ___|\     \    ____|\   \|\    \ |\     \    ___|\    \         |\    \ |\     \    ___|\    \   |    | |    ||\    \    /    /| ___|\     \|\    \ |\     \  
-|    |\     \  /    /\    \\\    \| \     \  /    /\    \         \\    \| \     \  /    /\    \  |    | |    || \    \  /    / ||     \     \\\    \| \     \ 
+#line 1 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+/*
+	  _____          ____  _____   ______         _____           _____   ______         _____     ____   ____  _____      _____      ______  _____   ______
+ ___|\     \    ____|\   \|\    \ |\     \    ___|\    \         |\    \ |\     \    ___|\    \   |    | |    ||\    \    /    /| ___|\     \|\    \ |\     \
+|    |\     \  /    /\    \\\    \| \     \  /    /\    \         \\    \| \     \  /    /\    \  |    | |    || \    \  /    / ||     \     \\\    \| \     \
 |    | |     ||    |  |    |\|    \  \     ||    |  |____|         \|    \  \     ||    |  |____| |    | |    ||  \____\/    /  /|     ,_____/|\|    \  \     |
 |    | /_ _ / |    |__|    | |     \  |    ||    |    ____          |     \  |    ||    |    ____ |    | |    | \ |    /    /  / |     \--'\_|/ |     \  |    |
 |    |\    \  |    .--.    | |      \ |    ||    |   |    |         |      \ |    ||    |   |    ||    | |    |  \|___/    /  /  |     /___/|   |      \ |    |
@@ -11,9 +11,9 @@
 |____|/____/| |____|  |____| |____||\_____/||\ ___\___/  /|         |____||\_____/||\ ___\___/  /||\___\_|____|     /____/  /    |____ '     /| |____||\_____/|
 |    /     || |    |  |    | |    |/ \|   ||| |   /____ / |         |    |/ \|   ||| |   /____ / || |    |    |    |`    | /     |    /_____/ | |    |/ \|   ||
 |____|_____|/ |____|  |____| |____|   |___|/ \|___|    | /          |____|   |___|/ \|___|    | /  \|____|____|    |_____|/      |____|     | / |____|   |___|/
-  \(    )/      \(      )/     \(       )/     \( |____|/             \(       )/     \( |____|/      \(   )/         )/           \( |_____|/    \(       )/  
-   '    '        '      '       '       '       '   )/                 '       '       '   )/          '   '          '             '    )/        '       '   
-                                                    '                                      '                                             '                     
+  \(    )/      \(      )/     \(       )/     \( |____|/             \(       )/     \( |____|/      \(   )/         )/           \( |_____|/    \(       )/
+   '    '        '      '       '       '       '   )/                 '       '       '   )/          '   '          '             '    )/        '       '
+													'                                      '                                             '
 */
 /* LIBRARY ARDUINO DEFINE  */
 #include <ESP8266WiFi.h>
@@ -30,37 +30,39 @@
 #include "../../../SmartClock/include/LCD_2004_define.h" /* DEFINE MACRO */
 #include "../../../SmartClock/include/Macro_define.h"	 /* LCD2004 - CHARACTER LCD */
 
-#line 31 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+#line 31 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void setup();
-#line 204 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+#line 192 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void loop();
-#line 216 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+#line 204 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Check_Status_Button();
-#line 395 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+#line 391 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+void Reload_Localtime_NTP();
+#line 404 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Setup_Local_RealTime();
-#line 723 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+#line 739 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Choose_location();
-#line 923 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+#line 939 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Call_Weather_Every_10Min();
-#line 944 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+#line 960 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Weather_Online_sever();
-#line 1024 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+#line 1040 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void smartConfig_ndb();
-#line 1112 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+#line 1128 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Setup_AlarmClock();
-#line 1219 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+#line 1235 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Set_Hour_Alarm();
-#line 1299 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+#line 1315 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Set_Minute_Alarm();
-#line 1387 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+#line 1403 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Active_Alarm();
-#line 1499 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+#line 1515 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 bool bool_Test_Wifi(void);
-#line 1548 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+#line 1564 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void update_FOTA();
-#line 1635 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+#line 1659 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Welcome_Smartclock();
-#line 31 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+#line 31 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void setup()
 {
 	/* Initialize Serial. */
@@ -198,15 +200,7 @@ void setup()
 	update_FOTA();
 
 	/* Cập nhật thời gian từ sever vn.pool.ntp.org */
-	configTime(7 * 3600, 0, "vn.pool.ntp.org", "time.nist.gov");
-	Serial.println("Update Time <<< - >>> vn.pool.ntp.org \n");
-	while (!time(nullptr))
-	{
-		Serial.println("\nWaiting for time");
-		Serial.print(".");
-		delay(1000);
-		yield(); // disble Soft WDT reset - NodeMCU
-	}
+	Reload_Localtime_NTP();
 
 	/* Màn hình khởi tạo chào mừng */
 	Serial.println("Chạy màn hình LCD khởi tạo chào mừng");
@@ -216,10 +210,6 @@ void setup()
 	Serial.println("Truy cập đến thời tiết địa phương");
 	time_dem_thoitiet = millis();
 	Weather_Online_sever();
-
-#if ESP_NB_THINGSPEAK
-	ThingSpeak.begin(client);
-#endif //#if ESP_NB_THINGSPEAK
 
 #if ESP_NB_BLYNK
 	Serial.println("\nKết nối Blynk");
@@ -425,8 +415,42 @@ void Check_Status_Button()
 	}
 }
 
+/*
+██╗      ██████╗  ██████╗ █████╗ ██╗  ████████╗██╗███╗   ███╗███████╗    ███╗   ██╗████████╗██████╗
+██║     ██╔═══██╗██╔════╝██╔══██╗██║  ╚══██╔══╝██║████╗ ████║██╔════╝    ████╗  ██║╚══██╔══╝██╔══██╗
+██║     ██║   ██║██║     ███████║██║     ██║   ██║██╔████╔██║█████╗      ██╔██╗ ██║   ██║   ██████╔╝
+██║     ██║   ██║██║     ██╔══██║██║     ██║   ██║██║╚██╔╝██║██╔══╝      ██║╚██╗██║   ██║   ██╔═══╝
+███████╗╚██████╔╝╚██████╗██║  ██║███████╗██║   ██║██║ ╚═╝ ██║███████╗    ██║ ╚████║   ██║   ██║
+╚══════╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝    ╚═╝  ╚═══╝   ╚═╝   ╚═╝
+*/
+void Reload_Localtime_NTP()
+{
+	configTime(7 * 3600, 0, "vn.pool.ntp.org", "time.nist.gov");
+	Serial.println("Update Time <<< - >>> vn.pool.ntp.org \n");
+	while (!time(nullptr))
+	{
+		Serial.println("\nWaiting for time");
+		Serial.print(".");
+		delay(1000);
+		yield(); // disble Soft WDT reset - NodeMCU
+	}
+}
+
 void Setup_Local_RealTime()
 {
+	/* Mỗi năm mới sẽ reload lại thời gian tren NTP một lần */
+	if ((thang == 12) && (ngay == 31))
+	{
+		if ((gio == 12) && (phut == 00))
+		{
+			if (giay < 10)
+			{
+				Serial.println("\nCập nhật thời gian mỗi năm.");
+				Reload_Localtime_NTP();
+			}
+		}
+	}
+
 	time_t rawtime;
 	struct tm *timeinfo;
 
@@ -442,10 +466,7 @@ void Setup_Local_RealTime()
 	strftime(buffer_GIO, 80, "%H", timeinfo);
 	strftime(buffer_PHUT, 80, "%M", timeinfo);
 	strftime(buffer_GIAY, 80, "%S", timeinfo);
-
-#if ESP_NB_THINGSPEAK
-	strftime(buffer_sent_thingspeak, 80, "Seen :[%H %M %S %d %B %Y] ", timeinfo);
-#endif
+	strftime(buffer_sent_serial, 80, "%H:%M:%S %d-%B-%Y", timeinfo);
 
 	nam = atoi(buffer_NAM);
 	thang = atoi(buffer_THANG);
@@ -458,11 +479,9 @@ void Setup_Local_RealTime()
 	if (nam < 2022) /*neu nam duoi 2022 cua nghia la time chua dc update */
 	{
 		/* lcd hien thi chu UPDATE TIME */
-		Serial.println(" ");
-		Serial.println("Thoi gian chua update.");
+		Serial.println("\nThoi gian chua update.");
 		lcd.clear();
-		Serial.println(" ");
-		Serial.println("Hien thi UPDATE TIME trên LCD.");
+		Serial.println("\nHien thi UPDATE TIME trên LCD.");
 		lcd.createChar(1, UB);
 		customU(0, 0);
 		delay(200);
@@ -494,8 +513,7 @@ void Setup_Local_RealTime()
 		if ((giay % 5 == 0) && (only_Delete_Once == 0))
 		/* cu moi 5 giay xoa 2 line tren 1 lan */
 		{
-			Serial.printf("Bây giờ là: %d:%d:%d \n", gio, phut, giay);
-			Serial.printf("Ngày: %d-%d-%d \n", ngay, thang, nam);
+			Serial.printf("Bây giờ là: %s \n", buffer_sent_serial);
 			lcd.setCursor(0, 0);
 			lcd.print("                    ");
 			lcd.setCursor(0, 1);
@@ -669,27 +687,27 @@ void Setup_Local_RealTime()
 			}
 		}
 		/*
-            HIỂN THỊ FONT SỐ LỚN                                                           
-                                                                                                                                                               
-                                                                                   
-          000000000          888888888               1111111    222222222222222    
-        00:::::::::00      88:::::::::88            1::::::1   2:::::::::::::::22  
-      00:::::::::::::00  88:::::::::::::88         1:::::::1   2::::::222222:::::2 
-     0:::::::000:::::::08::::::88888::::::8        111:::::1   2222222     2:::::2 
-     0::::::0   0::::::08:::::8     8:::::8           1::::1               2:::::2 
-     0:::::0     0:::::08:::::8     8:::::8 ::::::    1::::1               2:::::2 
-     0:::::0     0:::::0 8:::::88888:::::8  ::::::    1::::1            2222::::2  
-     0:::::0 000 0:::::0  8:::::::::::::8   ::::::    1::::l       22222::::::22   
-     0:::::0 000 0:::::0 8:::::88888:::::8            1::::l     22::::::::222     
-     0:::::0     0:::::08:::::8     8:::::8           1::::l    2:::::22222        
-     0:::::0     0:::::08:::::8     8:::::8           1::::l   2:::::2             
-     0::::::0   0::::::08:::::8     8:::::8 ::::::    1::::l   2:::::2             
-     0:::::::000:::::::08::::::88888::::::8 :::::: 111::::::1112:::::2       222222
-      00:::::::::::::00  88:::::::::::::88  :::::: 1::::::::::12::::::2222222:::::2
-        00:::::::::00      88:::::::::88           1::::::::::12::::::::::::::::::2
-          000000000          888888888             11111111111122222222222222222222
-                                                                                   
-																				
+			HIỂN THỊ FONT SỐ LỚN
+
+
+		  000000000          888888888               1111111    222222222222222
+		00:::::::::00      88:::::::::88            1::::::1   2:::::::::::::::22
+	  00:::::::::::::00  88:::::::::::::88         1:::::::1   2::::::222222:::::2
+	 0:::::::000:::::::08::::::88888::::::8        111:::::1   2222222     2:::::2
+	 0::::::0   0::::::08:::::8     8:::::8           1::::1               2:::::2
+	 0:::::0     0:::::08:::::8     8:::::8 ::::::    1::::1               2:::::2
+	 0:::::0     0:::::0 8:::::88888:::::8  ::::::    1::::1            2222::::2
+	 0:::::0 000 0:::::0  8:::::::::::::8   ::::::    1::::l       22222::::::22
+	 0:::::0 000 0:::::0 8:::::88888:::::8            1::::l     22::::::::222
+	 0:::::0     0:::::08:::::8     8:::::8           1::::l    2:::::22222
+	 0:::::0     0:::::08:::::8     8:::::8           1::::l   2:::::2
+	 0::::::0   0::::::08:::::8     8:::::8 ::::::    1::::l   2:::::2
+	 0:::::::000:::::::08::::::88888::::::8 :::::: 111::::::1112:::::2       222222
+	  00:::::::::::::00  88:::::::::::::88  :::::: 1::::::::::12::::::2222222:::::2
+		00:::::::::00      88:::::::::88           1::::::::::12::::::::::::::::::2
+		  000000000          888888888             11111111111122222222222222222222
+
+
 		*/
 		/* hien thi gio font so lon */
 		printDigits(gio / 10 % 10, 0, 2);
@@ -742,16 +760,16 @@ void Setup_Local_RealTime()
 	}
 }
 
-/* Chon vi tri doc gia tri thoi tiet 
-   █████████  █████                                            ████                               █████     ███                     
-  ███░░░░░███░░███                                            ░░███                              ░░███     ░░░                      
- ███     ░░░  ░███████    ██████   ██████   █████   ██████     ░███   ██████   ██████   ██████   ███████   ████   ██████  ████████  
-░███          ░███░░███  ███░░███ ███░░███ ███░░   ███░░███    ░███  ███░░███ ███░░███ ░░░░░███ ░░░███░   ░░███  ███░░███░░███░░███ 
-░███          ░███ ░███ ░███ ░███░███ ░███░░█████ ░███████     ░███ ░███ ░███░███ ░░░   ███████   ░███     ░███ ░███ ░███ ░███ ░███ 
-░░███     ███ ░███ ░███ ░███ ░███░███ ░███ ░░░░███░███░░░      ░███ ░███ ░███░███  ███ ███░░███   ░███ ███ ░███ ░███ ░███ ░███ ░███ 
+/* Chon vi tri doc gia tri thoi tiet
+   █████████  █████                                            ████                               █████     ███
+  ███░░░░░███░░███                                            ░░███                              ░░███     ░░░
+ ███     ░░░  ░███████    ██████   ██████   █████   ██████     ░███   ██████   ██████   ██████   ███████   ████   ██████  ████████
+░███          ░███░░███  ███░░███ ███░░███ ███░░   ███░░███    ░███  ███░░███ ███░░███ ░░░░░███ ░░░███░   ░░███  ███░░███░░███░░███
+░███          ░███ ░███ ░███ ░███░███ ░███░░█████ ░███████     ░███ ░███ ░███░███ ░░░   ███████   ░███     ░███ ░███ ░███ ░███ ░███
+░░███     ███ ░███ ░███ ░███ ░███░███ ░███ ░░░░███░███░░░      ░███ ░███ ░███░███  ███ ███░░███   ░███ ███ ░███ ░███ ░███ ░███ ░███
  ░░█████████  ████ █████░░██████ ░░██████  ██████ ░░██████     █████░░██████ ░░██████ ░░████████  ░░█████  █████░░██████  ████ █████
-  ░░░░░░░░░  ░░░░ ░░░░░  ░░░░░░   ░░░░░░  ░░░░░░   ░░░░░░     ░░░░░  ░░░░░░   ░░░░░░   ░░░░░░░░    ░░░░░  ░░░░░  ░░░░░░  ░░░░ ░░░░░ 
-                                                                                                                                                                                                                                                       
+  ░░░░░░░░░  ░░░░ ░░░░░  ░░░░░░   ░░░░░░  ░░░░░░   ░░░░░░     ░░░░░  ░░░░░░   ░░░░░░   ░░░░░░░░    ░░░░░  ░░░░░  ░░░░░░  ░░░░ ░░░░░
+
 */
 void Choose_location()
 {
@@ -964,15 +982,15 @@ void Call_Weather_Every_10Min()
 
 /* Lấy giá trị thời tiết tại vị trí đã chọn
    Sử dụng hàm API riêng để dùng cho nút nhấn MODE
-.--.      .--.    .-''-.     ____   ,---------. .---.  .---.     .-''-.  .-------.     
-|  |_     |  |  .'_ _   \  .'  __ `.\          \|   |  |_ _|   .'_ _   \ |  _ _   \    
-| _( )_   |  | / ( ` )   '/   '  \  \`--.  ,---'|   |  ( ' )  / ( ` )   '| ( ' )  |    
-|(_ o _)  |  |. (_ o _)  ||___|  /  |   |   \   |   '-(_{;}_). (_ o _)  ||(_ o _) /    
-| (_,_) \ |  ||  (_,_)___|   _.-`   |   :_ _:   |      (_,_) |  (_,_)___|| (_,_).' __  
-|  |/    \|  |'  \   .---..'   _    |   (_I_)   | _ _--.   | '  \   .---.|  |\ \  |  | 
-|  '  /\  `  | \  `-'    /|  _( )_  |  (_(=)_)  |( ' ) |   |  \  `-'    /|  | \ `'   / 
-|    /  \    |  \       / \ (_ o _) /   (_I_)   (_{;}_)|   |   \       / |  |  \    /  
-`---'    `---`   `'-..-'   '.(_,_).'    '---'   '(_,_) '---'    `'-..-'  ''-'   `'-'   
+.--.      .--.    .-''-.     ____   ,---------. .---.  .---.     .-''-.  .-------.
+|  |_     |  |  .'_ _   \  .'  __ `.\          \|   |  |_ _|   .'_ _   \ |  _ _   \
+| _( )_   |  | / ( ` )   '/   '  \  \`--.  ,---'|   |  ( ' )  / ( ` )   '| ( ' )  |
+|(_ o _)  |  |. (_ o _)  ||___|  /  |   |   \   |   '-(_{;}_). (_ o _)  ||(_ o _) /
+| (_,_) \ |  ||  (_,_)___|   _.-`   |   :_ _:   |      (_,_) |  (_,_)___|| (_,_).' __
+|  |/    \|  |'  \   .---..'   _    |   (_I_)   | _ _--.   | '  \   .---.|  |\ \  |  |
+|  '  /\  `  | \  `-'    /|  _( )_  |  (_(=)_)  |( ' ) |   |  \  `-'    /|  | \ `'   /
+|    /  \    |  \       / \ (_ o _) /   (_I_)   (_{;}_)|   |   \       / |  |  \    /
+`---'    `---`   `'-..-'   '.(_,_).'    '---'   '(_,_) '---'    `'-..-'  ''-'   `'-'
 */
 void Weather_Online_sever()
 {
@@ -1046,13 +1064,13 @@ void Weather_Online_sever()
 	}
 }
 
-/*                                                                                                            
-                              __                      _____      
+/*
+							  __                      _____
    _________ ___  ____ ______/ /_   _________  ____  / __(_)___ _
   / ___/ __ `__ \/ __ `/ ___/ __/  / ___/ __ \/ __ \/ /_/ / __ `/
- (__  ) / / / / / /_/ / /  / /_   / /__/ /_/ / / / / __/ / /_/ / 
-/____/_/ /_/ /_/\__,_/_/   \__/   \___/\____/_/ /_/_/ /_/\__, /  
-                                                        /____/                                                                                                         
+ (__  ) / / / / / /_/ / /  / /_   / /__/ /_/ / / / / __/ / /_/ /
+/____/_/ /_/ /_/\__,_/_/   \__/   \___/\____/_/ /_/_/ /_/\__, /
+														/____/
 */
 void smartConfig_ndb()
 {
@@ -1407,15 +1425,15 @@ void Set_Minute_Alarm()
 }
 
 /*
-   █████████             █████     ███                                   █████████   ████                                     
-  ███░░░░░███           ░░███     ░░░                                   ███░░░░░███ ░░███                                     
- ░███    ░███   ██████  ███████   ████  █████ █████  ██████            ░███    ░███  ░███   ██████   ████████  █████████████  
- ░███████████  ███░░███░░░███░   ░░███ ░░███ ░░███  ███░░███           ░███████████  ░███  ░░░░░███ ░░███░░███░░███░░███░░███ 
- ░███░░░░░███ ░███ ░░░   ░███     ░███  ░███  ░███ ░███████            ░███░░░░░███  ░███   ███████  ░███ ░░░  ░███ ░███ ░███ 
- ░███    ░███ ░███  ███  ░███ ███ ░███  ░░███ ███  ░███░░░             ░███    ░███  ░███  ███░░███  ░███      ░███ ░███ ░███ 
+   █████████             █████     ███                                   █████████   ████
+  ███░░░░░███           ░░███     ░░░                                   ███░░░░░███ ░░███
+ ░███    ░███   ██████  ███████   ████  █████ █████  ██████            ░███    ░███  ░███   ██████   ████████  █████████████
+ ░███████████  ███░░███░░░███░   ░░███ ░░███ ░░███  ███░░███           ░███████████  ░███  ░░░░░███ ░░███░░███░░███░░███░░███
+ ░███░░░░░███ ░███ ░░░   ░███     ░███  ░███  ░███ ░███████            ░███░░░░░███  ░███   ███████  ░███ ░░░  ░███ ░███ ░███
+ ░███    ░███ ░███  ███  ░███ ███ ░███  ░░███ ███  ░███░░░             ░███    ░███  ░███  ███░░███  ░███      ░███ ░███ ░███
  █████   █████░░██████   ░░█████  █████  ░░█████   ░░██████  █████████ █████   █████ █████░░████████ █████     █████░███ █████
-░░░░░   ░░░░░  ░░░░░░     ░░░░░  ░░░░░    ░░░░░     ░░░░░░  ░░░░░░░░░ ░░░░░   ░░░░░ ░░░░░  ░░░░░░░░ ░░░░░     ░░░░░ ░░░ ░░░░░ 
-                                                                                                                                                                                                                                                                                                                                                                                          
+░░░░░   ░░░░░  ░░░░░░     ░░░░░  ░░░░░    ░░░░░     ░░░░░░  ░░░░░░░░░ ░░░░░   ░░░░░ ░░░░░  ░░░░░░░░ ░░░░░     ░░░░░ ░░░ ░░░░░
+
 */
 void Active_Alarm()
 {
@@ -1518,16 +1536,16 @@ void Active_Alarm()
 	lcd.clear();
 }
 
-/* 
- ███████████                   █████       █████   ███   █████  ███     ██████   ███ 
-░█░░░███░░░█                  ░░███       ░░███   ░███  ░░███  ░░░     ███░░███ ░░░  
-░   ░███  ░   ██████   █████  ███████      ░███   ░███   ░███  ████   ░███ ░░░  ████ 
-    ░███     ███░░███ ███░░  ░░░███░       ░███   ░███   ░███ ░░███  ███████   ░░███ 
-    ░███    ░███████ ░░█████   ░███        ░░███  █████  ███   ░███ ░░░███░     ░███ 
-    ░███    ░███░░░   ░░░░███  ░███ ███     ░░░█████░█████░    ░███   ░███      ░███ 
-    █████   ░░██████  ██████   ░░█████        ░░███ ░░███      █████  █████     █████
-   ░░░░░     ░░░░░░  ░░░░░░     ░░░░░          ░░░   ░░░      ░░░░░  ░░░░░     ░░░░░ 
-                                                                                                                                                                       
+/*
+ ███████████                   █████       █████   ███   █████  ███     ██████   ███
+░█░░░███░░░█                  ░░███       ░░███   ░███  ░░███  ░░░     ███░░███ ░░░
+░   ░███  ░   ██████   █████  ███████      ░███   ░███   ░███  ████   ░███ ░░░  ████
+	░███     ███░░███ ███░░  ░░░███░       ░███   ░███   ░███ ░░███  ███████   ░░███
+	░███    ░███████ ░░█████   ░███        ░░███  █████  ███   ░███ ░░░███░     ░███
+	░███    ░███░░░   ░░░░███  ░███ ███     ░░░█████░█████░    ░███   ░███      ░███
+	█████   ░░██████  ██████   ░░█████        ░░███ ░░███      █████  █████     █████
+   ░░░░░     ░░░░░░  ░░░░░░     ░░░░░          ░░░   ░░░      ░░░░░  ░░░░░     ░░░░░
+
 */
 bool bool_Test_Wifi(void)
 {
@@ -1557,7 +1575,7 @@ bool bool_Test_Wifi(void)
 		}
 		delay(300);
 		Serial.print(WiFi.status());
-		Serial.print(" - ");
+		Serial.print(" -> ");
 		c++;
 	}
 	Serial.println("");
@@ -1565,18 +1583,18 @@ bool bool_Test_Wifi(void)
 	return false;
 }
 
-/* Cập nhật OTA 
- █████  █████               █████            █████                   ███████    ███████████   █████████  
-░░███  ░░███               ░░███            ░░███                  ███░░░░░███ ░█░░░███░░░█  ███░░░░░███ 
- ░███   ░███  ████████   ███████   ██████   ███████    ██████     ███     ░░███░   ░███  ░  ░███    ░███ 
- ░███   ░███ ░░███░░███ ███░░███  ░░░░░███ ░░░███░    ███░░███   ░███      ░███    ░███     ░███████████ 
- ░███   ░███  ░███ ░███░███ ░███   ███████   ░███    ░███████    ░███      ░███    ░███     ░███░░░░░███ 
- ░███   ░███  ░███ ░███░███ ░███  ███░░███   ░███ ███░███░░░     ░░███     ███     ░███     ░███    ░███ 
+/* Cập nhật OTA
+ █████  █████               █████            █████                   ███████    ███████████   █████████
+░░███  ░░███               ░░███            ░░███                  ███░░░░░███ ░█░░░███░░░█  ███░░░░░███
+ ░███   ░███  ████████   ███████   ██████   ███████    ██████     ███     ░░███░   ░███  ░  ░███    ░███
+ ░███   ░███ ░░███░░███ ███░░███  ░░░░░███ ░░░███░    ███░░███   ░███      ░███    ░███     ░███████████
+ ░███   ░███  ░███ ░███░███ ░███   ███████   ░███    ░███████    ░███      ░███    ░███     ░███░░░░░███
+ ░███   ░███  ░███ ░███░███ ░███  ███░░███   ░███ ███░███░░░     ░░███     ███     ░███     ░███    ░███
  ░░████████   ░███████ ░░████████░░████████  ░░█████ ░░██████     ░░░███████░      █████    █████   █████
-  ░░░░░░░░    ░███░░░   ░░░░░░░░  ░░░░░░░░    ░░░░░   ░░░░░░        ░░░░░░░       ░░░░░    ░░░░░   ░░░░░ 
-              ░███                                                                                       
-              █████                                                                                      
-             ░░░░░                                                                                       
+  ░░░░░░░░    ░███░░░   ░░░░░░░░  ░░░░░░░░    ░░░░░   ░░░░░░        ░░░░░░░       ░░░░░    ░░░░░   ░░░░░
+			  ░███
+			  █████
+			 ░░░░░
 */
 void update_FOTA()
 {
@@ -1665,6 +1683,14 @@ void update_FOTA()
 	Serial.println("\n<<<<<<<<<< Done Check FOTA \n");
 }
 
+/*
+__      __          _                                               _       ___     ___
+\ \    / / ___     | |     __      ___    _ __     ___      o O O  | |     / __|   |   \
+ \ \/\/ / / -_)    | |    / _|    / _ \  | '  \   / -_)    o       | |__  | (__    | |) |
+  \_/\_/  \___|   _|_|_   \__|_   \___/  |_|_|_|  \___|   TS__[O]  |____|  \___|   |___/
+_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""| {======|_|"""""|_|"""""|_|"""""|
+"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'./o--000'"`-0-0-'"`-0-0-'"`-0-0-'
+*/
 void Welcome_Smartclock()
 {
 	lcd.clear();
@@ -1733,156 +1759,3 @@ void Welcome_Smartclock()
 	}
 }
 
-/* Func get message on Thingspeak sever */
-#if ESP_NB_THINGSPEAK // Bắt đầu Ver 1.0.6 không sử dụng Thingspeak_Message
-void Thingspeak_Message()
-{
-	int statusCode_Thingspeak_0 = 200;
-	int statusCode_Thingspeak_1 = 200;
-	int statusCode_Thingspeak_2 = 200;
-	int statusCode_Thingspeak_3 = 200;
-	int statusCode_Thingspeak_4 = 200;
-	unsigned long dem_10s_stop = millis();
-	while (((unsigned long)(millis() - dem_10s_stop) < 10000) && (status_Mode == 0))
-	{
-		/* test nạp data vao Thingspeak */
-#if ESP_NB_OFF
-		String message_sent_Bang = "";
-		message_sent_Bang += "Hi Nguyen Bang!     ";
-		message_sent_Bang += "Have a nice day!    ";
-		message_sent_Bang += "Smart Clock 2020.   ";
-		message_sent_Bang += "    - by Nguyen Bang";
-
-		statusCode_Thingspeak_0 = ThingSpeak.setStatus(message_sent_Bang);
-		statusCode_Thingspeak_1 = ThingSpeak.writeFields(ChannelNumber_Smartclock, WriteAPIKey_Smartclock);
-		// Check the return code
-		if ((statusCode_Thingspeak_0 == 200) && (statusCode_Thingspeak_1 == 200))
-		{
-			Serial.println("Channel update successful.");
-			/* out khỏi chế độ */
-			status_Mode = 1;
-		}
-		else
-		{
-			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak_0));
-			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak_1));
-		}
-#else
-		/* hiển thị data vao Thingspeak */
-		lcd.setCursor(0, 0);
-		lcd.print("Loading...");
-		/* Đọc giá trị Thingspeak về & check đường truyền */
-		/* ChannelNumber_Status */
-		String message_sent_Bang = ThingSpeak.readStatus(ChannelNumber_Status, ReadAPIKey_Status);
-		statusCode_Thingspeak_0 = ThingSpeak.getLastReadStatus();
-		/* ChannelNumber_Smartclock */
-		int tam_hen_gio = ThingSpeak.readIntField(ChannelNumber_Smartclock, Fiels_Smartclock_Gio, ReadAPIKey_Smartclock);
-		statusCode_Thingspeak_1 = ThingSpeak.getLastReadStatus();
-		int tam_hen_phut = ThingSpeak.readIntField(ChannelNumber_Smartclock, Fiels_Smartclock_Phut, ReadAPIKey_Smartclock);
-		statusCode_Thingspeak_2 = ThingSpeak.getLastReadStatus();
-
-		/* Bao gio dong ho vao xem status */
-		/* ChannelNumber_View */
-		String tam_buffer_sent_thingspeak = buffer_sent_thingspeak;
-		tam_buffer_sent_thingspeak += message_sent_Bang;
-		statusCode_Thingspeak_3 = ThingSpeak.setStatus(tam_buffer_sent_thingspeak);
-		statusCode_Thingspeak_4 = ThingSpeak.writeFields(ChannelNumber_View, WriteAPIKey_View);
-
-		/* Check the status of the read operation to see if it was successful */
-		if ((statusCode_Thingspeak_0 == 200) &&
-			(statusCode_Thingspeak_1 == 200) &&
-			(statusCode_Thingspeak_2 == 200) &&
-			(statusCode_Thingspeak_3 == 200) &&
-			(statusCode_Thingspeak_4 == 200))
-		{
-			Serial.println("Channel update status successful.");
-			Serial.println(message_sent_Bang);
-			int sum_char = message_sent_Bang.length();
-			/* Show nội dụng message lên LCD 2004 */
-			lcd.clear();
-			for (int i = 0; i < sum_char; i++)
-			{
-				if (i > 139)
-				{
-					lcd.setCursor(i - 140, 3);
-				}
-				else if (i > 119)
-				{
-					lcd.setCursor(i - 120, 2);
-				}
-				else if (i > 99)
-				{
-					lcd.setCursor(i - 100, 1);
-				}
-				else if (i > 79)
-				{
-					lcd.setCursor(i - 80, 0);
-				}
-				else if (i > 59)
-				{
-					lcd.setCursor(i - 60, 3);
-				}
-				else if (i > 39)
-				{
-					lcd.setCursor(i - 40, 2);
-				}
-				else if (i > 19)
-				{
-					lcd.setCursor(i - 20, 1);
-				}
-				else
-				{
-					lcd.setCursor(i - 00, 0);
-				}
-
-				lcd.print(message_sent_Bang[i]);
-				if (i == 79)
-				{
-					delay(1000);
-					/* Xoa man hinh 1 de chuan bi chuyen sang man hinh 2 */
-					lcd.clear();
-				}
-				else
-				{
-					delay(150);
-				}
-			}
-			/* nếu đọc ok thì chính thức lấy biến tạm gấn vào */
-			hen_gio = tam_hen_gio;
-			hen_phut = tam_hen_phut;
-			/* luu gia tri báo thưc vao eeprom */
-			EEPROM.write(index_eeprom_hengio, hen_gio);
-			Serial.print("hen_gio duoc set eeprom: ");
-			Serial.println(EEPROM.read(index_eeprom_hengio));
-			/* luu gia tri báo thưc vao eeprom */
-			EEPROM.write(index_eeprom_henphut, hen_phut);
-			Serial.print("hen_phut duoc set eeprom: ");
-			Serial.println(EEPROM.read(index_eeprom_henphut));
-			EEPROM.commit();
-			status_Mode = 1;
-		}
-		else
-		{
-			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak_0));
-			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak_1));
-			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak_2));
-			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak_3));
-			Serial.println("Problem updating channel. HTTP error code " + String(statusCode_Thingspeak_4));
-			lcd.setCursor(0, 1);
-			lcd.print("Error Status!!!");
-			lcd.setCursor(0, 2);
-			lcd.print("Error Alarm!!!");
-			status_Mode = 0;
-		}
-#endif
-		/* END #if ESP_NB_OFF */
-		yield(); // disble Soft WDT reset - NodeMCU
-	}
-	/* set lai gia tri cho su dung lan sau */
-	status_Mode = 0;
-	/* Chuông báo ok */
-	digitalWrite(PIN_signal_Bell, ESP_NB_ON);
-	delay(300);
-	digitalWrite(PIN_signal_Bell, ESP_NB_OFF);
-}
-#endif // #if ESP_NB_THINGSPEAK

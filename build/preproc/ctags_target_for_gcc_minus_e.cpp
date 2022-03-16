@@ -1,10 +1,10 @@
-# 1 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
-/*                                                                                                                                                               
+# 1 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+/*
 
-      _____          ____  _____   ______         _____           _____   ______         _____     ____   ____  _____      _____      ______  _____   ______   
+	  _____          ____  _____   ______         _____           _____   ______         _____     ____   ____  _____      _____      ______  _____   ______
 
  ___|\     \    ____|\   \|\    \ |\     \    ___|\    \         |\    \ |\     \    ___|\    \   |    | |    ||\    \    /    /| ___|\     \|\    \ |\     |    |\     \  /    /\    \\\    \| \     \  /    /\    \         \\    \| \     \  /    /\    \  |    | |    || \    \  /    / ||     \     \\\    \| \     |    | |     ||    |  |    |\|    \  \     ||    |  |____|         \|    \  \     ||    |  |____| |    | |    ||  \____\/    /  /|     ,_____/|\|    \  \     |
- \     |
+    |
 |    | /_ _ / |    |__|    | |     \  |    ||    |    ____          |     \  |    ||    |    ____ |    | |    | \ |    /    /  / |     \--'\_|/ |     \  |    |
 
 |    |\    \  |    .--.    | |      \ |    ||    |   |    |         |      \ |    ||    |   |    ||    | |    |  \|___/    /  /  |     /___/|   |      \ |    |
@@ -17,28 +17,28 @@
 
 |____|_____|/ |____|  |____| |____|   |___|/ \|___|    | /          |____|   |___|/ \|___|    | /  \|____|____|    |_____|/      |____|     | / |____|   |___|/
 
-  \(    )/      \(      )/     \(       )/     \( |____|/             \(       )/     \( |____|/      \(   )/         )/           \( |_____|/    \(       )/  
+  \(    )/      \(      )/     \(       )/     \( |____|/             \(       )/     \( |____|/      \(   )/         )/           \( |_____|/    \(       )/
 
-   '    '        '      '       '       '       '   )/                 '       '       '   )/          '   '          '             '    )/        '       '   
+   '    '        '      '       '       '       '   )/                 '       '       '   )/          '   '          '             '    )/        '       '
 
-                                                    '                                      '                                             '                     
+													'                                      '                                             '
 
 */
-# 16 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+# 16 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 /* LIBRARY ARDUINO DEFINE  */
-# 18 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino" 2
-# 19 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino" 2
-# 20 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino" 2
-# 21 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino" 2
-# 22 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino" 2
-# 23 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino" 2
-# 24 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino" 2
-# 25 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino" 2
-# 26 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino" 2
+# 18 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 19 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 20 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 21 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 22 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 23 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 24 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 25 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 26 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
 
 /* USER DEFINE  */
-# 29 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino" 2
-# 30 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino" 2
+# 29 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 30 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
 
 void setup()
 {
@@ -46,9 +46,9 @@ void setup()
  Serial.begin(115200);
 
  /* Initialize BUTTON. */
- pinMode(16, 0x01);
- pinMode(14, 0x00);
- digitalWrite(14, 0x0);
+ pinMode(D0, 0x01);
+ pinMode(D1, 0x00);
+ digitalWrite(D1, 0x0);
  delay(10);
  /* Initialize the lcd, Print a message to the LCD. */
  lcd.init();
@@ -177,15 +177,7 @@ void setup()
  update_FOTA();
 
  /* Cập nhật thời gian từ sever vn.pool.ntp.org */
- configTime(7 * 3600, 0, "vn.pool.ntp.org", "time.nist.gov");
- Serial.println("Update Time <<< - >>> vn.pool.ntp.org \n");
- while (!time(nullptr))
- {
-  Serial.println("\nWaiting for time");
-  Serial.print(".");
-  delay(1000);
-  yield(); // disble Soft WDT reset - NodeMCU
- }
+ Reload_Localtime_NTP();
 
  /* Màn hình khởi tạo chào mừng */
  Serial.println("Chạy màn hình LCD khởi tạo chào mừng");
@@ -195,7 +187,7 @@ void setup()
  Serial.println("Truy cập đến thời tiết địa phương");
  time_dem_thoitiet = millis();
  Weather_Online_sever();
-# 202 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+# 190 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 }
 
 void loop()
@@ -212,16 +204,16 @@ void loop()
 
 void Check_Status_Button()
 {
- if (digitalRead(14) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
+ if (digitalRead(D1) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
  {
   delay(500); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
-  if (digitalRead(14) == 1 /* PULL DOWN*/)
+  if (digitalRead(D1) == 1 /* PULL DOWN*/)
   {
    lcd.clear();
    long startTime = millis(); // giá trị ban đầu được gán bằng giá trị hiện tại của millis
-   Serial.printf("digitalRead(Button_Mode): %d \n", digitalRead(14));
+   Serial.printf("digitalRead(Button_Mode): %d \n", digitalRead(D1));
 
-   while (digitalRead(14) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
+   while (digitalRead(D1) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
    {
     Serial.printf("Thời gian đè giữ nút nhấn: %d ms\n", (millis() - startTime));
     couter_Mode = (millis() - startTime) / 1000;
@@ -389,8 +381,50 @@ void Check_Status_Button()
  }
 }
 
+/*
+
+██╗      ██████╗  ██████╗ █████╗ ██╗  ████████╗██╗███╗   ███╗███████╗    ███╗   ██╗████████╗██████╗
+
+██║     ██╔═══██╗██╔════╝██╔══██╗██║  ╚══██╔══╝██║████╗ ████║██╔════╝    ████╗  ██║╚══██╔══╝██╔══██╗
+
+██║     ██║   ██║██║     ███████║██║     ██║   ██║██╔████╔██║█████╗      ██╔██╗ ██║   ██║   ██████╔╝
+
+██║     ██║   ██║██║     ██╔══██║██║     ██║   ██║██║╚██╔╝██║██╔══╝      ██║╚██╗██║   ██║   ██╔═══╝
+
+███████╗╚██████╔╝╚██████╗██║  ██║███████╗██║   ██║██║ ╚═╝ ██║███████╗    ██║ ╚████║   ██║   ██║
+
+╚══════╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝    ╚═╝  ╚═══╝   ╚═╝   ╚═╝
+
+*/
+# 391 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+void Reload_Localtime_NTP()
+{
+ configTime(7 * 3600, 0, "vn.pool.ntp.org", "time.nist.gov");
+ Serial.println("Update Time <<< - >>> vn.pool.ntp.org \n");
+ while (!time(nullptr))
+ {
+  Serial.println("\nWaiting for time");
+  Serial.print(".");
+  delay(1000);
+  yield(); // disble Soft WDT reset - NodeMCU
+ }
+}
+
 void Setup_Local_RealTime()
 {
+ /* Mỗi năm mới sẽ reload lại thời gian tren NTP một lần */
+ if ((thang == 12) && (ngay == 31))
+ {
+  if ((gio == 12) && (phut == 00))
+  {
+   if (giay < 10)
+   {
+    Serial.println("\nCập nhật thời gian mỗi năm.");
+    Reload_Localtime_NTP();
+   }
+  }
+ }
+
  time_t rawtime;
  struct tm *timeinfo;
 
@@ -406,10 +440,7 @@ void Setup_Local_RealTime()
  strftime(buffer_GIO, 80, "%H", timeinfo);
  strftime(buffer_PHUT, 80, "%M", timeinfo);
  strftime(buffer_GIAY, 80, "%S", timeinfo);
-
-
-
-
+ strftime(buffer_sent_serial, 80, "%H:%M:%S %d-%B-%Y", timeinfo);
 
  nam = atoi(buffer_NAM);
  thang = atoi(buffer_THANG);
@@ -422,11 +453,9 @@ void Setup_Local_RealTime()
  if (nam < 2022) /*neu nam duoi 2022 cua nghia la time chua dc update */
  {
   /* lcd hien thi chu UPDATE TIME */
-  Serial.println(" ");
-  Serial.println("Thoi gian chua update.");
+  Serial.println("\nThoi gian chua update.");
   lcd.clear();
-  Serial.println(" ");
-  Serial.println("Hien thi UPDATE TIME trên LCD.");
+  Serial.println("\nHien thi UPDATE TIME trên LCD.");
   lcd.createChar(1, UB);
   customU(0, 0);
   delay(200);
@@ -458,8 +487,7 @@ void Setup_Local_RealTime()
   if ((giay % 5 == 0) && (only_Delete_Once == 0))
   /* cu moi 5 giay xoa 2 line tren 1 lan */
   {
-   Serial.printf("Bây giờ là: %d:%d:%d \n", gio, phut, giay);
-   Serial.printf("Ngày: %d-%d-%d \n", ngay, thang, nam);
+   Serial.printf("Bây giờ là: %s \n", buffer_sent_serial);
    lcd.setCursor(0, 0);
    lcd.print("                    ");
    lcd.setCursor(0, 1);
@@ -533,7 +561,7 @@ void Setup_Local_RealTime()
     /*  *___XX_June_2019___*
 
 				July  */
-# 538 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+# 554 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 6) || (thang == 7))
     {
      lcd.setCursor(4, 1);
@@ -542,7 +570,7 @@ void Setup_Local_RealTime()
     /*  *__XX_March_2019___*
 
 				April  */
-# 545 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+# 561 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 3) || (thang == 4))
     {
      lcd.setCursor(3, 1);
@@ -557,7 +585,7 @@ void Setup_Local_RealTime()
     /*  *_XX_January_2019__*
 
 				October */
-# 558 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+# 574 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 10) || (thang == 1))
     {
      lcd.setCursor(2, 1);
@@ -566,7 +594,7 @@ void Setup_Local_RealTime()
     /*  *_XX_February_2019_*
 
 				November December  */
-# 565 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+# 581 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 11) || (thang == 2) || (thang == 12))
     {
      lcd.setCursor(2, 1);
@@ -642,50 +670,50 @@ void Setup_Local_RealTime()
   }
   /*
 
-            HIỂN THỊ FONT SỐ LỚN                                                           
+			HIỂN THỊ FONT SỐ LỚN
 
-                                                                                                                                                               
 
-                                                                                   
 
-          000000000          888888888               1111111    222222222222222    
 
-        00:::::::::00      88:::::::::88            1::::::1   2:::::::::::::::22  
 
-      00:::::::::::::00  88:::::::::::::88         1:::::::1   2::::::222222:::::2 
+		  000000000          888888888               1111111    222222222222222
 
-     0:::::::000:::::::08::::::88888::::::8        111:::::1   2222222     2:::::2 
+		00:::::::::00      88:::::::::88            1::::::1   2:::::::::::::::22
 
-     0::::::0   0::::::08:::::8     8:::::8           1::::1               2:::::2 
+	  00:::::::::::::00  88:::::::::::::88         1:::::::1   2::::::222222:::::2
 
-     0:::::0     0:::::08:::::8     8:::::8 ::::::    1::::1               2:::::2 
+	 0:::::::000:::::::08::::::88888::::::8        111:::::1   2222222     2:::::2
 
-     0:::::0     0:::::0 8:::::88888:::::8  ::::::    1::::1            2222::::2  
+	 0::::::0   0::::::08:::::8     8:::::8           1::::1               2:::::2
 
-     0:::::0 000 0:::::0  8:::::::::::::8   ::::::    1::::l       22222::::::22   
+	 0:::::0     0:::::08:::::8     8:::::8 ::::::    1::::1               2:::::2
 
-     0:::::0 000 0:::::0 8:::::88888:::::8            1::::l     22::::::::222     
+	 0:::::0     0:::::0 8:::::88888:::::8  ::::::    1::::1            2222::::2
 
-     0:::::0     0:::::08:::::8     8:::::8           1::::l    2:::::22222        
+	 0:::::0 000 0:::::0  8:::::::::::::8   ::::::    1::::l       22222::::::22
 
-     0:::::0     0:::::08:::::8     8:::::8           1::::l   2:::::2             
+	 0:::::0 000 0:::::0 8:::::88888:::::8            1::::l     22::::::::222
 
-     0::::::0   0::::::08:::::8     8:::::8 ::::::    1::::l   2:::::2             
+	 0:::::0     0:::::08:::::8     8:::::8           1::::l    2:::::22222
 
-     0:::::::000:::::::08::::::88888::::::8 :::::: 111::::::1112:::::2       222222
+	 0:::::0     0:::::08:::::8     8:::::8           1::::l   2:::::2
 
-      00:::::::::::::00  88:::::::::::::88  :::::: 1::::::::::12::::::2222222:::::2
+	 0::::::0   0::::::08:::::8     8:::::8 ::::::    1::::l   2:::::2
 
-        00:::::::::00      88:::::::::88           1::::::::::12::::::::::::::::::2
+	 0:::::::000:::::::08::::::88888::::::8 :::::: 111::::::1112:::::2       222222
 
-          000000000          888888888             11111111111122222222222222222222
+	  00:::::::::::::00  88:::::::::::::88  :::::: 1::::::::::12::::::2222222:::::2
 
-                                                                                   
+		00:::::::::00      88:::::::::88           1::::::::::12::::::::::::::::::2
 
-																				
+		  000000000          888888888             11111111111122222222222222222222
+
+
+
+
 
 		*/
-# 661 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+# 677 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
   /* hien thi gio font so lon */
   printDigits(gio / 10 % 10, 0, 2);
   printDigits(gio / 1 % 10, 4, 2);
@@ -715,11 +743,11 @@ void Setup_Local_RealTime()
   /* Qua khung giờ mới là tingting  */
   if ((phut == 0) && (giay < 3))
   {
-   digitalWrite(16, 1);
+   digitalWrite(D0, 1);
   }
   else
   {
-   digitalWrite(16, 0);
+   digitalWrite(D0, 0);
   }
   /* Báo thức */
   if ((hen_gio == gio) && (hen_phut == phut) &&
@@ -730,35 +758,35 @@ void Setup_Local_RealTime()
   }
   else
   {
-   digitalWrite(16, 0);
+   digitalWrite(D0, 0);
    /* Bật trang thai báo thức của Active_Alarm */
    status_Mode_Alarm = 1;
   }
  }
 }
 
-/* Chon vi tri doc gia tri thoi tiet 
+/* Chon vi tri doc gia tri thoi tiet
 
-   █████████  █████                                            ████                               █████     ███                     
+   █████████  █████                                            ████                               █████     ███
 
-  ███░░░░░███░░███                                            ░░███                              ░░███     ░░░                      
+  ███░░░░░███░░███                                            ░░███                              ░░███     ░░░
 
- ███     ░░░  ░███████    ██████   ██████   █████   ██████     ░███   ██████   ██████   ██████   ███████   ████   ██████  ████████  
+ ███     ░░░  ░███████    ██████   ██████   █████   ██████     ░███   ██████   ██████   ██████   ███████   ████   ██████  ████████
 
-░███          ░███░░███  ███░░███ ███░░███ ███░░   ███░░███    ░███  ███░░███ ███░░███ ░░░░░███ ░░░███░   ░░███  ███░░███░░███░░███ 
+░███          ░███░░███  ███░░███ ███░░███ ███░░   ███░░███    ░███  ███░░███ ███░░███ ░░░░░███ ░░░███░   ░░███  ███░░███░░███░░███
 
-░███          ░███ ░███ ░███ ░███░███ ░███░░█████ ░███████     ░███ ░███ ░███░███ ░░░   ███████   ░███     ░███ ░███ ░███ ░███ ░███ 
+░███          ░███ ░███ ░███ ░███░███ ░███░░█████ ░███████     ░███ ░███ ░███░███ ░░░   ███████   ░███     ░███ ░███ ░███ ░███ ░███
 
-░░███     ███ ░███ ░███ ░███ ░███░███ ░███ ░░░░███░███░░░      ░███ ░███ ░███░███  ███ ███░░███   ░███ ███ ░███ ░███ ░███ ░███ ░███ 
+░░███     ███ ░███ ░███ ░███ ░███░███ ░███ ░░░░███░███░░░      ░███ ░███ ░███░███  ███ ███░░███   ░███ ███ ░███ ░███ ░███ ░███ ░███
 
  ░░█████████  ████ █████░░██████ ░░██████  ██████ ░░██████     █████░░██████ ░░██████ ░░████████  ░░█████  █████░░██████  ████ █████
 
-  ░░░░░░░░░  ░░░░ ░░░░░  ░░░░░░   ░░░░░░  ░░░░░░   ░░░░░░     ░░░░░  ░░░░░░   ░░░░░░   ░░░░░░░░    ░░░░░  ░░░░░  ░░░░░░  ░░░░ ░░░░░ 
+  ░░░░░░░░░  ░░░░ ░░░░░  ░░░░░░   ░░░░░░  ░░░░░░   ░░░░░░     ░░░░░  ░░░░░░   ░░░░░░   ░░░░░░░░    ░░░░░  ░░░░░  ░░░░░░  ░░░░ ░░░░░
 
-                                                                                                                                                                                                                                                       
+
 
 */
-# 723 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+# 739 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Choose_location()
 {
  lcd.clear();
@@ -774,13 +802,13 @@ void Choose_location()
  int dem_location = 0;
  while (((unsigned long)(millis() - dem_10s_stop) < 10000) && (status_Mode == 0))
  {
-  if (digitalRead(14) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
+  if (digitalRead(D1) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
   {
    delay(500); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
-   if (digitalRead(14) == 1 /* PULL DOWN*/)
+   if (digitalRead(D1) == 1 /* PULL DOWN*/)
    {
     long startTime = millis(); // giá trị ban đầu được gán bằng giá trị hiện tại của millis
-    while (digitalRead(14) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
+    while (digitalRead(D1) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
     {
      /* khi nhan nut thi set lai time out mode */
      dem_10s_stop = millis();
@@ -953,9 +981,9 @@ void Choose_location()
  Serial.print("value_Location_EEPROM duoc set eeprom: ");
  Serial.println(EEPROM.read(99));
  /* Chuông báo ok */
- digitalWrite(16, 1);
+ digitalWrite(D0, 1);
  delay(300);
- digitalWrite(16, 0);
+ digitalWrite(D0, 0);
 }
 
 /* Hàm gọi thời tiết mỗi 10 phút một lần */
@@ -972,24 +1000,24 @@ void Call_Weather_Every_10Min()
 
    Sử dụng hàm API riêng để dùng cho nút nhấn MODE
 
-.--.      .--.    .-''-.     ____   ,---------. .---.  .---.     .-''-.  .-------.     
+.--.      .--.    .-''-.     ____   ,---------. .---.  .---.     .-''-.  .-------.
 
-|  |_     |  |  .'_ _   \  .'  __ `.\          \|   |  |_ _|   .'_ _   \ |  _ _   | _( )_   |  | / ( ` )   '/   '  \  \`--.  ,---'|   |  ( ' )  / ( ` )   '| ( ' )  |    
- |    
-|(_ o _)  |  |. (_ o _)  ||___|  /  |   |   \   |   '-(_{;}_). (_ o _)  ||(_ o _) /    
+|  |_     |  |  .'_ _   \  .'  __ `.\          \|   |  |_ _|   .'_ _   \ |  _ _   | _( )_   |  | / ( ` )   '/   '  \  \`--.  ,---'|   |  ( ' )  / ( ` )   '| ( ' )  |
+ |
+|(_ o _)  |  |. (_ o _)  ||___|  /  |   |   \   |   '-(_{;}_). (_ o _)  ||(_ o _) /
 
-| (_,_) \ |  ||  (_,_)___|   _.-`   |   :_ _:   |      (_,_) |  (_,_)___|| (_,_).' __  
+| (_,_) \ |  ||  (_,_)___|   _.-`   |   :_ _:   |      (_,_) |  (_,_)___|| (_,_).' __
 
-|  |/    \|  |'  \   .---..'   _    |   (_I_)   | _ _--.   | '  \   .---.|  |\ \  |  | 
+|  |/    \|  |'  \   .---..'   _    |   (_I_)   | _ _--.   | '  \   .---.|  |\ \  |  |
 
-|  '  /\  `  | \  `-'    /|  _( )_  |  (_(=)_)  |( ' ) |   |  \  `-'    /|  | \ `'   / 
+|  '  /\  `  | \  `-'    /|  _( )_  |  (_(=)_)  |( ' ) |   |  \  `-'    /|  | \ `'   /
 
-|    /  \    |  \       / \ (_ o _) /   (_I_)   (_{;}_)|   |   \       / |  |  \    /  
+|    /  \    |  \       / \ (_ o _) /   (_I_)   (_{;}_)|   |   \       / |  |  \    /
 
-`---'    `---`   `'-..-'   '.(_,_).'    '---'   '(_,_) '---'    `'-..-'  ''-'   `'-'   
+`---'    `---`   `'-..-'   '.(_,_).'    '---'   '(_,_) '---'    `'-..-'  ''-'   `'-'
 
 */
-# 944 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+# 960 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Weather_Online_sever()
 {
  if (value_Location_EEPROM == 0)
@@ -1037,7 +1065,15 @@ void Weather_Online_sever()
    JsonObject &root = jsonBuffer.parseObject(payload);
    if (!root.success())
    {
-    Serial.println(((reinterpret_cast<const __FlashStringHelper *>((__extension__({static const char __c[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "991" "." "0" "\", \"aSM\", @progbits, 1 #"))) = ("Parsing failed !"); &__c[0];}))))));
+    Serial.println(((reinterpret_cast<const __FlashStringHelper *>(
+# 1007 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+                  (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "1007" "." "9" "\", \"aSM\", @progbits, 1 #"))) = (
+# 1007 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+                  "Parsing failed !"
+# 1007 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+                  ); &__pstr__[0];}))
+# 1007 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+                  ))));
    }
 
    temp = (float)(root["main"]["temp"]) - 273.15; // get temperature in °C
@@ -1062,22 +1098,22 @@ void Weather_Online_sever()
  }
 }
 
-/*                                                                                                            
+/*
 
-                              __                      _____      
+							  __                      _____
 
    _________ ___  ____ ______/ /_   _________  ____  / __(_)___ _
 
   / ___/ __ `__ \/ __ `/ ___/ __/  / ___/ __ \/ __ \/ /_/ / __ `/
 
- (__  ) / / / / / /_/ / /  / /_   / /__/ /_/ / / / / __/ / /_/ / 
+ (__  ) / / / / / /_/ / /  / /_   / /__/ /_/ / / / / __/ / /_/ /
 
-/____/_/ /_/ /_/\__,_/_/   \__/   \___/\____/_/ /_/_/ /_/\__, /  
+/____/_/ /_/ /_/\__,_/_/   \__/   \___/\____/_/ /_/_/ /_/\__, /
 
-                                                        /____/                                                                                                         
+														/____/
 
 */
-# 1024 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+# 1040 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void smartConfig_ndb()
 {
  lcd.createChar(1, UB);
@@ -1125,7 +1161,7 @@ void smartConfig_ndb()
    lcd.setCursor(0, 3);
    lcd.print(qpass);
    /* Chuông báo két nối ok */
-   digitalWrite(16, 1);
+   digitalWrite(D0, 1);
    delay(5000);
    if (qsid.length() > 0 && qpass.length() > 0)
    {
@@ -1155,7 +1191,7 @@ void smartConfig_ndb()
     }
     EEPROM.commit();
     /* Ngắt chuông báo két nối ok */
-    digitalWrite(16, 0);
+    digitalWrite(D0, 0);
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Saved ID & Pass Wifi");
@@ -1189,13 +1225,13 @@ void Setup_AlarmClock()
   printDigits(hen_phut / 10 % 10, 11, 2);
   printDigits(hen_phut / 1 % 10, 15, 2);
 
-  if (digitalRead(14) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
+  if (digitalRead(D1) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
   {
    delay(500); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
-   if (digitalRead(14) == 1 /* PULL DOWN*/)
+   if (digitalRead(D1) == 1 /* PULL DOWN*/)
    {
     long startTime = millis(); // giá trị ban đầu được gán bằng giá trị hiện tại của millis
-    while (digitalRead(14) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
+    while (digitalRead(D1) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
     {
      /* khi nhan nut thi set lai time out mode */
      dem_10s_stop = millis();
@@ -1268,9 +1304,9 @@ void Setup_AlarmClock()
  /* set lai gia tri cho su dung lan sau */
  status_Mode = 0;
  /* Chuông báo ok */
- digitalWrite(16, 1);
+ digitalWrite(D0, 1);
  delay(300);
- digitalWrite(16, 0);
+ digitalWrite(D0, 0);
 }
 
 void Set_Hour_Alarm()
@@ -1311,10 +1347,10 @@ void Set_Hour_Alarm()
   printDigits(hen_phut / 10 % 10, 11, 2);
   printDigits(hen_phut / 1 % 10, 15, 2);
 
-  if (digitalRead(14) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
+  if (digitalRead(D1) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
   {
    delay(50); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
-   if (digitalRead(14) == 1 /* PULL DOWN*/)
+   if (digitalRead(D1) == 1 /* PULL DOWN*/)
    {
     hen_gio++;
     if (hen_gio >= 24)
@@ -1322,7 +1358,7 @@ void Set_Hour_Alarm()
      hen_gio = 0;
     }
     long startTime = millis();
-    while (digitalRead(14) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
+    while (digitalRead(D1) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
     {
      /* khi nhan nut thi set lai time out mode */
      dem_10s_stop_g = millis();
@@ -1389,10 +1425,10 @@ void Set_Minute_Alarm()
    time_dem_baothuc = millis();
   }
 
-  if (digitalRead(14) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
+  if (digitalRead(D1) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
   {
    delay(50); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
-   if (digitalRead(14) == 1 /* PULL DOWN*/)
+   if (digitalRead(D1) == 1 /* PULL DOWN*/)
    {
     hen_phut++;
     if (hen_phut >= 60)
@@ -1400,7 +1436,7 @@ void Set_Minute_Alarm()
      hen_phut = 0;
     }
     long startTime = millis();
-    while (digitalRead(14) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
+    while (digitalRead(D1) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
     {
      /* khi nhan nut thi set lai time out mode */
      dem_10s_stop_P = millis();
@@ -1432,26 +1468,26 @@ void Set_Minute_Alarm()
 
 /*
 
-   █████████             █████     ███                                   █████████   ████                                     
+   █████████             █████     ███                                   █████████   ████
 
-  ███░░░░░███           ░░███     ░░░                                   ███░░░░░███ ░░███                                     
+  ███░░░░░███           ░░███     ░░░                                   ███░░░░░███ ░░███
 
- ░███    ░███   ██████  ███████   ████  █████ █████  ██████            ░███    ░███  ░███   ██████   ████████  █████████████  
+ ░███    ░███   ██████  ███████   ████  █████ █████  ██████            ░███    ░███  ░███   ██████   ████████  █████████████
 
- ░███████████  ███░░███░░░███░   ░░███ ░░███ ░░███  ███░░███           ░███████████  ░███  ░░░░░███ ░░███░░███░░███░░███░░███ 
+ ░███████████  ███░░███░░░███░   ░░███ ░░███ ░░███  ███░░███           ░███████████  ░███  ░░░░░███ ░░███░░███░░███░░███░░███
 
- ░███░░░░░███ ░███ ░░░   ░███     ░███  ░███  ░███ ░███████            ░███░░░░░███  ░███   ███████  ░███ ░░░  ░███ ░███ ░███ 
+ ░███░░░░░███ ░███ ░░░   ░███     ░███  ░███  ░███ ░███████            ░███░░░░░███  ░███   ███████  ░███ ░░░  ░███ ░███ ░███
 
- ░███    ░███ ░███  ███  ░███ ███ ░███  ░░███ ███  ░███░░░             ░███    ░███  ░███  ███░░███  ░███      ░███ ░███ ░███ 
+ ░███    ░███ ░███  ███  ░███ ███ ░███  ░░███ ███  ░███░░░             ░███    ░███  ░███  ███░░███  ░███      ░███ ░███ ░███
 
  █████   █████░░██████   ░░█████  █████  ░░█████   ░░██████  █████████ █████   █████ █████░░████████ █████     █████░███ █████
 
-░░░░░   ░░░░░  ░░░░░░     ░░░░░  ░░░░░    ░░░░░     ░░░░░░  ░░░░░░░░░ ░░░░░   ░░░░░ ░░░░░  ░░░░░░░░ ░░░░░     ░░░░░ ░░░ ░░░░░ 
+░░░░░   ░░░░░  ░░░░░░     ░░░░░  ░░░░░    ░░░░░     ░░░░░░  ░░░░░░░░░ ░░░░░   ░░░░░ ░░░░░  ░░░░░░░░ ░░░░░     ░░░░░ ░░░ ░░░░░
 
-                                                                                                                                                                                                                                                                                                                                                                                          
+
 
 */
-# 1387 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+# 1403 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Active_Alarm()
 {
  lcd.clear();
@@ -1498,14 +1534,14 @@ void Active_Alarm()
   }
 
   /* Check đè phím MODE hơn 2 giây thì thoát, không kêu chuông nữa */
-  digitalWrite(16, 1);
-  if (digitalRead(14) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
+  digitalWrite(D0, 1);
+  if (digitalRead(D1) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
   {
    delay(500); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
-   if (digitalRead(14) == 1 /* PULL DOWN*/)
+   if (digitalRead(D1) == 1 /* PULL DOWN*/)
    {
     long startTime = millis(); // giá trị ban đầu được gán bằng giá trị hiện tại của millis
-    while (digitalRead(14) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
+    while (digitalRead(D1) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
     {
      /* hien thi gio font so lon */
      customA(0, 0);
@@ -1537,7 +1573,7 @@ void Active_Alarm()
       status_Mode_Alarm = 0;
       lcd.setCursor(19, 3);
       lcd.write(4);
-      digitalWrite(16, 0);
+      digitalWrite(D0, 0);
      }
      else if (couter_Mode < 2)
      {
@@ -1553,28 +1589,28 @@ void Active_Alarm()
  lcd.clear();
 }
 
-/* 
+/*
 
- ███████████                   █████       █████   ███   █████  ███     ██████   ███ 
+ ███████████                   █████       █████   ███   █████  ███     ██████   ███
 
-░█░░░███░░░█                  ░░███       ░░███   ░███  ░░███  ░░░     ███░░███ ░░░  
+░█░░░███░░░█                  ░░███       ░░███   ░███  ░░███  ░░░     ███░░███ ░░░
 
-░   ░███  ░   ██████   █████  ███████      ░███   ░███   ░███  ████   ░███ ░░░  ████ 
+░   ░███  ░   ██████   █████  ███████      ░███   ░███   ░███  ████   ░███ ░░░  ████
 
-    ░███     ███░░███ ███░░  ░░░███░       ░███   ░███   ░███ ░░███  ███████   ░░███ 
+	░███     ███░░███ ███░░  ░░░███░       ░███   ░███   ░███ ░░███  ███████   ░░███
 
-    ░███    ░███████ ░░█████   ░███        ░░███  █████  ███   ░███ ░░░███░     ░███ 
+	░███    ░███████ ░░█████   ░███        ░░███  █████  ███   ░███ ░░░███░     ░███
 
-    ░███    ░███░░░   ░░░░███  ░███ ███     ░░░█████░█████░    ░███   ░███      ░███ 
+	░███    ░███░░░   ░░░░███  ░███ ███     ░░░█████░█████░    ░███   ░███      ░███
 
-    █████   ░░██████  ██████   ░░█████        ░░███ ░░███      █████  █████     █████
+	█████   ░░██████  ██████   ░░█████        ░░███ ░░███      █████  █████     █████
 
-   ░░░░░     ░░░░░░  ░░░░░░     ░░░░░          ░░░   ░░░      ░░░░░  ░░░░░     ░░░░░ 
+   ░░░░░     ░░░░░░  ░░░░░░     ░░░░░          ░░░   ░░░      ░░░░░  ░░░░░     ░░░░░
 
-                                                                                                                                                                       
+
 
 */
-# 1499 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+# 1515 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 bool bool_Test_Wifi(void)
 {
  int c = 0;
@@ -1596,14 +1632,14 @@ bool bool_Test_Wifi(void)
   if (WiFi.status() == WL_CONNECTED)
   {
    /* Chuông báo ok */
-   digitalWrite(16, 1);
+   digitalWrite(D0, 1);
    delay(300);
-   digitalWrite(16, 0);
+   digitalWrite(D0, 0);
    return true;
   }
   delay(300);
   Serial.print(WiFi.status());
-  Serial.print(" - ");
+  Serial.print(" -> ");
   c++;
  }
  Serial.println("");
@@ -1611,32 +1647,32 @@ bool bool_Test_Wifi(void)
  return false;
 }
 
-/* Cập nhật OTA 
+/* Cập nhật OTA
 
- █████  █████               █████            █████                   ███████    ███████████   █████████  
+ █████  █████               █████            █████                   ███████    ███████████   █████████
 
-░░███  ░░███               ░░███            ░░███                  ███░░░░░███ ░█░░░███░░░█  ███░░░░░███ 
+░░███  ░░███               ░░███            ░░███                  ███░░░░░███ ░█░░░███░░░█  ███░░░░░███
 
- ░███   ░███  ████████   ███████   ██████   ███████    ██████     ███     ░░███░   ░███  ░  ░███    ░███ 
+ ░███   ░███  ████████   ███████   ██████   ███████    ██████     ███     ░░███░   ░███  ░  ░███    ░███
 
- ░███   ░███ ░░███░░███ ███░░███  ░░░░░███ ░░░███░    ███░░███   ░███      ░███    ░███     ░███████████ 
+ ░███   ░███ ░░███░░███ ███░░███  ░░░░░███ ░░░███░    ███░░███   ░███      ░███    ░███     ░███████████
 
- ░███   ░███  ░███ ░███░███ ░███   ███████   ░███    ░███████    ░███      ░███    ░███     ░███░░░░░███ 
+ ░███   ░███  ░███ ░███░███ ░███   ███████   ░███    ░███████    ░███      ░███    ░███     ░███░░░░░███
 
- ░███   ░███  ░███ ░███░███ ░███  ███░░███   ░███ ███░███░░░     ░░███     ███     ░███     ░███    ░███ 
+ ░███   ░███  ░███ ░███░███ ░███  ███░░███   ░███ ███░███░░░     ░░███     ███     ░███     ░███    ░███
 
  ░░████████   ░███████ ░░████████░░████████  ░░█████ ░░██████     ░░░███████░      █████    █████   █████
 
-  ░░░░░░░░    ░███░░░   ░░░░░░░░  ░░░░░░░░    ░░░░░   ░░░░░░        ░░░░░░░       ░░░░░    ░░░░░   ░░░░░ 
+  ░░░░░░░░    ░███░░░   ░░░░░░░░  ░░░░░░░░    ░░░░░   ░░░░░░        ░░░░░░░       ░░░░░    ░░░░░   ░░░░░
 
-              ░███                                                                                       
+			  ░███
 
-              █████                                                                                      
+			  █████
 
-             ░░░░░                                                                                       
+			 ░░░░░
 
 */
-# 1548 "d:\\NguyenBangGitHub\\SmartClock\\src\\main\\main.ino"
+# 1564 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void update_FOTA()
 {
  Serial.println("\n>>>>>>>>>>> Update FOTA \n");
@@ -1648,7 +1684,7 @@ void update_FOTA()
  lcd.print("Version Firmware:   ");
 
  lcd.setCursor(0, 1);
- lcd.print("1.1.3");
+ lcd.print("2.0.0");
  lcd.print(" - ");
  lcd.print(*((volatile uint32_t *)(0x3FF00000+(0x58))));
 
@@ -1659,7 +1695,7 @@ void update_FOTA()
  lcd.setCursor(0, 3);
  lcd.print("...");
  Serial.printf(">>> Device: %d MHz \n", ESP.getCpuFreqMHz());
- Serial.printf(">>> Version Firmware: v%s (OTADrive) \n", "1.1.3");
+ Serial.printf(">>> Version Firmware: v%s (OTADrive) \n", "2.0.0");
  Serial.printf(">>> ID ESP: ");
  Serial.println(*((volatile uint32_t *)(0x3FF00000+(0x58))));
  Serial.printf(">>> Boot Mode: %d \n", ESP.getBootMode());
@@ -1674,9 +1710,9 @@ void update_FOTA()
   String url = "http://otadrive.com/DeviceApi/update?";
   WiFiClient client;
   url += "&s=" + String(*((volatile uint32_t *)(0x3FF00000+(0x58))));
-  url += "&_FirmwareInfo&k=" "ee01b3e6-5101-4b37-8e0e-f53353bf12df" "&v=" "1.1.3" "&FirmwareInfo_&";
+  url += "&_FirmwareInfo&k=" "ee01b3e6-5101-4b37-8e0e-f53353bf12df" "&v=" "2.0.0" "&FirmwareInfo_&";
 
-  t_httpUpdate_return ret = ESPhttpUpdate.update(client, url, "1.1.3");
+  t_httpUpdate_return ret = ESPhttpUpdate.update(client, url, "2.0.0");
 
   switch (ret)
   {
@@ -1694,7 +1730,7 @@ void update_FOTA()
     Serial.println(">>> Sever OTADrive bị nghẻn, quá tải...");
     Serial.println(">>> Hoặc thiết bị của bạn chưa được cho phép cập nhật trên hệ thống...");
     Serial.println(">>> Check cập nhật ở thời điểm khác...");
-    Serial.printf(">>> Phiên bản hiện tại là v%s \n", "1.1.3");
+    Serial.printf(">>> Phiên bản hiện tại là v%s \n", "2.0.0");
     lcd.setCursor(0, 3);
     lcd.print("> Skip updated...   ");
     delay(2000);
@@ -1724,6 +1760,20 @@ void update_FOTA()
  Serial.println("\n<<<<<<<<<< Done Check FOTA \n");
 }
 
+/*
+
+__      __          _                                               _       ___     ___
+
+\ \    / / ___     | |     __      ___    _ __     ___      o O O  | |     / __|   |    \ \/\/ / / -_)    | |    / _|    / _ \  | '  \   / -_)    o       | |__  | (__    | |) |
+ |
+  \_/\_/  \___|   _|_|_   \__|_   \___/  |_|_|_|  \___|   TS__[O]  |____|  \___|   |___/
+
+_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""| {======|_|"""""|_|"""""|_|"""""|
+
+"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'./o--000'"`-0-0-'"`-0-0-'"`-0-0-'
+
+*/
+# 1659 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Welcome_Smartclock()
 {
  lcd.clear();
@@ -1791,5 +1841,3 @@ void Welcome_Smartclock()
   delay(100);
  }
 }
-
-/* Func get message on Thingspeak sever */

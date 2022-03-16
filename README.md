@@ -19,9 +19,6 @@ https://github.com/esp8266vn/esp8266.vn/blob/master/docs/arduino/libraries/eepro
 
 https://www.arduinolibraries.info/libraries/arduino-json
 
-### ThingSpeak
-
-https://github.com/mathworks/thingspeak-arduino
 
 ### SmartConfig ESP
 
