@@ -111,6 +111,7 @@ void setup()
 	}
 	Serial.print(">>>>> PASS: ");
 	Serial.println(epass);
+	Serial.println("\n");
 	/* nho check lai dieu kien cho nay khi < 1 */
 	if (esid.length() > ESP_NB_ONE)
 	{
@@ -164,11 +165,14 @@ void setup()
 	Serial.println("IP address: ");
 	Serial.println(WiFi.localIP());
 
-	/* Check firmware coi có cập nhật không?  */
-	update_FOTA();
-
-	/* Cập nhật thời gian từ sever vn.pool.ntp.org */
+	// Synchronize time useing SNTP. This is necessary to verify that
+	// the TLS certificates offered by the server are currently valid.
+	/* In cases when NTP is not used, app must set a time manually to check cert validity */
+	/* 1. Cập nhật thời gian từ sever vn.pool.ntp.org */
 	Reload_Localtime_NTP();
+
+	/* 2. Check firmware coi có cập nhật không?  */
+	update_FOTA();
 
 	/* Màn hình khởi tạo chào mừng */
 	Serial.println("Chạy màn hình LCD khởi tạo chào mừng");
@@ -178,25 +182,10 @@ void setup()
 	Serial.println("Truy cập đến thời tiết địa phương");
 	time_dem_thoitiet = millis();
 	Weather_Online_sever();
-
-#if ESP_NB_BLYNK
-	Serial.println("\nKết nối Blynk");
-	/* Kết nối Blynk */
-	Blynk.config(BLYNK_AUTH_TOKEN, BLYNK_DEFAULT_DOMAIN, 8080);
-	while (Blynk.connect() == false)
-	{
-		Blynk.connect(1000l);
-		Serial.print(". ");
-	}
-	Serial.println("\nKết nối Blynk");
-#endif //#if ESP_NB_BLYNK
 }
 
 void loop()
 {
-#if ESP_NB_BLYNK
-	Blynk.run();
-#endif
 	Check_Status_Button();
 	Call_Weather_Every_10Min();
 	Setup_Local_RealTime();
@@ -1530,6 +1519,7 @@ bool bool_Test_Wifi(void)
 	Serial.println("========================");
 	while (c < 40)
 	{
+		Serial.println("");
 		if (WiFi.status() == WL_CONNECTED)
 		{
 			/* Chuông báo ok */
@@ -1583,7 +1573,7 @@ void update_FOTA()
 	lcd.setCursor(0, 3);
 	lcd.print("...");
 	Serial.printf(">>> Device: %d MHz \n", ESP.getCpuFreqMHz());
-	Serial.printf(">>> Version Firmware: v%s (OTADrive) \n", FirmwareVer);
+	Serial.printf(">>> Version Firmware: %s \n", FirmwareVer);
 	Serial.printf(">>> ID ESP: ");
 	Serial.println(CHIPID);
 	Serial.printf(">>> Boot Mode: %d \n", ESP.getBootMode());

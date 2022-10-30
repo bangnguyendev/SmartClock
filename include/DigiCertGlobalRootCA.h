@@ -1,14 +1,18 @@
 /* Cập nhật OTA */
-#define MakeFirmwareInfo(k, v) "&_FirmwareInfo&k=" k "&v=" v "&FirmwareInfo_&"
-const String FirmwareVer={"Ver_1.8"}; 
-// Eg: MakeFirmwareInfo("smartclock_bangnguyendev",FirmwareVer)
 
-#define URL_fw_Version "/bangnguyendev/SmartClock/master/build/version_main.ino.bin.txt"
-#define URL_fw_Bin "https://raw.githubusercontent.com/bangnguyendev/SmartClock/master/build/main.ino.bin"
+const String FirmwareVer={"Ver_1.8"}; 
+
+// #define URL_fw_Version "/bangnguyendev/SmartClock/master/build/version_main.ino.bin.txt"
+// #define URL_fw_Bin "https://raw.githubusercontent.com/bangnguyendev/SmartClock/master/build/main.ino.bin"
+
+#define URL_fw_Version "/bangnguyendev/SmartClock/Down_Bin_from_Github/build/version_main.ino.bin.txt"
+#define URL_fw_Bin "https://raw.githubusercontent.com/bangnguyendev/SmartClock/Down_Bin_from_Github/build/main.ino.bin"
 const char* host = "raw.githubusercontent.com";
 const int httpsPort = 443;
 
 // DigiCert Global Root CA
+// https://www.digicert.com/kb/digicert-root-certificates.htm
+// https://cacerts.digicert.com/DigiCertGlobalRootCA.crt.pem
 const char trustRoot[] PROGMEM = R"EOF(
 -----BEGIN CERTIFICATE-----
 MIIDrzCCApegAwIBAgIQCDvgVpBCRrGhdWrJWZHHSjANBgkqhkiG9w0BAQUFADBh

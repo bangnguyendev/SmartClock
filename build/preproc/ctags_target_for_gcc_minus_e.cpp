@@ -123,6 +123,7 @@ void setup()
  }
  Serial.print(">>>>> PASS: ");
  Serial.println(epass);
+ Serial.println("\n");
  /* nho check lai dieu kien cho nay khi < 1 */
  if (esid.length() > 1)
  {
@@ -176,11 +177,14 @@ void setup()
  Serial.println("IP address: ");
  Serial.println(WiFi.localIP());
 
- /* Check firmware coi có cập nhật không?  */
- update_FOTA();
-
- /* Cập nhật thời gian từ sever vn.pool.ntp.org */
+ // Synchronize time useing SNTP. This is necessary to verify that
+ // the TLS certificates offered by the server are currently valid.
+ /* In cases when NTP is not used, app must set a time manually to check cert validity */
+ /* 1. Cập nhật thời gian từ sever vn.pool.ntp.org */
  Reload_Localtime_NTP();
+
+ /* 2. Check firmware coi có cập nhật không?  */
+ update_FOTA();
 
  /* Màn hình khởi tạo chào mừng */
  Serial.println("Chạy màn hình LCD khởi tạo chào mừng");
@@ -190,14 +194,10 @@ void setup()
  Serial.println("Truy cập đến thời tiết địa phương");
  time_dem_thoitiet = millis();
  Weather_Online_sever();
-# 193 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 }
 
 void loop()
 {
-
-
-
  Check_Status_Button();
  Call_Weather_Every_10Min();
  Setup_Local_RealTime();
@@ -397,7 +397,7 @@ void Check_Status_Button()
 ╚══════╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝    ╚═╝  ╚═══╝   ╚═╝   ╚═╝
 
 */
-# 392 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 381 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Reload_Localtime_NTP()
 {
  configTime(7 * 3600, 0, "vn.pool.ntp.org", "time.nist.gov");
@@ -562,7 +562,7 @@ void Setup_Local_RealTime()
     /*  *___XX_June_2019___*
 
 				July  */
-# 555 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 544 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 6) || (thang == 7))
     {
      lcd.setCursor(4, 1);
@@ -571,7 +571,7 @@ void Setup_Local_RealTime()
     /*  *__XX_March_2019___*
 
 				April  */
-# 562 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 551 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 3) || (thang == 4))
     {
      lcd.setCursor(3, 1);
@@ -586,7 +586,7 @@ void Setup_Local_RealTime()
     /*  *_XX_January_2019__*
 
 				October */
-# 575 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 564 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 10) || (thang == 1))
     {
      lcd.setCursor(2, 1);
@@ -595,7 +595,7 @@ void Setup_Local_RealTime()
     /*  *_XX_February_2019_*
 
 				November December  */
-# 582 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 571 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 11) || (thang == 2) || (thang == 12))
     {
      lcd.setCursor(2, 1);
@@ -714,7 +714,7 @@ void Setup_Local_RealTime()
 
 
 		*/
-# 678 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 667 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
   /* hien thi gio font so lon */
   printDigits(gio / 10 % 10, 0, 2);
   printDigits(gio / 1 % 10, 4, 2);
@@ -787,7 +787,7 @@ void Setup_Local_RealTime()
 
 
 */
-# 740 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 729 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Choose_location()
 {
  lcd.clear();
@@ -1017,7 +1017,7 @@ void Call_Weather_Every_10Min()
 `---'    `---`   `'-..-'   '.(_,_).'    '---'   '(_,_) '---'    `'-..-'  ''-'   `'-'
 
 */
-# 960 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 949 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Weather_Online_sever()
 {
  if (value_Location_EEPROM == 0)
@@ -1066,13 +1066,13 @@ void Weather_Online_sever()
    if (!root.success())
    {
     Serial.println(((reinterpret_cast<const __FlashStringHelper *>(
-# 1007 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
-                  (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "1007" "." "10" "\", \"aSM\", @progbits, 1 #"))) = (
-# 1007 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 996 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+                  (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "996" "." "10" "\", \"aSM\", @progbits, 1 #"))) = (
+# 996 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
                   "Parsing failed !"
-# 1007 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+# 996 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
                   ); &__pstr__[0];}))
-# 1007 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 996 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
                   ))));
    }
 
@@ -1113,7 +1113,7 @@ void Weather_Online_sever()
 														/____/
 
 */
-# 1040 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1029 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void smartConfig_ndb()
 {
  lcd.createChar(1, UB);
@@ -1487,7 +1487,7 @@ void Set_Minute_Alarm()
 
 
 */
-# 1403 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1392 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Active_Alarm()
 {
  lcd.clear();
@@ -1610,12 +1610,14 @@ void Active_Alarm()
 
 
 */
-# 1515 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1504 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 bool bool_Test_Wifi(void)
 {
  int c = 0;
+ delay(300);
  Serial.println("");
  Serial.println("Waiting for Wifi to connect");
+ delay(300);
  Serial.println("=========  Note =========");
  Serial.println("WL_NO_SHIELD        = 255");
  Serial.println("WL_IDLE_STATUS      = 0");
@@ -1629,6 +1631,7 @@ bool bool_Test_Wifi(void)
  Serial.println("========================");
  while (c < 40)
  {
+  Serial.println("");
   if (WiFi.status() == WL_CONNECTED)
   {
    /* Chuông báo ok */
@@ -1672,7 +1675,7 @@ bool bool_Test_Wifi(void)
 			 ░░░░░
 
 */
-# 1564 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1556 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void update_FOTA()
 {
  Serial.println("\n>>>>>>>>>>> Update FOTA \n");
@@ -1695,7 +1698,7 @@ void update_FOTA()
  lcd.setCursor(0, 3);
  lcd.print("...");
  Serial.printf(">>> Device: %d MHz \n", ESP.getCpuFreqMHz());
- Serial.printf(">>> Version Firmware: v%s (OTADrive) \n", FirmwareVer);
+ Serial.printf(">>> Version Firmware: %s \n", FirmwareVer);
  Serial.printf(">>> ID ESP: ");
  Serial.println(*((volatile uint32_t *)(0x3FF00000+(0x58))));
  Serial.printf(">>> Boot Mode: %d \n", ESP.getBootMode());
@@ -1709,7 +1712,7 @@ void update_FOTA()
   return;
  }
 
- client.print(String("GET ") + "/bangnguyendev/SmartClock/master/build/version_main.ino.bin.txt" + " HTTP/1.1\r\n" +
+ client.print(String("GET ") + "/bangnguyendev/SmartClock/Down_Bin_from_Github/build/version_main.ino.bin.txt" + " HTTP/1.1\r\n" +
      "Host: " + host + "\r\n" +
      "User-Agent: BuildFailureDetectorESP8266\r\n" +
      "Connection: close\r\n\r\n");
@@ -1741,7 +1744,7 @@ void update_FOTA()
  {
   Serial.println(">>> New firmware detected");
   ESPhttpUpdate.setLedPin(2, 0x0);
-  t_httpUpdate_return ret = ESPhttpUpdate.update(client, "https://raw.githubusercontent.com/bangnguyendev/SmartClock/master/build/main.ino.bin");
+  t_httpUpdate_return ret = ESPhttpUpdate.update(client, "https://raw.githubusercontent.com/bangnguyendev/SmartClock/Down_Bin_from_Github/build/main.ino.bin");
 
   switch (ret)
   {
@@ -1790,7 +1793,7 @@ _|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""| {======|_|"""""|_|"""""
 "`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'./o--000'"`-0-0-'"`-0-0-'"`-0-0-'
 
 */
-# 1676 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1668 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Welcome_Smartclock()
 {
  lcd.clear();
