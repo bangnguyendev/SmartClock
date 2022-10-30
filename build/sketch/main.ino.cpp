@@ -19,7 +19,6 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h> /* Get data Weather - http */
 #include <ESP8266httpUpdate.h> /* Updated OTA */
-#include <BlynkSimpleEsp8266.h>
 #include <time.h>
 #include <Wire.h>			   /* LCD I2C https://github.com/johnrickman/LiquidCrystal_I2C */
 #include <LiquidCrystal_I2C.h> /* LCD I2C https://github.com/johnrickman/LiquidCrystal_I2C */
@@ -30,39 +29,39 @@
 #include "../../../SmartClock/include/LCD_2004_define.h" /* DEFINE MACRO */
 #include "../../../SmartClock/include/Macro_define.h"	 /* LCD2004 - CHARACTER LCD */
 
-#line 31 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 30 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void setup();
-#line 192 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 191 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void loop();
-#line 204 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 203 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Check_Status_Button();
-#line 391 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 388 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Reload_Localtime_NTP();
-#line 404 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 401 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Setup_Local_RealTime();
-#line 739 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 736 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Choose_location();
-#line 939 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 935 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Call_Weather_Every_10Min();
-#line 960 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 956 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Weather_Online_sever();
-#line 1040 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1036 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void smartConfig_ndb();
-#line 1128 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1124 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Setup_AlarmClock();
-#line 1235 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1231 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Set_Hour_Alarm();
-#line 1315 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1311 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Set_Minute_Alarm();
-#line 1403 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1399 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Active_Alarm();
-#line 1515 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1511 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 bool bool_Test_Wifi(void);
-#line 1564 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1560 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void update_FOTA();
-#line 1659 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1655 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Welcome_Smartclock();
-#line 31 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 30 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void setup()
 {
 	/* Initialize Serial. */
@@ -244,7 +243,7 @@ void Check_Status_Button()
 		if (digitalRead(Button_Mode) == PULLUP_PULLDOWN)
 		{
 			lcd.clear();
-			long startTime = millis(); // giá trị ban đầu được gán bằng giá trị hiện tại của millis
+			unsigned long startTime = millis(); // giá trị ban đầu được gán bằng giá trị hiện tại của millis
 			Serial.printf("digitalRead(Button_Mode): %d \n", digitalRead(Button_Mode));
 
 			while (digitalRead(Button_Mode) == PULLUP_PULLDOWN) // đợi cho nút bấm được giữ
@@ -303,8 +302,6 @@ void Check_Status_Button()
 				}
 				yield(); // disble Soft WDT reset - NodeMCU
 			};
-			/* thời gian bằng giá trị hiện tại trừ giá trị ban đầu */
-			long duration = millis() - startTime;
 			Serial.printf("couter_Mode: ");
 			Serial.println(couter_Mode);
 			/* Update FOTA mode*/
@@ -783,7 +780,6 @@ void Choose_location()
 	lcd.setCursor(0, 3);
 	lcd.print("DaLat> TpHue> TpHCM>");
 	unsigned long dem_10s_stop = millis();
-	int dem_location = 0;
 	while (((unsigned long)(millis() - dem_10s_stop) < 10000) && (status_Mode == 0))
 	{
 		if (digitalRead(Button_Mode) == PULLUP_PULLDOWN) // nếu nút bấm ở mức cao
@@ -1134,14 +1130,14 @@ void smartConfig_ndb()
 				Serial.println("");
 
 				Serial.println("writing eeprom ssid:");
-				for (int i = 0; i < qsid.length(); ++i)
+				for (int i = 0; i < (int)qsid.length(); ++i)
 				{
 					EEPROM.write(i, qsid[i]);
 					Serial.print("Wrote: ");
 					Serial.println(qsid[i]);
 				}
 				Serial.println("writing eeprom pass:");
-				for (int i = 0; i < qpass.length(); ++i)
+				for (int i = 0; i < (int)qpass.length(); ++i)
 				{
 					EEPROM.write(32 + i, qpass[i]);
 					Serial.print("Wrote: ");
@@ -1487,7 +1483,7 @@ void Active_Alarm()
 			delay(500); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
 			if (digitalRead(Button_Mode) == PULLUP_PULLDOWN)
 			{
-				long startTime = millis();							// giá trị ban đầu được gán bằng giá trị hiện tại của millis
+				unsigned long startTime = millis();							// giá trị ban đầu được gán bằng giá trị hiện tại của millis
 				while (digitalRead(Button_Mode) == PULLUP_PULLDOWN) // đợi cho nút bấm được giữ
 				{
 					/* hien thi gio font so lon */

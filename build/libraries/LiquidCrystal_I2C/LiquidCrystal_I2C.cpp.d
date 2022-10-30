@@ -1,6 +1,6 @@
 d:\Git_NDB\SmartClock\build\libraries\LiquidCrystal_I2C\LiquidCrystal_I2C.cpp.o: \
- D:\OneDrive_bang.nguyen-duy\OneDrive\ -\ Ban\ Vien\ Co.,\ ltd\Documents\Arduino\libraries\LiquidCrystal_I2C\LiquidCrystal_I2C.cpp \
- D:\OneDrive_bang.nguyen-duy\OneDrive\ -\ Ban\ Vien\ Co.,\ ltd\Documents\Arduino\libraries\LiquidCrystal_I2C\LiquidCrystal_I2C.h \
+ D:\OneDrive\ -\ Ban\ Vien\ Co.,\ ltd\Documents\Arduino\libraries\LiquidCrystal_I2C\LiquidCrystal_I2C.cpp \
+ D:\OneDrive\ -\ Ban\ Vien\ Co.,\ ltd\Documents\Arduino\libraries\LiquidCrystal_I2C\LiquidCrystal_I2C.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2\cores\esp8266/Print.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2\cores\esp8266/WString.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2\cores\esp8266/pgmspace.h \
