@@ -130,6 +130,7 @@ d:\Git_NDB\SmartClock\build\sketch\main.ino.cpp.o: \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2\libraries\ESP8266WiFi\src/WiFiUdp.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2\cores\esp8266/Udp.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2\libraries\ESP8266WiFi\src/include/slist.h \
+ C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2\libraries\ESP8266WiFi\src/CertStoreBearSSL.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2\libraries\Wire/Wire.h \
  D:\OneDrive\ -\ Ban\ Vien\ Co.,\ ltd\Documents\Arduino\libraries\LiquidCrystal_I2C/LiquidCrystal_I2C.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2\libraries\EEPROM/EEPROM.h \
@@ -216,4 +217,5 @@ d:\Git_NDB\SmartClock\build\sketch\main.ino.cpp.o: \
  D:\OneDrive\ -\ Ban\ Vien\ Co.,\ ltd\Documents\Arduino\libraries\ArduinoJson\src/ArduinoJson/Serialization/JsonSerializerImpl.hpp \
  D:\OneDrive\ -\ Ban\ Vien\ Co.,\ ltd\Documents\Arduino\libraries\ArduinoJson\src/ArduinoJson/compatibility.hpp \
  d:\git_ndb\smartclock\include\lcd_2004_define.h \
- d:\git_ndb\smartclock\include\macro_define.h
+ d:\git_ndb\smartclock\include\macro_define.h \
+ d:\git_ndb\smartclock\include\digicertglobalrootca.h

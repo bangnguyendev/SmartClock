@@ -19,6 +19,9 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h> /* Get data Weather - http */
 #include <ESP8266httpUpdate.h> /* Updated OTA */
+#include <WiFiClientSecure.h>
+#include <CertStoreBearSSL.h>
+BearSSL::CertStore certStore;
 #include <time.h>
 #include <Wire.h>			   /* LCD I2C https://github.com/johnrickman/LiquidCrystal_I2C */
 #include <LiquidCrystal_I2C.h> /* LCD I2C https://github.com/johnrickman/LiquidCrystal_I2C */
@@ -26,42 +29,43 @@
 #include <ArduinoJson.h> /* ARDUINOJSON_VERSION "5.13.5" */
 
 /* USER DEFINE  */
-#include "../../../SmartClock/include/LCD_2004_define.h" /* DEFINE MACRO */
-#include "../../../SmartClock/include/Macro_define.h"	 /* LCD2004 - CHARACTER LCD */
+#include "../../../SmartClock/include/LCD_2004_define.h"	  /* DEFINE MACRO */
+#include "../../../SmartClock/include/Macro_define.h"		  /* LCD2004 - CHARACTER LCD */
+#include "../../../SmartClock/include/DigiCertGlobalRootCA.h" /* DEFINE DigiCertGlobalRootCA */
 
-#line 30 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 34 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void setup();
-#line 191 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 195 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void loop();
-#line 203 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 207 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Check_Status_Button();
-#line 388 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 392 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Reload_Localtime_NTP();
-#line 401 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 405 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Setup_Local_RealTime();
-#line 736 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 740 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Choose_location();
-#line 935 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 939 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Call_Weather_Every_10Min();
-#line 956 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 960 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Weather_Online_sever();
-#line 1036 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1040 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void smartConfig_ndb();
-#line 1124 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1128 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Setup_AlarmClock();
-#line 1231 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1235 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Set_Hour_Alarm();
-#line 1311 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1315 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Set_Minute_Alarm();
-#line 1399 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1403 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Active_Alarm();
-#line 1511 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1515 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 bool bool_Test_Wifi(void);
-#line 1560 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1564 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void update_FOTA();
-#line 1655 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1676 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Welcome_Smartclock();
-#line 30 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 34 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void setup()
 {
 	/* Initialize Serial. */
@@ -1483,7 +1487,7 @@ void Active_Alarm()
 			delay(500); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
 			if (digitalRead(Button_Mode) == PULLUP_PULLDOWN)
 			{
-				unsigned long startTime = millis();							// giá trị ban đầu được gán bằng giá trị hiện tại của millis
+				unsigned long startTime = millis();					// giá trị ban đầu được gán bằng giá trị hiện tại của millis
 				while (digitalRead(Button_Mode) == PULLUP_PULLDOWN) // đợi cho nút bấm được giữ
 				{
 					/* hien thi gio font so lon */
@@ -1603,7 +1607,7 @@ void update_FOTA()
 	lcd.print("Version Firmware:   ");
 
 	lcd.setCursor(0, 1);
-	lcd.print(Version);
+	lcd.print(FirmwareVer);
 	lcd.print(" - ");
 	lcd.print(CHIPID);
 
@@ -1614,51 +1618,69 @@ void update_FOTA()
 	lcd.setCursor(0, 3);
 	lcd.print("...");
 	Serial.printf(">>> Device: %d MHz \n", ESP.getCpuFreqMHz());
-	Serial.printf(">>> Version Firmware: v%s (OTADrive) \n", Version);
+	Serial.printf(">>> Version Firmware: v%s (OTADrive) \n", FirmwareVer);
 	Serial.printf(">>> ID ESP: ");
 	Serial.println(CHIPID);
 	Serial.printf(">>> Boot Mode: %d \n", ESP.getBootMode());
 	Serial.printf(">>> Free mem: %d \n", ESP.getFreeHeap());
-	/* biến Check_OTA kiểm tra có coi bản cập nhật OTA nào hay không? */
-	bool Check_OTA = true;
-	int count_Check_OTA = 0;
-	while (Check_OTA)
+
+	WiFiClientSecure client;
+	client.setTrustAnchors(&cert);
+	if (!client.connect(host, httpsPort))
 	{
+		Serial.println(">>> raw.githubusercontent.com - Connection failed");
+		return;
+	}
 
-		/* sever chưa tệp BIN */
-		String url = "http://otadrive.com/DeviceApi/update?";
-		WiFiClient client;
-		url += "&s=" + String(CHIPID);
-		url += MakeFirmwareInfo(ProductKey, Version);
+	client.print(String("GET ") + URL_fw_Version + " HTTP/1.1\r\n" +
+				 "Host: " + host + "\r\n" +
+				 "User-Agent: BuildFailureDetectorESP8266\r\n" +
+				 "Connection: close\r\n\r\n");
 
-		t_httpUpdate_return ret = ESPhttpUpdate.update(client, url, Version);
+	while (client.connected())
+	{
+		String line = client.readStringUntil('\n');
+		if (line == "\r")
+		{
+			Serial.println("Headers received");
+			break;
+		}
+	}
+	String payload = client.readStringUntil('\n');
+
+	payload.trim();
+	if (payload.equals(FirmwareVer))
+	{
+		Serial.println(">>> Device already on latest firmware version");
+		lcd.setCursor(0, 2);
+		lcd.print("The current version ");
+		lcd.setCursor(0, 2);
+		lcd.print("      is the latest.");
+		lcd.setCursor(0, 3);
+		lcd.print("> > > > > > > > > > ");
+		delay(1500);
+	}
+	else
+	{
+		Serial.println(">>> New firmware detected");
+		ESPhttpUpdate.setLedPin(LED_BUILTIN, LOW);
+		t_httpUpdate_return ret = ESPhttpUpdate.update(client, URL_fw_Bin);
 
 		switch (ret)
 		{
 		case HTTP_UPDATE_FAILED:
-			count_Check_OTA++;
-			Check_OTA = true;
-			Serial.println(">>> Please waiting ...");
+			Serial.printf("HTTP_UPDATE_FAILD Error (%d): %s\n", ESPhttpUpdate.getLastError(), ESPhttpUpdate.getLastErrorString().c_str());
+			Serial.println(">>> Sever OTADrive bị nghẻn, quá tải...");
+			Serial.println(">>> Hoặc thiết bị của bạn chưa được cho phép cập nhật trên hệ thống...");
+			Serial.println(">>> Check cập nhật ở thời điểm khác...");
+			Serial.printf(">>> Phiên bản hiện tại là v%s \n", FirmwareVer);
 			lcd.setCursor(0, 3);
-			lcd.print("> Please waiting ");
-			lcd.print((100 - count_Check_OTA) / 10 % 10);
-			lcd.print((100 - count_Check_OTA) / 1 % 10);
-			if (count_Check_OTA > 100)
-			{
-				Check_OTA = false;
-				Serial.println(">>> Sever OTADrive bị nghẻn, quá tải...");
-				Serial.println(">>> Hoặc thiết bị của bạn chưa được cho phép cập nhật trên hệ thống...");
-				Serial.println(">>> Check cập nhật ở thời điểm khác...");
-				Serial.printf(">>> Phiên bản hiện tại là v%s \n", Version);
-				lcd.setCursor(0, 3);
-				lcd.print("> Skip updated...   ");
-				delay(2000);
-			}
+			lcd.print("> Skip updated...   ");
+			delay(2000);
 			break;
 
 		case HTTP_UPDATE_NO_UPDATES:
-			Check_OTA = false;
-			Serial.println(">>> HTTP_UPDATE_NO_UPDATES");
+			Serial.println("HTTP_UPDATE_NO_UPDATES");
 			Serial.println(">>> The current version is the latest.");
 			lcd.setCursor(0, 2);
 			lcd.print("The current version ");
@@ -1670,8 +1692,7 @@ void update_FOTA()
 			break;
 
 		case HTTP_UPDATE_OK:
-			Serial.println(">>> HTTP_UPDATE_OK"); // may not called we reboot the ESP
-			Check_OTA = false;
+			Serial.println("HTTP_UPDATE_OK");
 			break;
 		}
 	}
