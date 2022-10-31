@@ -27,19 +27,6 @@
 /* Cài đặt dạng kết nối nút nhấn PULL_UP OR PULL_DOWN */
 #define PULLUP_PULLDOWN 1 // PULL DOWN
 
-/* Cập nhật OTA */
-#define ProductKey "ee01b3e6-5101-4b37-8e0e-f53353bf12df"
-#define Version "2.0.0"
-#define MakeFirmwareInfo(k, v) "&_FirmwareInfo&k=" k "&v=" v "&FirmwareInfo_&"
-
-/* MACRO BLYNK IOT */
-#define ESP_NB_BLYNK ESP_NB_OFF
-#define BLYNK_TEMPLATE_ID "TMPL85uHU5ks"
-#define BLYNK_DEVICE_NAME "Template NDB"
-#define BLYNK_AUTH_TOKEN "dHTAaLwA5F-ZdeGAcmXP3ZE54k20Joby"
-char ssida[] = "DUY BANG";
-char passa[] = "zxcvbnm@123";
-
 /*index 0 to 31 */
 #define index_eeprom_SSID 32
 /*index 32 to 95 */

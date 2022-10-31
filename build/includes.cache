@@ -26,18 +26,13 @@
   },
   {
     "Sourcefile": "d:\\Git_NDB\\SmartClock\\build\\sketch\\main.ino.cpp",
-    "Include": "BlynkSimpleEsp8266.h",
-    "Includepath": "D:\\OneDrive_bang.nguyen-duy\\OneDrive - Ban Vien Co., ltd\\Documents\\Arduino\\libraries\\Blynk\\src"
-  },
-  {
-    "Sourcefile": "d:\\Git_NDB\\SmartClock\\build\\sketch\\main.ino.cpp",
     "Include": "Wire.h",
     "Includepath": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\Wire"
   },
   {
     "Sourcefile": "d:\\Git_NDB\\SmartClock\\build\\sketch\\main.ino.cpp",
     "Include": "LiquidCrystal_I2C.h",
-    "Includepath": "D:\\OneDrive_bang.nguyen-duy\\OneDrive - Ban Vien Co., ltd\\Documents\\Arduino\\libraries\\LiquidCrystal_I2C"
+    "Includepath": "D:\\OneDrive - Ban Vien Co., ltd\\Documents\\Arduino\\libraries\\LiquidCrystal_I2C"
   },
   {
     "Sourcefile": "d:\\Git_NDB\\SmartClock\\build\\sketch\\main.ino.cpp",
@@ -47,7 +42,7 @@
   {
     "Sourcefile": "d:\\Git_NDB\\SmartClock\\build\\sketch\\main.ino.cpp",
     "Include": "ArduinoJson.h",
-    "Includepath": "D:\\OneDrive_bang.nguyen-duy\\OneDrive - Ban Vien Co., ltd\\Documents\\Arduino\\libraries\\ArduinoJson\\src"
+    "Includepath": "D:\\OneDrive - Ban Vien Co., ltd\\Documents\\Arduino\\libraries\\ArduinoJson\\src"
   },
   {
     "Sourcefile": "d:\\Git_NDB\\SmartClock\\build\\sketch\\main.ino.cpp",
@@ -145,32 +140,12 @@
     "Includepath": null
   },
   {
-    "Sourcefile": "D:\\OneDrive_bang.nguyen-duy\\OneDrive - Ban Vien Co., ltd\\Documents\\Arduino\\libraries\\Blynk\\src\\utility\\BlynkDebug.cpp",
-    "Include": "",
-    "Includepath": null
-  },
-  {
-    "Sourcefile": "D:\\OneDrive_bang.nguyen-duy\\OneDrive - Ban Vien Co., ltd\\Documents\\Arduino\\libraries\\Blynk\\src\\utility\\BlynkHandlers.cpp",
-    "Include": "",
-    "Includepath": null
-  },
-  {
-    "Sourcefile": "D:\\OneDrive_bang.nguyen-duy\\OneDrive - Ban Vien Co., ltd\\Documents\\Arduino\\libraries\\Blynk\\src\\utility\\BlynkTimer.cpp",
-    "Include": "",
-    "Includepath": null
-  },
-  {
-    "Sourcefile": "D:\\OneDrive_bang.nguyen-duy\\OneDrive - Ban Vien Co., ltd\\Documents\\Arduino\\libraries\\Blynk\\src\\utility\\utility.cpp",
-    "Include": "",
-    "Includepath": null
-  },
-  {
     "Sourcefile": "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.0.2\\libraries\\Wire\\Wire.cpp",
     "Include": "",
     "Includepath": null
   },
   {
-    "Sourcefile": "D:\\OneDrive_bang.nguyen-duy\\OneDrive - Ban Vien Co., ltd\\Documents\\Arduino\\libraries\\LiquidCrystal_I2C\\LiquidCrystal_I2C.cpp",
+    "Sourcefile": "D:\\OneDrive - Ban Vien Co., ltd\\Documents\\Arduino\\libraries\\LiquidCrystal_I2C\\LiquidCrystal_I2C.cpp",
     "Include": "",
     "Includepath": null
   },
