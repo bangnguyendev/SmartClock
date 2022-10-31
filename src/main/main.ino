@@ -1584,6 +1584,10 @@ void update_FOTA()
 	if (!client.connect(host, httpsPort))
 	{
 		Serial.println(">>> raw.githubusercontent.com - Connection failed");
+		Serial.println(">>> Sever bị nghẻn, quá tải...");
+		Serial.println(">>> Hoặc thiết bị của bạn chưa được cho phép cập nhật trên hệ thống...");
+		Serial.println(">>> Check cập nhật ở thời điểm khác...");
+		Serial.printf(">>> Phiên bản hiện tại là v%s \n", FirmwareVer);
 		return;
 	}
 
@@ -1605,6 +1609,7 @@ void update_FOTA()
 	String payload = client.readStringUntil('\n');
 
 	payload.trim();
+
 	if (payload.equals(FirmwareVer))
 	{
 		Serial.println(">>> Device already on latest firmware version");
@@ -1618,7 +1623,8 @@ void update_FOTA()
 	}
 	else
 	{
-		Serial.println(">>> New firmware detected");
+		Serial.print(">>> New firmware detected: ");
+		Serial.println(payload);
 		ESPhttpUpdate.setLedPin(LED_BUILTIN, LOW);
 		t_httpUpdate_return ret = ESPhttpUpdate.update(client, URL_fw_Bin);
 
@@ -1626,7 +1632,7 @@ void update_FOTA()
 		{
 		case HTTP_UPDATE_FAILED:
 			Serial.printf("HTTP_UPDATE_FAILD Error (%d): %s\n", ESPhttpUpdate.getLastError(), ESPhttpUpdate.getLastErrorString().c_str());
-			Serial.println(">>> Sever OTADrive bị nghẻn, quá tải...");
+			Serial.println(">>> Sever bị nghẻn, quá tải...");
 			Serial.println(">>> Hoặc thiết bị của bạn chưa được cho phép cập nhật trên hệ thống...");
 			Serial.println(">>> Check cập nhật ở thời điểm khác...");
 			Serial.printf(">>> Phiên bản hiện tại là v%s \n", FirmwareVer);
