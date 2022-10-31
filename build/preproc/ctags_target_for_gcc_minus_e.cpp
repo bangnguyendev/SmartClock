@@ -1614,10 +1614,8 @@ void Active_Alarm()
 bool bool_Test_Wifi(void)
 {
  int c = 0;
- delay(300);
  Serial.println("");
  Serial.println("Waiting for Wifi to connect");
- delay(300);
  Serial.println("=========  Note =========");
  Serial.println("WL_NO_SHIELD        = 255");
  Serial.println("WL_IDLE_STATUS      = 0");
@@ -1675,7 +1673,7 @@ bool bool_Test_Wifi(void)
 			 ░░░░░
 
 */
-# 1556 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1554 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void update_FOTA()
 {
  Serial.println("\n>>>>>>>>>>> Update FOTA \n");
@@ -1712,11 +1710,12 @@ void update_FOTA()
   return;
  }
 
- client.print(String("GET ") + "/bangnguyendev/SmartClock/Down_Bin_from_Github/build/version_main.ino.bin.txt" + " HTTP/1.1\r\n" +
+ client.print(String("GET ") + "/bangnguyendev/SmartClock/master/build/version_main.ino.bin.txt" + " HTTP/1.1\r\n" +
      "Host: " + host + "\r\n" +
      "User-Agent: BuildFailureDetectorESP8266\r\n" +
      "Connection: close\r\n\r\n");
 
+ // Check nội dung từ file Version 	
  while (client.connected())
  {
   String line = client.readStringUntil('\n');
@@ -1744,7 +1743,7 @@ void update_FOTA()
  {
   Serial.println(">>> New firmware detected");
   ESPhttpUpdate.setLedPin(2, 0x0);
-  t_httpUpdate_return ret = ESPhttpUpdate.update(client, "https://raw.githubusercontent.com/bangnguyendev/SmartClock/Down_Bin_from_Github/build/main.ino.bin");
+  t_httpUpdate_return ret = ESPhttpUpdate.update(client, "https://raw.githubusercontent.com/bangnguyendev/SmartClock/master/build/main.ino.bin");
 
   switch (ret)
   {
@@ -1793,7 +1792,7 @@ _|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""| {======|_|"""""|_|"""""
 "`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'./o--000'"`-0-0-'"`-0-0-'"`-0-0-'
 
 */
-# 1668 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1667 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Welcome_Smartclock()
 {
  lcd.clear();

@@ -61,9 +61,9 @@ void Set_Minute_Alarm();
 void Active_Alarm();
 #line 1504 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 bool bool_Test_Wifi(void);
-#line 1556 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1554 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void update_FOTA();
-#line 1668 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1667 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Welcome_Smartclock();
 #line 34 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void setup()
@@ -1539,10 +1539,8 @@ void Active_Alarm()
 bool bool_Test_Wifi(void)
 {
 	int c = 0;
-	delay(300);
 	Serial.println("");
 	Serial.println("Waiting for Wifi to connect");
-	delay(300);
 	Serial.println("=========  Note =========");
 	Serial.println("WL_NO_SHIELD        = 255");
 	Serial.println("WL_IDLE_STATUS      = 0");
@@ -1629,6 +1627,7 @@ void update_FOTA()
 				 "User-Agent: BuildFailureDetectorESP8266\r\n" +
 				 "Connection: close\r\n\r\n");
 
+	// Check nội dung từ file Version 	
 	while (client.connected())
 	{
 		String line = client.readStringUntil('\n');

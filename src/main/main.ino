@@ -1592,6 +1592,7 @@ void update_FOTA()
 				 "User-Agent: BuildFailureDetectorESP8266\r\n" +
 				 "Connection: close\r\n\r\n");
 
+	// Check nội dung từ file Version 	
 	while (client.connected())
 	{
 		String line = client.readStringUntil('\n');
