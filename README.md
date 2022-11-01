@@ -15,7 +15,7 @@ https://github.com/johnrickman/LiquidCrystal_I2C
 
 https://github.com/esp8266vn/esp8266.vn/blob/master/docs/arduino/libraries/eeprom.md
 
-### ArduinoJson-5.13.5.zip
+### ArduinoJson
 
 https://www.arduinolibraries.info/libraries/arduino-json
 
@@ -23,6 +23,11 @@ https://www.arduinolibraries.info/libraries/arduino-json
 ### SmartConfig ESP
 
 https://arduino.esp8266.vn/wifi/smartconfig.html
+
+
+### Digicert
+
+https://www.digicert.com/kb/digicert-root-certificates.htm
 
 
 ### LIBRARY time : 
