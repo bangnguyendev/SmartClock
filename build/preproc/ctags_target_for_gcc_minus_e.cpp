@@ -207,16 +207,16 @@ void loop()
 
 void Check_Status_Button()
 {
- if (digitalRead(D1) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
+ if (digitalRead(D1) == 0 /* PULL DOWN*/) // nếu nút bấm ở mức cao
  {
   delay(500); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
-  if (digitalRead(D1) == 1 /* PULL DOWN*/)
+  if (digitalRead(D1) == 0 /* PULL DOWN*/)
   {
    lcd.clear();
    unsigned long startTime = millis(); // giá trị ban đầu được gán bằng giá trị hiện tại của millis
    Serial.printf("digitalRead(Button_Mode): %d \n", digitalRead(D1));
 
-   while (digitalRead(D1) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
+   while (digitalRead(D1) == 0 /* PULL DOWN*/) // đợi cho nút bấm được giữ
    {
     Serial.printf("Thời gian đè giữ nút nhấn: %d ms\n", (millis() - startTime));
     couter_Mode = (millis() - startTime) / 1000;
@@ -802,13 +802,13 @@ void Choose_location()
  unsigned long dem_10s_stop = millis();
  while (((unsigned long)(millis() - dem_10s_stop) < 10000) && (status_Mode == 0))
  {
-  if (digitalRead(D1) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
+  if (digitalRead(D1) == 0 /* PULL DOWN*/) // nếu nút bấm ở mức cao
   {
    delay(500); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
-   if (digitalRead(D1) == 1 /* PULL DOWN*/)
+   if (digitalRead(D1) == 0 /* PULL DOWN*/)
    {
     long startTime = millis(); // giá trị ban đầu được gán bằng giá trị hiện tại của millis
-    while (digitalRead(D1) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
+    while (digitalRead(D1) == 0 /* PULL DOWN*/) // đợi cho nút bấm được giữ
     {
      /* khi nhan nut thi set lai time out mode */
      dem_10s_stop = millis();
@@ -1225,13 +1225,13 @@ void Setup_AlarmClock()
   printDigits(hen_phut / 10 % 10, 11, 2);
   printDigits(hen_phut / 1 % 10, 15, 2);
 
-  if (digitalRead(D1) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
+  if (digitalRead(D1) == 0 /* PULL DOWN*/) // nếu nút bấm ở mức cao
   {
    delay(500); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
-   if (digitalRead(D1) == 1 /* PULL DOWN*/)
+   if (digitalRead(D1) == 0 /* PULL DOWN*/)
    {
     long startTime = millis(); // giá trị ban đầu được gán bằng giá trị hiện tại của millis
-    while (digitalRead(D1) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
+    while (digitalRead(D1) == 0 /* PULL DOWN*/) // đợi cho nút bấm được giữ
     {
      /* khi nhan nut thi set lai time out mode */
      dem_10s_stop = millis();
@@ -1347,10 +1347,10 @@ void Set_Hour_Alarm()
   printDigits(hen_phut / 10 % 10, 11, 2);
   printDigits(hen_phut / 1 % 10, 15, 2);
 
-  if (digitalRead(D1) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
+  if (digitalRead(D1) == 0 /* PULL DOWN*/) // nếu nút bấm ở mức cao
   {
    delay(50); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
-   if (digitalRead(D1) == 1 /* PULL DOWN*/)
+   if (digitalRead(D1) == 0 /* PULL DOWN*/)
    {
     hen_gio++;
     if (hen_gio >= 24)
@@ -1358,7 +1358,7 @@ void Set_Hour_Alarm()
      hen_gio = 0;
     }
     long startTime = millis();
-    while (digitalRead(D1) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
+    while (digitalRead(D1) == 0 /* PULL DOWN*/) // đợi cho nút bấm được giữ
     {
      /* khi nhan nut thi set lai time out mode */
      dem_10s_stop_g = millis();
@@ -1425,10 +1425,10 @@ void Set_Minute_Alarm()
    time_dem_baothuc = millis();
   }
 
-  if (digitalRead(D1) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
+  if (digitalRead(D1) == 0 /* PULL DOWN*/) // nếu nút bấm ở mức cao
   {
    delay(50); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
-   if (digitalRead(D1) == 1 /* PULL DOWN*/)
+   if (digitalRead(D1) == 0 /* PULL DOWN*/)
    {
     hen_phut++;
     if (hen_phut >= 60)
@@ -1436,7 +1436,7 @@ void Set_Minute_Alarm()
      hen_phut = 0;
     }
     long startTime = millis();
-    while (digitalRead(D1) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
+    while (digitalRead(D1) == 0 /* PULL DOWN*/) // đợi cho nút bấm được giữ
     {
      /* khi nhan nut thi set lai time out mode */
      dem_10s_stop_P = millis();
@@ -1535,13 +1535,13 @@ void Active_Alarm()
 
   /* Check đè phím MODE hơn 2 giây thì thoát, không kêu chuông nữa */
   digitalWrite(D0, 1);
-  if (digitalRead(D1) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
+  if (digitalRead(D1) == 0 /* PULL DOWN*/) // nếu nút bấm ở mức cao
   {
    delay(500); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
-   if (digitalRead(D1) == 1 /* PULL DOWN*/)
+   if (digitalRead(D1) == 0 /* PULL DOWN*/)
    {
     unsigned long startTime = millis(); // giá trị ban đầu được gán bằng giá trị hiện tại của millis
-    while (digitalRead(D1) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
+    while (digitalRead(D1) == 0 /* PULL DOWN*/) // đợi cho nút bấm được giữ
     {
      /* hien thi gio font so lon */
      customA(0, 0);
@@ -1710,7 +1710,11 @@ void update_FOTA()
   Serial.println(">>> Sever bị nghẻn, quá tải...");
   Serial.println(">>> Hoặc thiết bị của bạn chưa được cho phép cập nhật trên hệ thống...");
   Serial.println(">>> Check cập nhật ở thời điểm khác...");
+<<<<<<< HEAD
   Serial.printf(">>> Phiên bản hiện tại là %s \n", FirmwareVer);
+=======
+  Serial.printf(">>> Phiên bản hiện tại là v%s \n", FirmwareVer);
+>>>>>>> master
   return;
  }
 
@@ -1730,6 +1734,7 @@ void update_FOTA()
   }
  }
 
+<<<<<<< HEAD
  String payload = client.readString(); // Get the request response payload
  Serial.println(payload);
  DynamicJsonDocument jsonBuffer(1024);
@@ -1755,6 +1760,11 @@ void update_FOTA()
  // serializeJson(jsonBuffer, Serial);
 
  if (version_prod.equals(FirmwareVer))
+=======
+ payload.trim();
+
+ if (payload.equals(FirmwareVer))
+>>>>>>> master
  {
   Serial.println(">>> Device already on latest firmware version");
   lcd.setCursor(0, 2);
@@ -1768,7 +1778,11 @@ void update_FOTA()
  else
  {
   Serial.print(">>> New firmware detected: ");
+<<<<<<< HEAD
   Serial.println(version_prod);
+=======
+  Serial.println(payload);
+>>>>>>> master
   ESPhttpUpdate.setLedPin(2, 0x0);
   t_httpUpdate_return ret = ESPhttpUpdate.update(client, "https://raw.githubusercontent.com/bangnguyendev/SmartClock/Down_Bin_from_Github/build/main.ino.bin");
 
@@ -1819,7 +1833,11 @@ _|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""| {======|_|"""""|_|"""""
 "`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'./o--000'"`-0-0-'"`-0-0-'"`-0-0-'
 
 */
+<<<<<<< HEAD
 # 1686 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+=======
+# 1673 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+>>>>>>> master
 void Welcome_Smartclock()
 {
  lcd.clear();
