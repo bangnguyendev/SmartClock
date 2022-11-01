@@ -1058,29 +1058,29 @@ void Weather_Online_sever()
   if (httpCode > 0) // check the returning code
   {
    String payload = http.getString(); // Get the request response payload
+   // Serial.println(payload);
+   DynamicJsonDocument jsonBuffer(1024);
 
-   DynamicJsonBuffer jsonBuffer(512);
-
-   // Parse JSON object
-   JsonObject &root = jsonBuffer.parseObject(payload);
-   if (!root.success())
-   {
-    Serial.println(((reinterpret_cast<const __FlashStringHelper *>(
-# 996 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
-                  (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "996" "." "10" "\", \"aSM\", @progbits, 1 #"))) = (
-# 996 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
-                  "Parsing failed !"
-# 996 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
-                  ); &__pstr__[0];}))
-# 996 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
-                  ))));
+   auto error = deserializeJson(jsonBuffer, payload);
+   if (error) {
+    Serial.print(((reinterpret_cast<const __FlashStringHelper *>(
+# 994 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+                (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "994" "." "23" "\", \"aSM\", @progbits, 1 #"))) = (
+# 994 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+                "deserializeJson() failed with code "
+# 994 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+                ); &__pstr__[0];}))
+# 994 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+                ))));
+    Serial.println(error.c_str());
+    return;
    }
 
-   temp = (float)(root["main"]["temp"]) - 273.15; // get temperature in °C
-   humidity = root["main"]["humidity"]; // get humidity in %
-   pressure = (float)(root["main"]["pressure"]) / 1000; // get pressure in bar
-   wind_speed = root["wind"]["speed"]; // get wind speed in m/s
-   wind_degree = root["wind"]["deg"]; // get wind degree in °
+   temp = (float)(jsonBuffer["main"]["temp"]) - 273.15; // get temperature in °C
+   humidity = jsonBuffer["main"]["humidity"]; // get humidity in %
+   pressure = (float)(jsonBuffer["main"]["pressure"]) / 1000; // get pressure in bar
+   wind_speed = jsonBuffer["wind"]["speed"]; // get wind speed in m/s
+   wind_degree = jsonBuffer["wind"]["deg"]; // get wind degree in °
 
    // print data
    Serial.printf("Temperature = % .2f°C\n", temp);
@@ -1710,11 +1710,15 @@ void update_FOTA()
   Serial.println(">>> Sever bị nghẻn, quá tải...");
   Serial.println(">>> Hoặc thiết bị của bạn chưa được cho phép cập nhật trên hệ thống...");
   Serial.println(">>> Check cập nhật ở thời điểm khác...");
+<<<<<<< HEAD
+  Serial.printf(">>> Phiên bản hiện tại là %s \n", FirmwareVer);
+=======
   Serial.printf(">>> Phiên bản hiện tại là v%s \n", FirmwareVer);
+>>>>>>> master
   return;
  }
 
- client.print(String("GET ") + "/bangnguyendev/SmartClock/master/build/version_main.ino.bin.txt" + " HTTP/1.1\r\n" +
+ client.print(String("GET ") + "/bangnguyendev/SmartClock/Down_Bin_from_Github/include/Info_prod.json" + " HTTP/1.1\r\n" +
      "Host: " + host + "\r\n" +
      "User-Agent: BuildFailureDetectorESP8266\r\n" +
      "Connection: close\r\n\r\n");
@@ -1725,15 +1729,42 @@ void update_FOTA()
   String line = client.readStringUntil('\n');
   if (line == "\r")
   {
-   Serial.println("Headers received");
+   Serial.println(">>> Headers received");
    break;
   }
  }
- String payload = client.readStringUntil('\n');
 
+<<<<<<< HEAD
+ String payload = client.readString(); // Get the request response payload
+ Serial.println(payload);
+ DynamicJsonDocument jsonBuffer(1024);
+
+ auto error = deserializeJson(jsonBuffer, payload);
+ if (error) {
+  Serial.print(((reinterpret_cast<const __FlashStringHelper *>(
+# 1616 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "1616" "." "24" "\", \"aSM\", @progbits, 1 #"))) = (
+# 1616 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+              "deserializeJson() failed with code "
+# 1616 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+              ); &__pstr__[0];}))
+# 1616 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+              ))));
+  Serial.println(error.c_str());
+  return;
+ }
+
+ String author_prod = jsonBuffer["author"];
+ String version_prod = jsonBuffer["main"]["version"];
+
+ // serializeJson(jsonBuffer, Serial);
+
+ if (version_prod.equals(FirmwareVer))
+=======
  payload.trim();
 
  if (payload.equals(FirmwareVer))
+>>>>>>> master
  {
   Serial.println(">>> Device already on latest firmware version");
   lcd.setCursor(0, 2);
@@ -1747,9 +1778,13 @@ void update_FOTA()
  else
  {
   Serial.print(">>> New firmware detected: ");
+<<<<<<< HEAD
+  Serial.println(version_prod);
+=======
   Serial.println(payload);
+>>>>>>> master
   ESPhttpUpdate.setLedPin(2, 0x0);
-  t_httpUpdate_return ret = ESPhttpUpdate.update(client, "https://raw.githubusercontent.com/bangnguyendev/SmartClock/master/build/main.ino.bin");
+  t_httpUpdate_return ret = ESPhttpUpdate.update(client, "https://raw.githubusercontent.com/bangnguyendev/SmartClock/Down_Bin_from_Github/build/main.ino.bin");
 
   switch (ret)
   {
@@ -1798,7 +1833,11 @@ _|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""| {======|_|"""""|_|"""""
 "`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'./o--000'"`-0-0-'"`-0-0-'"`-0-0-'
 
 */
+<<<<<<< HEAD
+# 1686 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+=======
 # 1673 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+>>>>>>> master
 void Welcome_Smartclock()
 {
  lcd.clear();

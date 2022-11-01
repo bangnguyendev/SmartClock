@@ -26,7 +26,7 @@ BearSSL::CertStore certStore;
 #include <Wire.h>			   /* LCD I2C https://github.com/johnrickman/LiquidCrystal_I2C */
 #include <LiquidCrystal_I2C.h> /* LCD I2C https://github.com/johnrickman/LiquidCrystal_I2C */
 #include <EEPROM.h>
-#include <ArduinoJson.h> /* ARDUINOJSON_VERSION "5.13.5" */
+#include <ArduinoJson.h> /* ARDUINOJSON_VERSION "6.x.x" */
 
 /* USER DEFINE  */
 #include "../../../SmartClock/include/LCD_2004_define.h"	  /* DEFINE MACRO */
@@ -63,7 +63,11 @@ void Active_Alarm();
 bool bool_Test_Wifi(void);
 #line 1554 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void update_FOTA();
+<<<<<<< HEAD
+#line 1686 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+=======
 #line 1673 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+>>>>>>> master
 void Welcome_Smartclock();
 #line 34 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void setup()
@@ -1021,21 +1025,21 @@ void Weather_Online_sever()
 		if (httpCode > 0) // check the returning code
 		{
 			String payload = http.getString(); // Get the request response payload
+			// Serial.println(payload);
+			DynamicJsonDocument jsonBuffer(1024);
 
-			DynamicJsonBuffer jsonBuffer(512);
-
-			// Parse JSON object
-			JsonObject &root = jsonBuffer.parseObject(payload);
-			if (!root.success())
-			{
-				Serial.println(F("Parsing failed !"));
+			auto error = deserializeJson(jsonBuffer, payload);
+			if (error) {
+				Serial.print(F("deserializeJson() failed with code "));
+				Serial.println(error.c_str());
+				return;
 			}
 
-			temp = (float)(root["main"]["temp"]) - 273.15;		 // get temperature in °C
-			humidity = root["main"]["humidity"];				 // get humidity in %
-			pressure = (float)(root["main"]["pressure"]) / 1000; // get pressure in bar
-			wind_speed = root["wind"]["speed"];					 // get wind speed in m/s
-			wind_degree = root["wind"]["deg"];					 // get wind degree in °
+			temp = (float)(jsonBuffer["main"]["temp"]) - 273.15;		 // get temperature in °C
+			humidity = jsonBuffer["main"]["humidity"];				 // get humidity in %
+			pressure = (float)(jsonBuffer["main"]["pressure"]) / 1000; // get pressure in bar
+			wind_speed = jsonBuffer["wind"]["speed"];					 // get wind speed in m/s
+			wind_degree = jsonBuffer["wind"]["deg"];					 // get wind degree in °
 
 			// print data
 			Serial.printf("Temperature = % .2f°C\n", temp);
@@ -1622,7 +1626,11 @@ void update_FOTA()
 		Serial.println(">>> Sever bị nghẻn, quá tải...");
 		Serial.println(">>> Hoặc thiết bị của bạn chưa được cho phép cập nhật trên hệ thống...");
 		Serial.println(">>> Check cập nhật ở thời điểm khác...");
+<<<<<<< HEAD
+		Serial.printf(">>> Phiên bản hiện tại là %s \n", FirmwareVer);
+=======
 		Serial.printf(">>> Phiên bản hiện tại là v%s \n", FirmwareVer);
+>>>>>>> master
 		return;
 	}
 
@@ -1637,15 +1645,34 @@ void update_FOTA()
 		String line = client.readStringUntil('\n');
 		if (line == "\r")
 		{
-			Serial.println("Headers received");
+			Serial.println(">>> Headers received");
 			break;
 		}
 	}
-	String payload = client.readStringUntil('\n');
 
+<<<<<<< HEAD
+	String payload = client.readString(); // Get the request response payload
+	Serial.println(payload);
+	DynamicJsonDocument jsonBuffer(1024);
+
+	auto error = deserializeJson(jsonBuffer, payload);
+	if (error) {
+		Serial.print(F("deserializeJson() failed with code "));
+		Serial.println(error.c_str());
+		return;
+	}
+
+	String author_prod = jsonBuffer["author"];
+	String version_prod = jsonBuffer["main"]["version"];
+
+	// serializeJson(jsonBuffer, Serial);
+
+	if (version_prod.equals(FirmwareVer))
+=======
 	payload.trim();
 
 	if (payload.equals(FirmwareVer))
+>>>>>>> master
 	{
 		Serial.println(">>> Device already on latest firmware version");
 		lcd.setCursor(0, 2);
@@ -1659,7 +1686,11 @@ void update_FOTA()
 	else
 	{
 		Serial.print(">>> New firmware detected: ");
+<<<<<<< HEAD
+		Serial.println(version_prod);
+=======
 		Serial.println(payload);
+>>>>>>> master
 		ESPhttpUpdate.setLedPin(LED_BUILTIN, LOW);
 		t_httpUpdate_return ret = ESPhttpUpdate.update(client, URL_fw_Bin);
 
