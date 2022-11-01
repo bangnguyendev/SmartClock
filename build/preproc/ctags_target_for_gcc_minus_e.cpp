@@ -207,16 +207,16 @@ void loop()
 
 void Check_Status_Button()
 {
- if (digitalRead(D1) == 0 /* PULL DOWN*/) // nếu nút bấm ở mức cao
+ if (digitalRead(D1) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
  {
   delay(500); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
-  if (digitalRead(D1) == 0 /* PULL DOWN*/)
+  if (digitalRead(D1) == 1 /* PULL DOWN*/)
   {
    lcd.clear();
    unsigned long startTime = millis(); // giá trị ban đầu được gán bằng giá trị hiện tại của millis
    Serial.printf("digitalRead(Button_Mode): %d \n", digitalRead(D1));
 
-   while (digitalRead(D1) == 0 /* PULL DOWN*/) // đợi cho nút bấm được giữ
+   while (digitalRead(D1) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
    {
     Serial.printf("Thời gian đè giữ nút nhấn: %d ms\n", (millis() - startTime));
     couter_Mode = (millis() - startTime) / 1000;
@@ -802,13 +802,13 @@ void Choose_location()
  unsigned long dem_10s_stop = millis();
  while (((unsigned long)(millis() - dem_10s_stop) < 10000) && (status_Mode == 0))
  {
-  if (digitalRead(D1) == 0 /* PULL DOWN*/) // nếu nút bấm ở mức cao
+  if (digitalRead(D1) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
   {
    delay(500); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
-   if (digitalRead(D1) == 0 /* PULL DOWN*/)
+   if (digitalRead(D1) == 1 /* PULL DOWN*/)
    {
     long startTime = millis(); // giá trị ban đầu được gán bằng giá trị hiện tại của millis
-    while (digitalRead(D1) == 0 /* PULL DOWN*/) // đợi cho nút bấm được giữ
+    while (digitalRead(D1) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
     {
      /* khi nhan nut thi set lai time out mode */
      dem_10s_stop = millis();
@@ -1058,29 +1058,29 @@ void Weather_Online_sever()
   if (httpCode > 0) // check the returning code
   {
    String payload = http.getString(); // Get the request response payload
+   // Serial.println(payload);
+   DynamicJsonDocument jsonBuffer(1024);
 
-   DynamicJsonBuffer jsonBuffer(512);
-
-   // Parse JSON object
-   JsonObject &root = jsonBuffer.parseObject(payload);
-   if (!root.success())
-   {
-    Serial.println(((reinterpret_cast<const __FlashStringHelper *>(
-# 996 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
-                  (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "996" "." "10" "\", \"aSM\", @progbits, 1 #"))) = (
-# 996 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
-                  "Parsing failed !"
-# 996 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
-                  ); &__pstr__[0];}))
-# 996 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
-                  ))));
+   auto error = deserializeJson(jsonBuffer, payload);
+   if (error) {
+    Serial.print(((reinterpret_cast<const __FlashStringHelper *>(
+# 994 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+                (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "994" "." "23" "\", \"aSM\", @progbits, 1 #"))) = (
+# 994 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+                "deserializeJson() failed with code "
+# 994 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+                ); &__pstr__[0];}))
+# 994 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+                ))));
+    Serial.println(error.c_str());
+    return;
    }
 
-   temp = (float)(root["main"]["temp"]) - 273.15; // get temperature in °C
-   humidity = root["main"]["humidity"]; // get humidity in %
-   pressure = (float)(root["main"]["pressure"]) / 1000; // get pressure in bar
-   wind_speed = root["wind"]["speed"]; // get wind speed in m/s
-   wind_degree = root["wind"]["deg"]; // get wind degree in °
+   temp = (float)(jsonBuffer["main"]["temp"]) - 273.15; // get temperature in °C
+   humidity = jsonBuffer["main"]["humidity"]; // get humidity in %
+   pressure = (float)(jsonBuffer["main"]["pressure"]) / 1000; // get pressure in bar
+   wind_speed = jsonBuffer["wind"]["speed"]; // get wind speed in m/s
+   wind_degree = jsonBuffer["wind"]["deg"]; // get wind degree in °
 
    // print data
    Serial.printf("Temperature = % .2f°C\n", temp);
@@ -1225,13 +1225,13 @@ void Setup_AlarmClock()
   printDigits(hen_phut / 10 % 10, 11, 2);
   printDigits(hen_phut / 1 % 10, 15, 2);
 
-  if (digitalRead(D1) == 0 /* PULL DOWN*/) // nếu nút bấm ở mức cao
+  if (digitalRead(D1) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
   {
    delay(500); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
-   if (digitalRead(D1) == 0 /* PULL DOWN*/)
+   if (digitalRead(D1) == 1 /* PULL DOWN*/)
    {
     long startTime = millis(); // giá trị ban đầu được gán bằng giá trị hiện tại của millis
-    while (digitalRead(D1) == 0 /* PULL DOWN*/) // đợi cho nút bấm được giữ
+    while (digitalRead(D1) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
     {
      /* khi nhan nut thi set lai time out mode */
      dem_10s_stop = millis();
@@ -1347,10 +1347,10 @@ void Set_Hour_Alarm()
   printDigits(hen_phut / 10 % 10, 11, 2);
   printDigits(hen_phut / 1 % 10, 15, 2);
 
-  if (digitalRead(D1) == 0 /* PULL DOWN*/) // nếu nút bấm ở mức cao
+  if (digitalRead(D1) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
   {
    delay(50); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
-   if (digitalRead(D1) == 0 /* PULL DOWN*/)
+   if (digitalRead(D1) == 1 /* PULL DOWN*/)
    {
     hen_gio++;
     if (hen_gio >= 24)
@@ -1358,7 +1358,7 @@ void Set_Hour_Alarm()
      hen_gio = 0;
     }
     long startTime = millis();
-    while (digitalRead(D1) == 0 /* PULL DOWN*/) // đợi cho nút bấm được giữ
+    while (digitalRead(D1) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
     {
      /* khi nhan nut thi set lai time out mode */
      dem_10s_stop_g = millis();
@@ -1425,10 +1425,10 @@ void Set_Minute_Alarm()
    time_dem_baothuc = millis();
   }
 
-  if (digitalRead(D1) == 0 /* PULL DOWN*/) // nếu nút bấm ở mức cao
+  if (digitalRead(D1) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
   {
    delay(50); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
-   if (digitalRead(D1) == 0 /* PULL DOWN*/)
+   if (digitalRead(D1) == 1 /* PULL DOWN*/)
    {
     hen_phut++;
     if (hen_phut >= 60)
@@ -1436,7 +1436,7 @@ void Set_Minute_Alarm()
      hen_phut = 0;
     }
     long startTime = millis();
-    while (digitalRead(D1) == 0 /* PULL DOWN*/) // đợi cho nút bấm được giữ
+    while (digitalRead(D1) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
     {
      /* khi nhan nut thi set lai time out mode */
      dem_10s_stop_P = millis();
@@ -1535,13 +1535,13 @@ void Active_Alarm()
 
   /* Check đè phím MODE hơn 2 giây thì thoát, không kêu chuông nữa */
   digitalWrite(D0, 1);
-  if (digitalRead(D1) == 0 /* PULL DOWN*/) // nếu nút bấm ở mức cao
+  if (digitalRead(D1) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
   {
    delay(500); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
-   if (digitalRead(D1) == 0 /* PULL DOWN*/)
+   if (digitalRead(D1) == 1 /* PULL DOWN*/)
    {
     unsigned long startTime = millis(); // giá trị ban đầu được gán bằng giá trị hiện tại của millis
-    while (digitalRead(D1) == 0 /* PULL DOWN*/) // đợi cho nút bấm được giữ
+    while (digitalRead(D1) == 1 /* PULL DOWN*/) // đợi cho nút bấm được giữ
     {
      /* hien thi gio font so lon */
      customA(0, 0);
@@ -1710,11 +1710,11 @@ void update_FOTA()
   Serial.println(">>> Sever bị nghẻn, quá tải...");
   Serial.println(">>> Hoặc thiết bị của bạn chưa được cho phép cập nhật trên hệ thống...");
   Serial.println(">>> Check cập nhật ở thời điểm khác...");
-  Serial.printf(">>> Phiên bản hiện tại là v%s \n", FirmwareVer);
+  Serial.printf(">>> Phiên bản hiện tại là %s \n", FirmwareVer);
   return;
  }
 
- client.print(String("GET ") + "/bangnguyendev/SmartClock/master/build/version_main.ino.bin.txt" + " HTTP/1.1\r\n" +
+ client.print(String("GET ") + "/bangnguyendev/SmartClock/Down_Bin_from_Github/build/version_main.ino.bin.json" + " HTTP/1.1\r\n" +
      "Host: " + host + "\r\n" +
      "User-Agent: BuildFailureDetectorESP8266\r\n" +
      "Connection: close\r\n\r\n");
@@ -1725,15 +1725,43 @@ void update_FOTA()
   String line = client.readStringUntil('\n');
   if (line == "\r")
   {
-   Serial.println("Headers received");
+   Serial.println(">>> Headers received");
    break;
   }
  }
- String payload = client.readStringUntil('\n');
+ // String payload = client.readStringUntil('\n');
 
- payload.trim();
+ // payload.trim();
 
- if (payload.equals(FirmwareVer))
+ String payload = client.readString(); // Get the request response payload
+ Serial.println(payload);
+ DynamicJsonDocument jsonBuffer(1024);
+
+ auto error = deserializeJson(jsonBuffer, payload);
+ if (error) {
+  Serial.print(((reinterpret_cast<const __FlashStringHelper *>(
+# 1619 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "1619" "." "24" "\", \"aSM\", @progbits, 1 #"))) = (
+# 1619 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+              "deserializeJson() failed with code "
+# 1619 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+              ); &__pstr__[0];}))
+# 1619 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+              ))));
+  Serial.println(error.c_str());
+  return;
+ }
+
+ String author_prod = jsonBuffer["author"];
+ String version_prod = jsonBuffer["main"]["version"];
+
+ // serializeJson(jsonBuffer, Serial);
+ // print data
+ Serial.print("Author: ");
+ Serial.println(author_prod);
+ Serial.print("Version: ");
+ Serial.println(version_prod);
+ if (version_prod.equals(FirmwareVer))
  {
   Serial.println(">>> Device already on latest firmware version");
   lcd.setCursor(0, 2);
@@ -1747,9 +1775,9 @@ void update_FOTA()
  else
  {
   Serial.print(">>> New firmware detected: ");
-  Serial.println(payload);
+  Serial.println(version_prod);
   ESPhttpUpdate.setLedPin(2, 0x0);
-  t_httpUpdate_return ret = ESPhttpUpdate.update(client, "https://raw.githubusercontent.com/bangnguyendev/SmartClock/master/build/main.ino.bin");
+  t_httpUpdate_return ret = ESPhttpUpdate.update(client, "https://raw.githubusercontent.com/bangnguyendev/SmartClock/Down_Bin_from_Github/build/main.ino.bin");
 
   switch (ret)
   {
@@ -1798,7 +1826,7 @@ _|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""| {======|_|"""""|_|"""""
 "`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'./o--000'"`-0-0-'"`-0-0-'"`-0-0-'
 
 */
-# 1673 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1693 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Welcome_Smartclock()
 {
  lcd.clear();
