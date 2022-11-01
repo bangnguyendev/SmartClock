@@ -1,13 +1,13 @@
 /* Cập nhật OTA */
 
-const String FirmwareVer={"v2.2.0"}; 
+const String FirmwareVer={"v2.2.1"}; 
 
 
-// #define URL_fw_Version "/bangnguyendev/SmartClock/master/include/Info_prod.json"
-// #define URL_fw_Bin "https://raw.githubusercontent.com/bangnguyendev/SmartClock/master/build/main.ino.bin"
+#define URL_fw_Version "/bangnguyendev/SmartClock/master/include/Info_prod.json"
+#define URL_fw_Bin "https://raw.githubusercontent.com/bangnguyendev/SmartClock/master/build/main.ino.bin"
 
-#define URL_fw_Version "/bangnguyendev/SmartClock/Down_Bin_from_Github/include/Info_prod.json"
-#define URL_fw_Bin "https://raw.githubusercontent.com/bangnguyendev/SmartClock/Down_Bin_from_Github/build/main.ino.bin"
+// #define URL_fw_Version "/bangnguyendev/SmartClock/Down_Bin_from_Github/include/Info_prod.json"
+// #define URL_fw_Bin "https://raw.githubusercontent.com/bangnguyendev/SmartClock/Down_Bin_from_Github/build/main.ino.bin"
 
 const char* host = "raw.githubusercontent.com";
 const int httpsPort = 443;

@@ -63,11 +63,7 @@ void Active_Alarm();
 bool bool_Test_Wifi(void);
 #line 1554 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void update_FOTA();
-<<<<<<< HEAD
 #line 1686 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
-=======
-#line 1673 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
->>>>>>> master
 void Welcome_Smartclock();
 #line 34 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void setup()
@@ -1626,11 +1622,7 @@ void update_FOTA()
 		Serial.println(">>> Sever bị nghẻn, quá tải...");
 		Serial.println(">>> Hoặc thiết bị của bạn chưa được cho phép cập nhật trên hệ thống...");
 		Serial.println(">>> Check cập nhật ở thời điểm khác...");
-<<<<<<< HEAD
 		Serial.printf(">>> Phiên bản hiện tại là %s \n", FirmwareVer);
-=======
-		Serial.printf(">>> Phiên bản hiện tại là v%s \n", FirmwareVer);
->>>>>>> master
 		return;
 	}
 
@@ -1650,7 +1642,6 @@ void update_FOTA()
 		}
 	}
 
-<<<<<<< HEAD
 	String payload = client.readString(); // Get the request response payload
 	Serial.println(payload);
 	DynamicJsonDocument jsonBuffer(1024);
@@ -1668,11 +1659,6 @@ void update_FOTA()
 	// serializeJson(jsonBuffer, Serial);
 
 	if (version_prod.equals(FirmwareVer))
-=======
-	payload.trim();
-
-	if (payload.equals(FirmwareVer))
->>>>>>> master
 	{
 		Serial.println(">>> Device already on latest firmware version");
 		lcd.setCursor(0, 2);
@@ -1686,11 +1672,7 @@ void update_FOTA()
 	else
 	{
 		Serial.print(">>> New firmware detected: ");
-<<<<<<< HEAD
 		Serial.println(version_prod);
-=======
-		Serial.println(payload);
->>>>>>> master
 		ESPhttpUpdate.setLedPin(LED_BUILTIN, LOW);
 		t_httpUpdate_return ret = ESPhttpUpdate.update(client, URL_fw_Bin);
 
