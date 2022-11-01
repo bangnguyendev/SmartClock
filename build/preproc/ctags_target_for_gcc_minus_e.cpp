@@ -1714,7 +1714,7 @@ void update_FOTA()
   return;
  }
 
- client.print(String("GET ") + "/bangnguyendev/SmartClock/Down_Bin_from_Github/build/version_main.ino.bin.json" + " HTTP/1.1\r\n" +
+ client.print(String("GET ") + "/bangnguyendev/SmartClock/Down_Bin_from_Github/include/Info_prod.json" + " HTTP/1.1\r\n" +
      "Host: " + host + "\r\n" +
      "User-Agent: BuildFailureDetectorESP8266\r\n" +
      "Connection: close\r\n\r\n");
@@ -1729,9 +1729,6 @@ void update_FOTA()
    break;
   }
  }
- // String payload = client.readStringUntil('\n');
-
- // payload.trim();
 
  String payload = client.readString(); // Get the request response payload
  Serial.println(payload);
@@ -1740,13 +1737,13 @@ void update_FOTA()
  auto error = deserializeJson(jsonBuffer, payload);
  if (error) {
   Serial.print(((reinterpret_cast<const __FlashStringHelper *>(
-# 1619 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
-              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "1619" "." "24" "\", \"aSM\", @progbits, 1 #"))) = (
-# 1619 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1616 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "1616" "." "24" "\", \"aSM\", @progbits, 1 #"))) = (
+# 1616 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
               "deserializeJson() failed with code "
-# 1619 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+# 1616 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
               ); &__pstr__[0];}))
-# 1619 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1616 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
               ))));
   Serial.println(error.c_str());
   return;
@@ -1756,11 +1753,7 @@ void update_FOTA()
  String version_prod = jsonBuffer["main"]["version"];
 
  // serializeJson(jsonBuffer, Serial);
- // print data
- Serial.print("Author: ");
- Serial.println(author_prod);
- Serial.print("Version: ");
- Serial.println(version_prod);
+
  if (version_prod.equals(FirmwareVer))
  {
   Serial.println(">>> Device already on latest firmware version");
@@ -1826,7 +1819,7 @@ _|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""| {======|_|"""""|_|"""""
 "`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'./o--000'"`-0-0-'"`-0-0-'"`-0-0-'
 
 */
-# 1693 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1686 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Welcome_Smartclock()
 {
  lcd.clear();

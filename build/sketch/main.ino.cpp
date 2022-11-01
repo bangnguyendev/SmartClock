@@ -63,7 +63,7 @@ void Active_Alarm();
 bool bool_Test_Wifi(void);
 #line 1554 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void update_FOTA();
-#line 1693 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1686 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Welcome_Smartclock();
 #line 34 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void setup()
@@ -1641,9 +1641,6 @@ void update_FOTA()
 			break;
 		}
 	}
-	// String payload = client.readStringUntil('\n');
-
-	// payload.trim();
 
 	String payload = client.readString(); // Get the request response payload
 	Serial.println(payload);
@@ -1660,11 +1657,7 @@ void update_FOTA()
 	String version_prod = jsonBuffer["main"]["version"];
 
 	// serializeJson(jsonBuffer, Serial);
-	// print data
-	Serial.print("Author: ");
-	Serial.println(author_prod);
-	Serial.print("Version: ");
-	Serial.println(version_prod);
+
 	if (version_prod.equals(FirmwareVer))
 	{
 		Serial.println(">>> Device already on latest firmware version");
