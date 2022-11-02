@@ -83,7 +83,7 @@ unsigned long time_dem_thoitiet;
 /* Khai báo cấu hình cho wifi */
 const char *ssid = "nguyenduybang";
 const char *passphrase = "nguyenduybang";
-WiFiClient client;
+WiFiClient client_wifi;
 
 extern void setup();
 extern void loop();

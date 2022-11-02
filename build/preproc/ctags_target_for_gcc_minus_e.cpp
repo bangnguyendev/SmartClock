@@ -30,18 +30,17 @@
 # 19 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
 # 20 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
 # 21 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 22 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-BearSSL::CertStore certStore;
+
+# 23 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
 # 24 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
 # 25 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
 # 26 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
 # 27 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 28 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
 
 /* USER DEFINE  */
+# 30 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
 # 31 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
 # 32 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 33 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
 
 void setup()
 {
@@ -397,7 +396,7 @@ void Check_Status_Button()
 ╚══════╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝    ╚═╝  ╚═══╝   ╚═╝   ╚═╝
 
 */
-# 381 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 380 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Reload_Localtime_NTP()
 {
  configTime(7 * 3600, 0, "vn.pool.ntp.org", "time.nist.gov");
@@ -562,7 +561,7 @@ void Setup_Local_RealTime()
     /*  *___XX_June_2019___*
 
 				July  */
-# 544 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 543 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 6) || (thang == 7))
     {
      lcd.setCursor(4, 1);
@@ -571,7 +570,7 @@ void Setup_Local_RealTime()
     /*  *__XX_March_2019___*
 
 				April  */
-# 551 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 550 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 3) || (thang == 4))
     {
      lcd.setCursor(3, 1);
@@ -586,7 +585,7 @@ void Setup_Local_RealTime()
     /*  *_XX_January_2019__*
 
 				October */
-# 564 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 563 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 10) || (thang == 1))
     {
      lcd.setCursor(2, 1);
@@ -595,7 +594,7 @@ void Setup_Local_RealTime()
     /*  *_XX_February_2019_*
 
 				November December  */
-# 571 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 570 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 11) || (thang == 2) || (thang == 12))
     {
      lcd.setCursor(2, 1);
@@ -714,7 +713,7 @@ void Setup_Local_RealTime()
 
 
 		*/
-# 667 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 666 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
   /* hien thi gio font so lon */
   printDigits(gio / 10 % 10, 0, 2);
   printDigits(gio / 1 % 10, 4, 2);
@@ -787,7 +786,7 @@ void Setup_Local_RealTime()
 
 
 */
-# 729 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 728 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Choose_location()
 {
  lcd.clear();
@@ -1017,7 +1016,7 @@ void Call_Weather_Every_10Min()
 `---'    `---`   `'-..-'   '.(_,_).'    '---'   '(_,_) '---'    `'-..-'  ''-'   `'-'
 
 */
-# 949 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 948 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Weather_Online_sever()
 {
  if (value_Location_EEPROM == 0)
@@ -1051,7 +1050,7 @@ void Weather_Online_sever()
   HTTPClient http; // Declare an object of class HTTPClient
 
   // specify request destination
-  http.begin(client, "http://api.openweathermap.org/data/2.5/weather?id=" + Location + "&APPID=" + APIKey_openweather);
+  http.begin(client_wifi, "http://api.openweathermap.org/data/2.5/weather?id=" + Location + "&APPID=" + APIKey_openweather);
 
   int httpCode = http.GET(); // send the request
 
@@ -1064,13 +1063,13 @@ void Weather_Online_sever()
    auto error = deserializeJson(jsonBuffer, payload);
    if (error) {
     Serial.print(((reinterpret_cast<const __FlashStringHelper *>(
-# 994 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
-                (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "994" "." "23" "\", \"aSM\", @progbits, 1 #"))) = (
-# 994 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 993 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+                (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "993" "." "23" "\", \"aSM\", @progbits, 1 #"))) = (
+# 993 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
                 "deserializeJson() failed with code "
-# 994 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+# 993 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
                 ); &__pstr__[0];}))
-# 994 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 993 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
                 ))));
     Serial.println(error.c_str());
     return;
@@ -1113,7 +1112,7 @@ void Weather_Online_sever()
 														/____/
 
 */
-# 1029 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1028 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void smartConfig_ndb()
 {
  lcd.createChar(1, UB);
@@ -1487,7 +1486,7 @@ void Set_Minute_Alarm()
 
 
 */
-# 1392 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1391 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Active_Alarm()
 {
  lcd.clear();
@@ -1610,7 +1609,7 @@ void Active_Alarm()
 
 
 */
-# 1504 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1503 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 bool bool_Test_Wifi(void)
 {
  int c = 0;
@@ -1673,7 +1672,7 @@ bool bool_Test_Wifi(void)
 			 ░░░░░
 
 */
-# 1554 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1553 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void update_FOTA()
 {
  Serial.println("\n>>>>>>>>>>> Update FOTA \n");
@@ -1700,7 +1699,7 @@ void update_FOTA()
  Serial.printf(">>> ID ESP: ");
  Serial.println(*((volatile uint32_t *)(0x3FF00000+(0x58))));
  Serial.printf(">>> Boot Mode: %d \n", ESP.getBootMode());
- Serial.printf(">>> Free mem: %d \n", ESP.getFreeHeap());
+ Serial.printf(">>> Free Sketch Space: %d \n", ESP.getFreeSketchSpace());
 
  WiFiClientSecure client;
  client.setTrustAnchors(&cert);
@@ -1737,13 +1736,13 @@ void update_FOTA()
  auto error = deserializeJson(jsonBuffer, payload);
  if (error) {
   Serial.print(((reinterpret_cast<const __FlashStringHelper *>(
-# 1616 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
-              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "1616" "." "24" "\", \"aSM\", @progbits, 1 #"))) = (
-# 1616 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1615 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "1615" "." "24" "\", \"aSM\", @progbits, 1 #"))) = (
+# 1615 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
               "deserializeJson() failed with code "
-# 1616 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+# 1615 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
               ); &__pstr__[0];}))
-# 1616 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1615 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
               ))));
   Serial.println(error.c_str());
   return;
@@ -1838,7 +1837,7 @@ _|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""| {======|_|"""""|_|"""""
 "`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'./o--000'"`-0-0-'"`-0-0-'"`-0-0-'
 
 */
-# 1705 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1704 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Welcome_Smartclock()
 {
  lcd.clear();

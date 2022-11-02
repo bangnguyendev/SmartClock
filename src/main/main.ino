@@ -18,8 +18,7 @@
 #include <ESP8266HTTPClient.h> /* Get data Weather - http */
 #include <ESP8266httpUpdate.h> /* Updated OTA */
 #include <WiFiClientSecure.h>
-#include <CertStoreBearSSL.h>
-BearSSL::CertStore certStore;
+
 #include <time.h>
 #include <Wire.h>			   /* LCD I2C https://github.com/johnrickman/LiquidCrystal_I2C */
 #include <LiquidCrystal_I2C.h> /* LCD I2C https://github.com/johnrickman/LiquidCrystal_I2C */
@@ -979,7 +978,7 @@ void Weather_Online_sever()
 		HTTPClient http; // Declare an object of class HTTPClient
 
 		// specify request destination
-		http.begin(client, "http://api.openweathermap.org/data/2.5/weather?id=" + Location + "&APPID=" + APIKey_openweather);
+		http.begin(client_wifi, "http://api.openweathermap.org/data/2.5/weather?id=" + Location + "&APPID=" + APIKey_openweather);
 
 		int httpCode = http.GET(); // send the request
 
@@ -1577,7 +1576,7 @@ void update_FOTA()
 	Serial.printf(">>> ID ESP: ");
 	Serial.println(CHIPID);
 	Serial.printf(">>> Boot Mode: %d \n", ESP.getBootMode());
-	Serial.printf(">>> Free mem: %d \n", ESP.getFreeHeap());
+	Serial.printf(">>> Free Sketch Space: %d \n", ESP.getFreeSketchSpace());
 
 	WiFiClientSecure client;
 	client.setTrustAnchors(&cert);

@@ -12,7 +12,7 @@ const String FirmwareVer={"v2.2.1"};
 const char* host = "raw.githubusercontent.com";
 const int httpsPort = 443;
 
-// DigiCert Global Root CA
+// DigiCert Global Root CA - Valid until: 10/Nov/2031
 // https://www.digicert.com/kb/digicert-root-certificates.htm
 // https://cacerts.digicert.com/DigiCertGlobalRootCA.crt.pem
 const char trustRoot[] PROGMEM = R"EOF(
@@ -40,9 +40,6 @@ CAUw7C29C79Fv1C5qfPrmAESrciIxpg0X40KPMbp1ZWVbd4=
 -----END CERTIFICATE-----
 )EOF";
 X509List cert(trustRoot);
-
-// extern const unsigned char caCert[] PROGMEM;
-// extern const unsigned int caCertLen;
 
 
 //UPDATER

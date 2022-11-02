@@ -20,8 +20,7 @@
 #include <ESP8266HTTPClient.h> /* Get data Weather - http */
 #include <ESP8266httpUpdate.h> /* Updated OTA */
 #include <WiFiClientSecure.h>
-#include <CertStoreBearSSL.h>
-BearSSL::CertStore certStore;
+
 #include <time.h>
 #include <Wire.h>			   /* LCD I2C https://github.com/johnrickman/LiquidCrystal_I2C */
 #include <LiquidCrystal_I2C.h> /* LCD I2C https://github.com/johnrickman/LiquidCrystal_I2C */
@@ -33,39 +32,39 @@ BearSSL::CertStore certStore;
 #include "../../../SmartClock/include/Macro_define.h"		  /* LCD2004 - CHARACTER LCD */
 #include "../../../SmartClock/include/DigiCertGlobalRootCA.h" /* DEFINE DigiCertGlobalRootCA */
 
-#line 34 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 33 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void setup();
-#line 187 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 186 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void loop();
-#line 196 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 195 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Check_Status_Button();
-#line 381 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 380 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Reload_Localtime_NTP();
-#line 394 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 393 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Setup_Local_RealTime();
-#line 729 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 728 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Choose_location();
-#line 928 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 927 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Call_Weather_Every_10Min();
-#line 949 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 948 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Weather_Online_sever();
-#line 1029 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1028 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void smartConfig_ndb();
-#line 1117 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1116 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Setup_AlarmClock();
-#line 1224 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1223 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Set_Hour_Alarm();
-#line 1304 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1303 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Set_Minute_Alarm();
-#line 1392 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1391 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Active_Alarm();
-#line 1504 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1503 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 bool bool_Test_Wifi(void);
-#line 1554 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1553 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void update_FOTA();
-#line 1705 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1704 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Welcome_Smartclock();
-#line 34 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 33 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void setup()
 {
 	/* Initialize Serial. */
@@ -1014,7 +1013,7 @@ void Weather_Online_sever()
 		HTTPClient http; // Declare an object of class HTTPClient
 
 		// specify request destination
-		http.begin(client, "http://api.openweathermap.org/data/2.5/weather?id=" + Location + "&APPID=" + APIKey_openweather);
+		http.begin(client_wifi, "http://api.openweathermap.org/data/2.5/weather?id=" + Location + "&APPID=" + APIKey_openweather);
 
 		int httpCode = http.GET(); // send the request
 
@@ -1612,7 +1611,7 @@ void update_FOTA()
 	Serial.printf(">>> ID ESP: ");
 	Serial.println(CHIPID);
 	Serial.printf(">>> Boot Mode: %d \n", ESP.getBootMode());
-	Serial.printf(">>> Free mem: %d \n", ESP.getFreeHeap());
+	Serial.printf(">>> Free Sketch Space: %d \n", ESP.getFreeSketchSpace());
 
 	WiFiClientSecure client;
 	client.setTrustAnchors(&cert);
