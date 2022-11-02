@@ -1769,7 +1769,26 @@ void update_FOTA()
  {
   Serial.print(">>> New firmware detected: ");
   Serial.println(version_prod);
+  lcd.setCursor(0, 2);
+  lcd.print("NewFirmware detected");
+  lcd.setCursor(0, 2);
+  lcd.print(FirmwareVer);
+  lcd.print(" -> ");
+  lcd.print(version_prod);
+  // The line below is optional. It can be used to blink the LED on the board during flashing
+  // The LED will be on during download of one buffer of data from the network. The LED will
+  // be off during writing that buffer to flash
+  // On a good connection the LED should flash regularly. On a bad connection the LED will be
+  // on much longer than it will be off. Other pins than LED_BUILTIN may be used. The second
+  // value is used to put the LED on. If the LED is on with HIGH, that value should be passed
   ESPhttpUpdate.setLedPin(2, 0x0);
+
+  // Add optional callback notifiers
+  ESPhttpUpdate.onStart(update_started);
+  ESPhttpUpdate.onEnd(update_finished);
+  ESPhttpUpdate.onProgress(update_progress);
+  ESPhttpUpdate.onError(update_error);
+
   t_httpUpdate_return ret = ESPhttpUpdate.update(client, "https://raw.githubusercontent.com/bangnguyendev/SmartClock/master/build/main.ino.bin");
 
   switch (ret)
@@ -1779,9 +1798,9 @@ void update_FOTA()
    Serial.println(">>> Sever bị nghẻn, quá tải...");
    Serial.println(">>> Hoặc thiết bị của bạn chưa được cho phép cập nhật trên hệ thống...");
    Serial.println(">>> Check cập nhật ở thời điểm khác...");
-   Serial.printf(">>> Phiên bản hiện tại là v%s \n", FirmwareVer);
+   Serial.printf(">>> Phiên bản hiện tại là %s \n", FirmwareVer);
    lcd.setCursor(0, 3);
-   lcd.print("> Skip updated...   ");
+   lcd.print("> Skip updated...ERR");
    delay(2000);
    break;
 
@@ -1819,7 +1838,7 @@ _|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""| {======|_|"""""|_|"""""
 "`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'./o--000'"`-0-0-'"`-0-0-'"`-0-0-'
 
 */
-# 1686 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1705 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Welcome_Smartclock()
 {
  lcd.clear();
