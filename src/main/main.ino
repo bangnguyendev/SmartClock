@@ -38,7 +38,8 @@ void setup()
 	/* Initialize BUTTON. */
 	pinMode(PIN_signal_Bell, OUTPUT);
 	pinMode(Button_Mode, INPUT);
-	digitalWrite(Button_Mode, LOW);
+	digitalWrite(Button_Mode, HIGH);
+	digitalWrite(PIN_signal_Bell, ESP_NB_OFF);
 	delay(10);
 	/* Initialize the lcd, Print a message to the LCD. */
 	lcd.init();
@@ -108,8 +109,8 @@ void setup()
 	{
 		epass += char(EEPROM.read(i));
 	}
-	Serial.print(">>>>> PASS: ");
-	Serial.println(epass);
+	Serial.print(">>>>> PASS: <Done>");
+	// Serial.println(epass);
 	Serial.println("\n");
 	/* nho check lai dieu kien cho nay khi < 1 */
 	if (esid.length() > ESP_NB_ONE)
@@ -163,7 +164,8 @@ void setup()
 	Serial.println("WiFi connected");
 	Serial.println("IP address: ");
 	Serial.println(WiFi.localIP());
-
+	Serial.println("\n");
+	
 	// Synchronize time useing SNTP. This is necessary to verify that
 	// the TLS certificates offered by the server are currently valid.
 	/* In cases when NTP is not used, app must set a time manually to check cert validity */
@@ -1039,7 +1041,7 @@ void smartConfig_ndb()
 	{
 		delay(1000);
 		dem--;
-		Serial.println(dem);
+		Serial.printf("Thời gian chờ kết nối còn: %d\n", dem);
 		lcd.setCursor(0, 1);
 		lcd.print("Wait for 100 seconds");
 		lcd.setCursor(3, 3);
@@ -1086,14 +1088,14 @@ void smartConfig_ndb()
 				Serial.println(qpass);
 				Serial.println("");
 
-				Serial.println("writing eeprom ssid:");
+				Serial.println("Writing eeprom ssid:");
 				for (int i = 0; i < (int)qsid.length(); ++i)
 				{
 					EEPROM.write(i, qsid[i]);
 					Serial.print("Wrote: ");
 					Serial.println(qsid[i]);
 				}
-				Serial.println("writing eeprom pass:");
+				Serial.println("Writing eeprom pass:");
 				for (int i = 0; i < (int)qpass.length(); ++i)
 				{
 					EEPROM.write(32 + i, qpass[i]);
@@ -1523,10 +1525,14 @@ bool bool_Test_Wifi(void)
 		{
 			/* Chuông báo ok */
 			digitalWrite(PIN_signal_Bell, ESP_NB_ON);
-			delay(300);
+			delay(1500);
 			digitalWrite(PIN_signal_Bell, ESP_NB_OFF);
 			return true;
 		}
+		/* Chuông báo ok */
+		digitalWrite(PIN_signal_Bell, ESP_NB_ON);
+		delay(300);
+		digitalWrite(PIN_signal_Bell, ESP_NB_OFF);
 		delay(300);
 		Serial.print(WiFi.status());
 		Serial.print(" -> ");

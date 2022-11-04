@@ -14,7 +14,7 @@
                                                     '                                      '                                             '                     
 */
 /* PIN kết nối với chuông kêu */
-#define PIN_signal_Bell D0
+#define PIN_signal_Bell D4
 /* PIN kết nối với nút nhấn MODE */
 #define Button_Mode D1
 
