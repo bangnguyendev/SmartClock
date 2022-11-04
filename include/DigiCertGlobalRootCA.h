@@ -48,18 +48,14 @@ String update_status;
 float progress_percent; 
 void update_started() {
     Serial.println("CALLBACK:  HTTP update process started");
+    lcd.setCursor(0, 3);
+    lcd.print("Downloading... ");
 }
 void update_finished() {
     Serial.println("CALLBACK:  HTTP update process finished");
 }
 void update_progress(int cur, int total) {
     progress_percent = float((float)cur/(float)total)*100;
-
-    lcd.setCursor(0, 3);
-    lcd.print("Downloading: ");
-    lcd.print(progress_percent);
-    lcd.print(" %");
-
     Serial.printf("CALLBACK:  HTTP update process at %d of %d bytes... -[ %0.1f %% ]- \n", cur, total, progress_percent);
 }
 void update_error(int err) {

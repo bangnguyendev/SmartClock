@@ -48,9 +48,10 @@ void setup()
  Serial.begin(115200);
 
  /* Initialize BUTTON. */
- pinMode(D0, 0x01);
+ pinMode(D4, 0x01);
  pinMode(D1, 0x00);
- digitalWrite(D1, 0x0);
+ digitalWrite(D1, 0x1);
+ digitalWrite(D4, 0);
  delay(10);
  /* Initialize the lcd, Print a message to the LCD. */
  lcd.init();
@@ -120,8 +121,8 @@ void setup()
  {
   epass += char(EEPROM.read(i));
  }
- Serial.print(">>>>> PASS: ");
- Serial.println(epass);
+ Serial.print(">>>>> PASS: <Done>");
+ // Serial.println(epass);
  Serial.println("\n");
  /* nho check lai dieu kien cho nay khi < 1 */
  if (esid.length() > 1)
@@ -175,6 +176,7 @@ void setup()
  Serial.println("WiFi connected");
  Serial.println("IP address: ");
  Serial.println(WiFi.localIP());
+ Serial.println("\n");
 
  // Synchronize time useing SNTP. This is necessary to verify that
  // the TLS certificates offered by the server are currently valid.
@@ -396,7 +398,7 @@ void Check_Status_Button()
 ╚══════╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝    ╚═╝  ╚═══╝   ╚═╝   ╚═╝
 
 */
-# 380 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 382 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Reload_Localtime_NTP()
 {
  configTime(7 * 3600, 0, "vn.pool.ntp.org", "time.nist.gov");
@@ -561,7 +563,7 @@ void Setup_Local_RealTime()
     /*  *___XX_June_2019___*
 
 				July  */
-# 543 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 545 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 6) || (thang == 7))
     {
      lcd.setCursor(4, 1);
@@ -570,7 +572,7 @@ void Setup_Local_RealTime()
     /*  *__XX_March_2019___*
 
 				April  */
-# 550 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 552 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 3) || (thang == 4))
     {
      lcd.setCursor(3, 1);
@@ -585,7 +587,7 @@ void Setup_Local_RealTime()
     /*  *_XX_January_2019__*
 
 				October */
-# 563 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 565 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 10) || (thang == 1))
     {
      lcd.setCursor(2, 1);
@@ -594,7 +596,7 @@ void Setup_Local_RealTime()
     /*  *_XX_February_2019_*
 
 				November December  */
-# 570 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 572 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 11) || (thang == 2) || (thang == 12))
     {
      lcd.setCursor(2, 1);
@@ -713,7 +715,7 @@ void Setup_Local_RealTime()
 
 
 		*/
-# 666 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 668 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
   /* hien thi gio font so lon */
   printDigits(gio / 10 % 10, 0, 2);
   printDigits(gio / 1 % 10, 4, 2);
@@ -743,11 +745,11 @@ void Setup_Local_RealTime()
   /* Qua khung giờ mới là tingting  */
   if ((phut == 0) && (giay < 3))
   {
-   digitalWrite(D0, 1);
+   digitalWrite(D4, 1);
   }
   else
   {
-   digitalWrite(D0, 0);
+   digitalWrite(D4, 0);
   }
   /* Báo thức */
   if ((hen_gio == gio) && (hen_phut == phut) &&
@@ -758,7 +760,7 @@ void Setup_Local_RealTime()
   }
   else
   {
-   digitalWrite(D0, 0);
+   digitalWrite(D4, 0);
    /* Bật trang thai báo thức của Active_Alarm */
    status_Mode_Alarm = 1;
   }
@@ -786,7 +788,7 @@ void Setup_Local_RealTime()
 
 
 */
-# 728 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 730 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Choose_location()
 {
  lcd.clear();
@@ -980,9 +982,9 @@ void Choose_location()
  Serial.print("value_Location_EEPROM duoc set eeprom: ");
  Serial.println(EEPROM.read(99));
  /* Chuông báo ok */
- digitalWrite(D0, 1);
+ digitalWrite(D4, 1);
  delay(300);
- digitalWrite(D0, 0);
+ digitalWrite(D4, 0);
 }
 
 /* Hàm gọi thời tiết mỗi 10 phút một lần */
@@ -1016,7 +1018,7 @@ void Call_Weather_Every_10Min()
 `---'    `---`   `'-..-'   '.(_,_).'    '---'   '(_,_) '---'    `'-..-'  ''-'   `'-'
 
 */
-# 948 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 950 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Weather_Online_sever()
 {
  if (value_Location_EEPROM == 0)
@@ -1063,13 +1065,13 @@ void Weather_Online_sever()
    auto error = deserializeJson(jsonBuffer, payload);
    if (error) {
     Serial.print(((reinterpret_cast<const __FlashStringHelper *>(
-# 993 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
-                (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "993" "." "23" "\", \"aSM\", @progbits, 1 #"))) = (
-# 993 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 995 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+                (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "995" "." "23" "\", \"aSM\", @progbits, 1 #"))) = (
+# 995 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
                 "deserializeJson() failed with code "
-# 993 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+# 995 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
                 ); &__pstr__[0];}))
-# 993 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 995 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
                 ))));
     Serial.println(error.c_str());
     return;
@@ -1112,7 +1114,7 @@ void Weather_Online_sever()
 														/____/
 
 */
-# 1028 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1030 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void smartConfig_ndb()
 {
  lcd.createChar(1, UB);
@@ -1127,7 +1129,7 @@ void smartConfig_ndb()
  {
   delay(1000);
   dem--;
-  Serial.println(dem);
+  Serial.printf("Thời gian chờ kết nối còn: %d\n", dem);
   lcd.setCursor(0, 1);
   lcd.print("Wait for 100 seconds");
   lcd.setCursor(3, 3);
@@ -1160,7 +1162,7 @@ void smartConfig_ndb()
    lcd.setCursor(0, 3);
    lcd.print(qpass);
    /* Chuông báo két nối ok */
-   digitalWrite(D0, 1);
+   digitalWrite(D4, 1);
    delay(5000);
    if (qsid.length() > 0 && qpass.length() > 0)
    {
@@ -1174,14 +1176,14 @@ void smartConfig_ndb()
     Serial.println(qpass);
     Serial.println("");
 
-    Serial.println("writing eeprom ssid:");
+    Serial.println("Writing eeprom ssid:");
     for (int i = 0; i < (int)qsid.length(); ++i)
     {
      EEPROM.write(i, qsid[i]);
      Serial.print("Wrote: ");
      Serial.println(qsid[i]);
     }
-    Serial.println("writing eeprom pass:");
+    Serial.println("Writing eeprom pass:");
     for (int i = 0; i < (int)qpass.length(); ++i)
     {
      EEPROM.write(32 + i, qpass[i]);
@@ -1190,7 +1192,7 @@ void smartConfig_ndb()
     }
     EEPROM.commit();
     /* Ngắt chuông báo két nối ok */
-    digitalWrite(D0, 0);
+    digitalWrite(D4, 0);
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Saved ID & Pass Wifi");
@@ -1303,9 +1305,9 @@ void Setup_AlarmClock()
  /* set lai gia tri cho su dung lan sau */
  status_Mode = 0;
  /* Chuông báo ok */
- digitalWrite(D0, 1);
+ digitalWrite(D4, 1);
  delay(300);
- digitalWrite(D0, 0);
+ digitalWrite(D4, 0);
 }
 
 void Set_Hour_Alarm()
@@ -1486,7 +1488,7 @@ void Set_Minute_Alarm()
 
 
 */
-# 1391 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1393 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Active_Alarm()
 {
  lcd.clear();
@@ -1533,7 +1535,7 @@ void Active_Alarm()
   }
 
   /* Check đè phím MODE hơn 2 giây thì thoát, không kêu chuông nữa */
-  digitalWrite(D0, 1);
+  digitalWrite(D4, 1);
   if (digitalRead(D1) == 1 /* PULL DOWN*/) // nếu nút bấm ở mức cao
   {
    delay(500); /* Check chống dội phím - chắc chắn phải là do người nhấn nút */
@@ -1572,7 +1574,7 @@ void Active_Alarm()
       status_Mode_Alarm = 0;
       lcd.setCursor(19, 3);
       lcd.write(4);
-      digitalWrite(D0, 0);
+      digitalWrite(D4, 0);
      }
      else if (couter_Mode < 2)
      {
@@ -1609,7 +1611,7 @@ void Active_Alarm()
 
 
 */
-# 1503 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1505 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 bool bool_Test_Wifi(void)
 {
  int c = 0;
@@ -1632,11 +1634,15 @@ bool bool_Test_Wifi(void)
   if (WiFi.status() == WL_CONNECTED)
   {
    /* Chuông báo ok */
-   digitalWrite(D0, 1);
-   delay(300);
-   digitalWrite(D0, 0);
+   digitalWrite(D4, 1);
+   delay(1500);
+   digitalWrite(D4, 0);
    return true;
   }
+  /* Chuông báo ok */
+  digitalWrite(D4, 1);
+  delay(300);
+  digitalWrite(D4, 0);
   delay(300);
   Serial.print(WiFi.status());
   Serial.print(" -> ");
@@ -1672,7 +1678,7 @@ bool bool_Test_Wifi(void)
 			 ░░░░░
 
 */
-# 1553 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1559 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void update_FOTA()
 {
  Serial.println("\n>>>>>>>>>>> Update FOTA \n");
@@ -1736,13 +1742,13 @@ void update_FOTA()
  auto error = deserializeJson(jsonBuffer, payload);
  if (error) {
   Serial.print(((reinterpret_cast<const __FlashStringHelper *>(
-# 1615 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
-              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "1615" "." "24" "\", \"aSM\", @progbits, 1 #"))) = (
-# 1615 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1621 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "1621" "." "24" "\", \"aSM\", @progbits, 1 #"))) = (
+# 1621 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
               "deserializeJson() failed with code "
-# 1615 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+# 1621 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
               ); &__pstr__[0];}))
-# 1615 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1621 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
               ))));
   Serial.println(error.c_str());
   return;
@@ -1837,7 +1843,7 @@ _|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""| {======|_|"""""|_|"""""
 "`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'./o--000'"`-0-0-'"`-0-0-'"`-0-0-'
 
 */
-# 1704 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1710 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Welcome_Smartclock()
 {
  lcd.clear();

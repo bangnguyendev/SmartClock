@@ -24,6 +24,7 @@ d:\Git_NDB\SmartClock\build\core\LwipDhcpServer.cpp.o: \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lwip2/include/lwip/ip4_addr.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lwip2/include/lwip/ip6_addr.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lwip2/include/lwip/def.h \
+ C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lwip2/include/lwip/ip6_zone.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/include/queue.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/include/spi_flash.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/include/spi_flash_geometry.h \
@@ -48,6 +49,7 @@ d:\Git_NDB\SmartClock\build\core\LwipDhcpServer.cpp.o: \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lwip2/include/lwip/ip4.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lwip2/include/lwip/prot/ip4.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lwip2/include/lwip/ip6.h \
+ C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lwip2/include/lwip/prot/ip6.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lwip2/include/lwip/prot/ip.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lwip2/include/lwip/prot/udp.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2\cores\esp8266\LwipDhcpServer.h

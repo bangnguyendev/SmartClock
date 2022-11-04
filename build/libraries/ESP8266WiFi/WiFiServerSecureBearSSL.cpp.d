@@ -32,6 +32,7 @@ d:\Git_NDB\SmartClock\build\libraries\ESP8266WiFi\WiFiServerSecureBearSSL.cpp.o:
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lwip2/include/lwip/ip4_addr.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lwip2/include/lwip/ip6_addr.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lwip2/include/lwip/def.h \
+ C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lwip2/include/lwip/ip6_zone.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/include/queue.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/include/spi_flash.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/include/spi_flash_geometry.h \
@@ -133,9 +134,12 @@ d:\Git_NDB\SmartClock\build\libraries\ESP8266WiFi\WiFiServerSecureBearSSL.cpp.o:
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lwip2/include/lwip/ip4.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lwip2/include/lwip/prot/ip4.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lwip2/include/lwip/ip6.h \
+ C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lwip2/include/lwip/prot/ip6.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lwip2/include/lwip/prot/ip.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lwip2/include/lwip/icmp.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lwip2/include/lwip/prot/icmp.h \
+ C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lwip2/include/lwip/icmp6.h \
+ C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lwip2/include/lwip/prot/icmp6.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lwip2/include/lwip/inet.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2\libraries\ESP8266WiFi\src/include/ClientContext.h \
  C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2\cores\esp8266/esp_priv.h
