@@ -23439,9 +23439,9 @@ END GROUP
  .irom.text     0x4027084c       0x18 C:\Users\bang.nguyen-duy\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\3.0.2/tools/sdk/lib/NONOSDK22x_190703\libnet80211.a(ieee80211_crypto_wep.o)
                 0x4027084c                wep
  *(.irom0.pstr.*)
- .irom0.pstr.main.ino.1621.24
+ .irom0.pstr.main.ino.1623.24
                 0x40270864       0x24 d:\Git_NDB\SmartClock\build\sketch\main.ino.cpp.o
- .irom0.pstr.main.ino.995.23
+ .irom0.pstr.main.ino.997.23
                 0x40270888       0x24 d:\Git_NDB\SmartClock\build\sketch\main.ino.cpp.o
  .irom0.pstr.BearSSLHelpers.cpp.365.10
                 0x40270888       0x11 d:\Git_NDB\SmartClock\build\libraries\ESP8266WiFi\ESP8266WiFi.a(BearSSLHelpers.cpp.o)

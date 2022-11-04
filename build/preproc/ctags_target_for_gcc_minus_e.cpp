@@ -47,11 +47,13 @@ void setup()
  /* Initialize Serial. */
  Serial.begin(115200);
 
- /* Initialize BUTTON. */
+ /* Initialize Bell, Led & Button. */
  pinMode(D4, 0x01);
+ digitalWrite(D4, 1);
+
  pinMode(D1, 0x00);
  digitalWrite(D1, 0x1);
- digitalWrite(D4, 0);
+
  delay(10);
  /* Initialize the lcd, Print a message to the LCD. */
  lcd.init();
@@ -398,7 +400,7 @@ void Check_Status_Button()
 ╚══════╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝    ╚═╝  ╚═══╝   ╚═╝   ╚═╝
 
 */
-# 382 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 384 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Reload_Localtime_NTP()
 {
  configTime(7 * 3600, 0, "vn.pool.ntp.org", "time.nist.gov");
@@ -563,7 +565,7 @@ void Setup_Local_RealTime()
     /*  *___XX_June_2019___*
 
 				July  */
-# 545 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 547 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 6) || (thang == 7))
     {
      lcd.setCursor(4, 1);
@@ -572,7 +574,7 @@ void Setup_Local_RealTime()
     /*  *__XX_March_2019___*
 
 				April  */
-# 552 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 554 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 3) || (thang == 4))
     {
      lcd.setCursor(3, 1);
@@ -587,7 +589,7 @@ void Setup_Local_RealTime()
     /*  *_XX_January_2019__*
 
 				October */
-# 565 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 567 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 10) || (thang == 1))
     {
      lcd.setCursor(2, 1);
@@ -596,7 +598,7 @@ void Setup_Local_RealTime()
     /*  *_XX_February_2019_*
 
 				November December  */
-# 572 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 574 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 11) || (thang == 2) || (thang == 12))
     {
      lcd.setCursor(2, 1);
@@ -715,7 +717,7 @@ void Setup_Local_RealTime()
 
 
 		*/
-# 668 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 670 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
   /* hien thi gio font so lon */
   printDigits(gio / 10 % 10, 0, 2);
   printDigits(gio / 1 % 10, 4, 2);
@@ -788,7 +790,7 @@ void Setup_Local_RealTime()
 
 
 */
-# 730 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 732 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Choose_location()
 {
  lcd.clear();
@@ -1018,7 +1020,7 @@ void Call_Weather_Every_10Min()
 `---'    `---`   `'-..-'   '.(_,_).'    '---'   '(_,_) '---'    `'-..-'  ''-'   `'-'
 
 */
-# 950 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 952 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Weather_Online_sever()
 {
  if (value_Location_EEPROM == 0)
@@ -1065,13 +1067,13 @@ void Weather_Online_sever()
    auto error = deserializeJson(jsonBuffer, payload);
    if (error) {
     Serial.print(((reinterpret_cast<const __FlashStringHelper *>(
-# 995 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
-                (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "995" "." "23" "\", \"aSM\", @progbits, 1 #"))) = (
-# 995 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 997 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+                (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "997" "." "23" "\", \"aSM\", @progbits, 1 #"))) = (
+# 997 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
                 "deserializeJson() failed with code "
-# 995 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+# 997 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
                 ); &__pstr__[0];}))
-# 995 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 997 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
                 ))));
     Serial.println(error.c_str());
     return;
@@ -1114,7 +1116,7 @@ void Weather_Online_sever()
 														/____/
 
 */
-# 1030 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1032 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void smartConfig_ndb()
 {
  lcd.createChar(1, UB);
@@ -1488,7 +1490,7 @@ void Set_Minute_Alarm()
 
 
 */
-# 1393 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1395 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Active_Alarm()
 {
  lcd.clear();
@@ -1611,7 +1613,7 @@ void Active_Alarm()
 
 
 */
-# 1505 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1507 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 bool bool_Test_Wifi(void)
 {
  int c = 0;
@@ -1634,15 +1636,15 @@ bool bool_Test_Wifi(void)
   if (WiFi.status() == WL_CONNECTED)
   {
    /* Chuông báo ok */
-   digitalWrite(D4, 1);
-   delay(1500);
    digitalWrite(D4, 0);
+   delay(1500);
+   digitalWrite(D4, 1);
    return true;
   }
   /* Chuông báo ok */
-  digitalWrite(D4, 1);
-  delay(300);
   digitalWrite(D4, 0);
+  delay(300);
+  digitalWrite(D4, 1);
   delay(300);
   Serial.print(WiFi.status());
   Serial.print(" -> ");
@@ -1678,7 +1680,7 @@ bool bool_Test_Wifi(void)
 			 ░░░░░
 
 */
-# 1559 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1561 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void update_FOTA()
 {
  Serial.println("\n>>>>>>>>>>> Update FOTA \n");
@@ -1742,13 +1744,13 @@ void update_FOTA()
  auto error = deserializeJson(jsonBuffer, payload);
  if (error) {
   Serial.print(((reinterpret_cast<const __FlashStringHelper *>(
-# 1621 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
-              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "1621" "." "24" "\", \"aSM\", @progbits, 1 #"))) = (
-# 1621 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1623 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "1623" "." "24" "\", \"aSM\", @progbits, 1 #"))) = (
+# 1623 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
               "deserializeJson() failed with code "
-# 1621 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+# 1623 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
               ); &__pstr__[0];}))
-# 1621 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1623 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
               ))));
   Serial.println(error.c_str());
   return;
@@ -1843,7 +1845,7 @@ _|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""| {======|_|"""""|_|"""""
 "`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'./o--000'"`-0-0-'"`-0-0-'"`-0-0-'
 
 */
-# 1710 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1712 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
 void Welcome_Smartclock()
 {
  lcd.clear();

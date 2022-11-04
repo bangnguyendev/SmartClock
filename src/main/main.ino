@@ -35,11 +35,13 @@ void setup()
 	/* Initialize Serial. */
 	Serial.begin(115200);
 
-	/* Initialize BUTTON. */
+	/* Initialize Bell, Led & Button. */
 	pinMode(PIN_signal_Bell, OUTPUT);
+	digitalWrite(PIN_signal_Bell, 1);
+
 	pinMode(Button_Mode, INPUT);
 	digitalWrite(Button_Mode, HIGH);
-	digitalWrite(PIN_signal_Bell, ESP_NB_OFF);
+
 	delay(10);
 	/* Initialize the lcd, Print a message to the LCD. */
 	lcd.init();
@@ -1524,15 +1526,15 @@ bool bool_Test_Wifi(void)
 		if (WiFi.status() == WL_CONNECTED)
 		{
 			/* Chuông báo ok */
-			digitalWrite(PIN_signal_Bell, ESP_NB_ON);
+			digitalWrite(PIN_signal_Bell, 0);
 			delay(1500);
-			digitalWrite(PIN_signal_Bell, ESP_NB_OFF);
+			digitalWrite(PIN_signal_Bell, 1);
 			return true;
 		}
 		/* Chuông báo ok */
-		digitalWrite(PIN_signal_Bell, ESP_NB_ON);
+		digitalWrite(PIN_signal_Bell, 0);
 		delay(300);
-		digitalWrite(PIN_signal_Bell, ESP_NB_OFF);
+		digitalWrite(PIN_signal_Bell, 1);
 		delay(300);
 		Serial.print(WiFi.status());
 		Serial.print(" -> ");
