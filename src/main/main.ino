@@ -1711,7 +1711,7 @@ _|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""| {======|_|"""""|_|"""""
 */
 void Welcome_Smartclock()
 {
-	lcd.clear();
+
 	delay(100);
 	/* chay full trai tim */
 	lcd.createChar(1, traitim);

@@ -19,7 +19,7 @@
             "includePath": [
                 "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.1.2\\tools\\sdk\\include",
                 "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.1.2\\tools\\sdk\\lwip2\\include",
-                "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\build\\core",
+                "c:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\build\\core",
                 "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.1.2\\cores\\esp8266",
                 "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.1.2\\variants\\d1_mini",
                 "C:\\Users\\bang.nguyen-duy\\AppData\\Local\\Arduino15\\packages\\esp8266\\hardware\\esp8266\\3.1.2\\libraries\\ESP8266WiFi\\src",
