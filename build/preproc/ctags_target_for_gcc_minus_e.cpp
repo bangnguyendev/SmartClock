@@ -1,4 +1,4 @@
-# 1 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 /*
 
 	  _____          ____  _____   ______         _____           _____   ______         _____     ____   ____  _____      _____      ______  _____   ______
@@ -24,23 +24,23 @@
 													'                                      '                                             '
 
 */
-# 16 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 16 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 /* LIBRARY ARDUINO DEFINE  */
-# 18 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 19 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 20 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 21 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 18 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino" 2
+# 19 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino" 2
+# 20 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino" 2
+# 21 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino" 2
 
-# 23 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 24 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 25 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 26 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 27 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 23 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino" 2
+# 24 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino" 2
+# 25 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino" 2
+# 26 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino" 2
+# 27 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino" 2
 
 /* USER DEFINE  */
-# 30 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 31 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
-# 32 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 2
+# 30 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino" 2
+# 31 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino" 2
+# 32 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino" 2
 
 void setup()
 {
@@ -400,7 +400,7 @@ void Check_Status_Button()
 ╚══════╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝    ╚═╝  ╚═══╝   ╚═╝   ╚═╝
 
 */
-# 384 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 384 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 void Reload_Localtime_NTP()
 {
  configTime(7 * 3600, 0, "vn.pool.ntp.org", "time.nist.gov");
@@ -565,7 +565,7 @@ void Setup_Local_RealTime()
     /*  *___XX_June_2019___*
 
 				July  */
-# 547 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 547 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 6) || (thang == 7))
     {
      lcd.setCursor(4, 1);
@@ -574,7 +574,7 @@ void Setup_Local_RealTime()
     /*  *__XX_March_2019___*
 
 				April  */
-# 554 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 554 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 3) || (thang == 4))
     {
      lcd.setCursor(3, 1);
@@ -589,7 +589,7 @@ void Setup_Local_RealTime()
     /*  *_XX_January_2019__*
 
 				October */
-# 567 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 567 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 10) || (thang == 1))
     {
      lcd.setCursor(2, 1);
@@ -598,7 +598,7 @@ void Setup_Local_RealTime()
     /*  *_XX_February_2019_*
 
 				November December  */
-# 574 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 574 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
     else if ((thang == 11) || (thang == 2) || (thang == 12))
     {
      lcd.setCursor(2, 1);
@@ -717,7 +717,7 @@ void Setup_Local_RealTime()
 
 
 		*/
-# 670 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 670 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
   /* hien thi gio font so lon */
   printDigits(gio / 10 % 10, 0, 2);
   printDigits(gio / 1 % 10, 4, 2);
@@ -790,7 +790,7 @@ void Setup_Local_RealTime()
 
 
 */
-# 732 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 732 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 void Choose_location()
 {
  lcd.clear();
@@ -1020,7 +1020,7 @@ void Call_Weather_Every_10Min()
 `---'    `---`   `'-..-'   '.(_,_).'    '---'   '(_,_) '---'    `'-..-'  ''-'   `'-'
 
 */
-# 952 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 952 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 void Weather_Online_sever()
 {
  if (value_Location_EEPROM == 0)
@@ -1067,13 +1067,13 @@ void Weather_Online_sever()
    auto error = deserializeJson(jsonBuffer, payload);
    if (error) {
     Serial.print(((reinterpret_cast<const __FlashStringHelper *>(
-# 997 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
-                (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "997" "." "23" "\", \"aSM\", @progbits, 1 #"))) = (
-# 997 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 997 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino" 3
+                (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "997" "." "24" "\", \"aSM\", @progbits, 1 #"))) = (
+# 997 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
                 "deserializeJson() failed with code "
-# 997 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+# 997 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino" 3
                 ); &__pstr__[0];}))
-# 997 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 997 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
                 ))));
     Serial.println(error.c_str());
     return;
@@ -1116,7 +1116,7 @@ void Weather_Online_sever()
 														/____/
 
 */
-# 1032 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1032 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 void smartConfig_ndb()
 {
  lcd.createChar(1, UB);
@@ -1490,7 +1490,7 @@ void Set_Minute_Alarm()
 
 
 */
-# 1395 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1395 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 void Active_Alarm()
 {
  lcd.clear();
@@ -1613,7 +1613,7 @@ void Active_Alarm()
 
 
 */
-# 1507 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1507 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 bool bool_Test_Wifi(void)
 {
  int c = 0;
@@ -1680,7 +1680,7 @@ bool bool_Test_Wifi(void)
 			 ░░░░░
 
 */
-# 1561 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1561 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 void update_FOTA()
 {
  Serial.println("\n>>>>>>>>>>> Update FOTA \n");
@@ -1744,13 +1744,13 @@ void update_FOTA()
  auto error = deserializeJson(jsonBuffer, payload);
  if (error) {
   Serial.print(((reinterpret_cast<const __FlashStringHelper *>(
-# 1623 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
-              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "1623" "." "24" "\", \"aSM\", @progbits, 1 #"))) = (
-# 1623 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1623 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino" 3
+              (__extension__({static const char __pstr__[] __attribute__((__aligned__(4))) __attribute__((section( "\".irom0.pstr." "main.ino" "." "1623" "." "25" "\", \"aSM\", @progbits, 1 #"))) = (
+# 1623 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
               "deserializeJson() failed with code "
-# 1623 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino" 3
+# 1623 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino" 3
               ); &__pstr__[0];}))
-# 1623 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1623 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
               ))));
   Serial.println(error.c_str());
   return;
@@ -1845,7 +1845,7 @@ _|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""| {======|_|"""""|_|"""""
 "`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'./o--000'"`-0-0-'"`-0-0-'"`-0-0-'
 
 */
-# 1712 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+# 1712 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 void Welcome_Smartclock()
 {
  lcd.clear();

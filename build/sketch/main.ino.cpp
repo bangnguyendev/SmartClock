@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#line 1 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 /*
 	  _____          ____  _____   ______         _____           _____   ______         _____     ____   ____  _____      _____      ______  _____   ______
  ___|\     \    ____|\   \|\    \ |\     \    ___|\    \         |\    \ |\     \    ___|\    \   |    | |    ||\    \    /    /| ___|\     \|\    \ |\     \
@@ -32,39 +32,39 @@
 #include "../../../SmartClock/include/Macro_define.h"		  /* LCD2004 - CHARACTER LCD */
 #include "../../../SmartClock/include/DigiCertGlobalRootCA.h" /* DEFINE DigiCertGlobalRootCA */
 
-#line 33 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 33 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 void setup();
-#line 190 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 190 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 void loop();
-#line 199 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 199 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 void Check_Status_Button();
-#line 384 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 384 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 void Reload_Localtime_NTP();
-#line 397 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 397 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 void Setup_Local_RealTime();
-#line 732 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 732 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 void Choose_location();
-#line 931 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 931 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 void Call_Weather_Every_10Min();
-#line 952 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 952 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 void Weather_Online_sever();
-#line 1032 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1032 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 void smartConfig_ndb();
-#line 1120 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1120 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 void Setup_AlarmClock();
-#line 1227 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1227 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 void Set_Hour_Alarm();
-#line 1307 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1307 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 void Set_Minute_Alarm();
-#line 1395 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1395 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 void Active_Alarm();
-#line 1507 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1507 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 bool bool_Test_Wifi(void);
-#line 1561 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1561 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 void update_FOTA();
-#line 1712 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 1712 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 void Welcome_Smartclock();
-#line 33 "d:\\Git_NDB\\SmartClock\\src\\main\\main.ino"
+#line 33 "C:\\Users\\bang.nguyen-duy\\Documents\\Git\\SmartClock\\src\\main\\main.ino"
 void setup()
 {
 	/* Initialize Serial. */
